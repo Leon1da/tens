@@ -1,0 +1,6 @@
+update:
+  script:
+    - cd /ltw
+    - git pull
+  only:
+    - master
