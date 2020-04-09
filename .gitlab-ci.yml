@@ -3,7 +3,8 @@ update:
     - sync
   script:
     - cd /ltw
-    - git pull
+    - git fetch --all
+    - git reset --hard origin/master
     - chmod -R 777 *
   only:
     - master
