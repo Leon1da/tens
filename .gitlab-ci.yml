@@ -1,4 +1,6 @@
 update:
+  tags:
+    - sync
   script:
     - cd /ltw
     - git pull
