@@ -4,5 +4,6 @@ update:
   script:
     - cd /ltw
     - git pull
+    - chmod -R 777 *
   only:
     - master
