@@ -8,6 +8,11 @@
 </head>
 <body>
     <button class="btn" id="play">PLAY</button>
+    <button class="btn" id="choose0" onclick="stop(0)"></button>
+    <button class="btn" id="choose1" onclick="stop(1)"></button>
+    <button class="btn" id="choose2" onclick="stop(2)"></button>
+    <button class="btn" id="choose3" onclick="stop(3)"></button>
+    <div class="alert" id="result"></div>
     <script>
         load();
         document.getElementById("play").addEventListener("click",play);
