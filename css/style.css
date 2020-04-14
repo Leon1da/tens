@@ -1,0 +1,16 @@
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.my-btn{
+    border-radius: 20px;
+}
+
+::placeholder{
+    text-align: center;
+}
+
+.form-group > input{
+    border-radius: 20px;
+}
