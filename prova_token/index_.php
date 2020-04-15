@@ -1,24 +1,9 @@
 <?php
 // [TODO] Copiare risultato del browser su http://json.parser.online.fr/
 
-/* Spotify Application Client ID and Secret Key */
-$client_id     = 'a351932160f74239bb1a1459e88819f7';
-$client_secret = 'cc456cf809e64324a526cc27fad02063';
 
-/* Get Spotify Authorization Token */
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,            'https://accounts.spotify.com/api/token' );
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
-curl_setopt($ch, CURLOPT_POST,           1 );
-curl_setopt($ch, CURLOPT_POSTFIELDS,     'grant_type=client_credentials' );
-curl_setopt($ch, CURLOPT_HTTPHEADER,     array('Authorization: Basic '.base64_encode($client_id.':'.$client_secret)));
-
-$result=curl_exec($ch);
-echo $result;
-echo "<br>";
+$result = getToken();
 $json = json_decode($result, true);
-curl_close($ch);
-
 $access_token = $json["access_token"];
 $token_type = $json["token_type"];
 
@@ -43,6 +28,29 @@ echo "<hr>";
 /*
     $json = json_decode($result,true); // true, create an associative array
 */
+
+/* [TODO] Parse with json_decode for access_token, token_type, etc.. */
+/* Return a json string with Spotify application token */
+function getToken(){
+    /* Spotify Application Client ID and Secret Key */
+    $client_id     = 'a351932160f74239bb1a1459e88819f7';
+    $client_secret = 'cc456cf809e64324a526cc27fad02063';
+
+    /* Get Spotify Authorization Token */
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,            'https://accounts.spotify.com/api/token' );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt($ch, CURLOPT_POST,           1 );
+    curl_setopt($ch, CURLOPT_POSTFIELDS,     'grant_type=client_credentials' );
+    curl_setopt($ch, CURLOPT_HTTPHEADER,     array('Authorization: Basic '.base64_encode($client_id.':'.$client_secret)));
+
+    $result=curl_exec($ch);
+    curl_close($ch);
+
+    return $result;
+
+}
+
 
 /* get a spotify _endpoint, a _token_type and an _access_token */
 /* return a JSON string with the query's result */
