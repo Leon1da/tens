@@ -1,111 +1,62 @@
 const api = new SpotifyWebApi(); //API
-var trackIds = []; //Array contentente gli id delle canzoni
-var trackWrongIds = []; //Array contenente
+var playlistsIds;
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
-var onPlay;
 
-var correct; //index of correct btn
-
+var onPlay; //canzone in riproduzione
+var correct; //indice della risposta corretta
 
 
 /*
-*  Caricamento dati:
-*  1 - Richiesta al webserver per un token Spotify necessario all'accesso ai servizi Spotify
-*  2 - Richiesta al webserver degli id delle canzoni
-*  3 - Carica i file audio
+* Caricamento dati:
+* 1 - TODO Richiesta al webserver di un token Spotify necessario per accedere ai servizi API Spotify
+* 2 - TODO richiesta al webserver una lista di ids
+* 3 - Carica i file Audio
 */
 function load() {
-    getToken();
-    getTrackIds();
-    loadsongs();
-    loadWrongSongs();
+    api.setAccessToken(getToken());
+    playlistsIds = getPlaylistIds();
+    loadsongs(playlistsIds.pop());
 }
 
-//Carica le canzoni in memoria: richiede ai server spotify l'url della canzone e crea un oggetto audio per poterla riprodurre
-function loadsongs() {
+/*
+* Richiede i dati necessari ai server Spotify:
+* 1 - Richiede la playlist id
+* 2 - TODO Carica random la playlist (alcune canzoni vengono riprodotte ed altre vengono usate solo per mostrare il nome)
+*/
+function loadsongs(playlistId){
     songs_objs = [];
-    api.getTracks(trackIds,function (err,suc) {
-        if(err) {
-            console.log("error getting tracks");
-            return;
-        }
-        //in suc viene restituito il JSON contentente una array di Tracks
-        console.log(suc);
-        console.log(suc.tracks.length);
-        for(let i = 0; i<suc.tracks.length;i++){
-
-            /*
-            * Il risultato e/o l'url di preview potrebbero essere null
-            * Richiede 20 track al database e ne ottiene 10 riproducibili
-            * Se non riesce a trovarne 10 riproducibili ricomincia
-            */
-
-            if(suc.tracks[i] != null && suc.tracks[i].preview_url != null && songs_objs.length < 10){
-                let url = suc.tracks[i].preview_url;
-                let name = suc.tracks[i].name;
-                let artist = suc.tracks[i].artists[0].name;
-                let image = suc.tracks[i].album.images[0].url;
-                console.log("Trovato: "+ name);
-                songs_objs.push(new Song(url,name,artist,image));
-            }
-        }
-
-        if( songs_objs.length < 10 )
-            loadsongs();
-
-    });
-}
-
-/*
-* Carica un wrong_songs_objs con gli oggetti Wrong_songs
-*/
-function loadWrongSongs() {
     wrong_songs_objs = [];
-    api.getTracks(trackWrongIds,function (err,suc) {
+    api.getPlaylistTracks(playlistId,function (err,suc) {
         if(err){
-            console.log("Errore caricamento canzoni sbagliate");
+            console.log("error getting playlist");
             return;
         }
-        for(let i = 0; i<suc.tracks.length;i++){
+        console.log(suc);
+        let i = 0;
+        while((songs_objs.length < 10 || wrong_songs_objs.length < 30 ) && i < 50){
+            if(suc.items[i].track != null){
+                let name = suc.items[i].track.name;
+                let artist = suc.items[i].track.artists[0].name;
+                let image = suc.items[i].track.album.images[0].url;
 
-            if(suc.tracks[i] != null && wrong_songs_objs.length < 30){
-                let name = suc.tracks[i].name;
-                let artist = suc.tracks[i].artists[0].name;
-                let image = suc.tracks[i].album.images[0].url;
-                console.log("Trovato wrong: "+ name);
-                wrong_songs_objs.push(new WrongSong(name,artist,image));
+
+                //Se la canzone è riproducibile la carica e verrà usata come canzone da indovinare
+                //Altrimenti viene usata solo per avere delle scelte sbagliate
+                if(suc.items[i].track.preview_url != null && songs_objs.length < 10){
+                    let url = suc.items[i].track.preview_url;
+                    console.log("Trovato: "+ name);
+                    songs_objs.push(new Song(url,name,artist,image));
+                } else {
+                    console.log("Trovato wrong: "+ name);
+                    wrong_songs_objs.push(new WrongSong(name,artist,image));
+                }
             }
+            console.log(i);
+            console.log(songs_objs.length,wrong_songs_objs.length);
+            i++;
         }
     });
-}
-
-/*
-* Song obj:
-* name = nome canzone
-* artist = nome artista
-* player = oggetto audio per la riproduzione
-* image = url della cover
-*/
-function Song(url,name,artist,image) {
-    this.name = name;
-    this.artist = artist;
-    this.image = image;
-    this.player = document.createElement("audio");
-    this.player.src = url;
-    this.player.setAttribute("preload","true");
-
-}
-
-/*
-* name = nome canzone
-* artist = nome artista
-* image = url della cover
-*/
-function WrongSong(name,artist,image) {
-    this.name = name;
-    this.artist = artist;
-    this.image = image;
 }
 
 /*
@@ -130,7 +81,7 @@ function play() {
 }
 
 /*
-*
+* TODO
 * */
 function stop(id) {
     onPlay.player.pause();
@@ -141,27 +92,3 @@ function stop(id) {
             "Nome: " + onPlay.name + "\nArtista: " + onPlay.artist;
     onPlay = null;
 }
-
-/*
-* Side-effect: richiede ed aggiorna gli ids
-*/
-function getTrackIds() {
-    track = {name: "auto blu", artist: "shiva", id: "2chEq24EHjyw9Zjmwq0hlS"};
-    track2 = {name: "boh", artist: "carlo", id: "3Nc7IorgrSffzaQrQWVw4L"};
-    trackIds = ["1DFD5Fotzgn6yYXkYsKiGs","1Oou7m2VuxCDSOdqsu07TU","2chEq24EHjyw9Zjmwq0hlS","3Nc7IorgrSffzaQrQWVw4L","6HDdOPc6FWpMfjC8ebzdRC0","3nwH3HTFzpnRV5SqM9um3r","1Xm2e1vDwOMeJJioWuG1s7","4D2snxPPfeYhKeZnGlYioU","5yfE6GXTuJaAlepKoE0wJE","5YxP1CkunbhUQVvctFOHa7","696DnlkuDOXcMAnKlTgXXK","5mn8bU8IjYqr8ZqTDmLtSO","5e50NiIlOc2YJIftHzoehd","2jkIbZ43eH3rM1yro2Ojzh","7aVX95NjONZszSeb8vJZF3"];
-    trackWrongIds = ["0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","0NwuXciw6eQc4edjwSBnV3","6pDqB2dlzxB2i9Inu4h3wC","1TaSkLG2bXx84YuKmJvncw","1Oou7m2VuxCDSOdqsu07TU","16wAOAZ2OkqoIDN7TpChjR","05mrU7mN3c1822bpY58UBC0","1Gyzr8UQgUlpYsGxQC6Tcl","2VxeLyX666F8uXCJ0dZF8B","4Fs1sEg9Mwn6vykFD89xvc","0NwuXciw6eQc4edjwSBnV3","2TxDcppMX95JQv9WB5rtuB"];
-}
-
-/*
-* Side-effect: richiede un token
-*/
-function getToken() {
-    let token = "BQBxOoURP5YWanuicp4ueVASUCEQrIdOnl8XDapRcXbC9Bp8wVGh0NZIJTr4bQRwoag3xFR0bBWw3j2L_hM";
-    api.setAccessToken(token);
-}
-
-
-function getPlaylistTracks() {
-
-}
-
