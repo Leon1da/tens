@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <a class="btn btn-primary" onclick="play()" role="button">Gioca</a>
+            <button class="btn btn-primary" onclick="play()" role="button" id="gioca" disabled>Caricamento</button>
         </div>
     </div>
     <div class="row">

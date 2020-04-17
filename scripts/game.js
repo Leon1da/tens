@@ -19,6 +19,9 @@ function load() {
         console.log(token);
         api.setAccessToken(token);
         loadsongs(playlistsIds.pop());
+        //TODO migliorare
+        document.getElementById("gioca").innerText = "Gioca";
+        document.getElementById("gioca").disabled = false;
     });
     playlistsIds = getPlaylistIds();
 
