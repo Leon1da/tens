@@ -5,5 +5,5 @@ function getPlaylistIds() {
 }
 
 function getToken() {
-    return token = "BQD6QwWfrtTQCqVrjvRBAjgezfhfuNslW0ND-2FL7KNMnVw7q71XYoo_6O1vBCGo7b9rAknDDFsmhEVJXAQ";
+    return token = "BQBEfGxOQuZqRx4RsRgRJpwy6g8IsuEMtI0nj0WbLDAXo8T8LRcNMeoL5hFeBhPBOjp_z3kKDeXg5cMIL9Q";
 }

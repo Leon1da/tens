@@ -7,9 +7,11 @@ $json = json_decode($result, true);
 $access_token = $json["access_token"];
 $token_type = $json["token_type"];
 
+echo $access_token;
+
 /* Examples of usage */
-echo getResult("/v1/search?q=top&type=playlist&market=IT",$token_type, $access_token);
-echo "<hr>";
+//echo getResult("/v1/search?q=top&type=playlist&market=IT",$token_type, $access_token);
+//echo "<hr>";
 //echo getResult("/v1/search?q=top%2020&type=playlist",$token_type, $access_token);
 //echo "<hr>";
 //echo getResult("/v1/search?q=global&type=playlist",$token_type, $access_token);
