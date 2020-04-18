@@ -1,12 +1,10 @@
-
-
 <div class="offset-md-2 col-md-8">
     <div class="row">
         <div class="col-md-4">
 
             <select id="category" class="form-control">
                 <option selected>All categories</option>
-                <? include_once('load/category.php'); ?>
+                 <? include_once('load/category.php'); ?>
             </select>
 
         </div>
