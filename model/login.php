@@ -1,14 +1,13 @@
 <?php
 session_start();
 require_once('database.php');
-$msg = '[LOGIN] ';
+require_once ('utility.php');
 
+$status = Status::Success;
 
 if (isset($_SESSION['session_id'])) {
-    //header('Location: dashboard.php');
-    //include "dashboard.php";
-    //echo "<h1>[DASHBOARD] Gia` loggato</h1>";
 
+    // sei gia` loggato (sessione salvata)
     // #area riservata
     include "dashboard.php";
     exit;
@@ -20,6 +19,7 @@ if (isset($_POST['login'])) {
 
     if (empty($username) || empty($password)) {
         $msg = 'Inserisci username e password';
+        $status = Status::Warning;
     } else {
         $query = "
             SELECT username, password
@@ -35,23 +35,21 @@ if (isset($_POST['login'])) {
 
         if (!$user || password_verify($password, $user['password']) === false) {
             $msg = 'Credenziali utente errate';
+            $status = Status::Error;
         } else {
             session_regenerate_id();
             $_SESSION['session_id'] = session_id();
             $_SESSION['session_user'] = $user['username'];
 
-            //header('Location: dashboard.php');
-            //include "dashboard.php";
-            //echo "<h1>[DASHBOARD] Nuova sessione</h1>";
-
+            // nuova sessione
             // #area riservata
             include "dashboard.php";
             exit;
         }
     }
-    echo $msg;
-    echo "<br>";
-    echo "<a href='index.php'>torna indietro</a>";
+//    echo $msg;
+//    echo "<br>";
+//    echo "<a href='index.php'>torna indietro</a>";
     //printf($msg, '<a href="../user.php">torna indietro</a>');
 }
 

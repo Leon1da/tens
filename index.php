@@ -54,10 +54,6 @@
  </div>
 
 
- <div id="risultato">
-
- </div>
-
  <!-- Modal --> <!-- Sign In -->
  <div class="modal fade" id="in-panel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
@@ -98,8 +94,8 @@
              <div class="modal-body">
                  <form method="post" id="register-form">
                      <div class="form-group">
-                         <label for="exampleInputEmail1">Email address</label>
-                         <input type="email" placeholder="non funge per ora" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                         <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                      </div>
 
@@ -162,7 +158,7 @@
             request.done( function (response) {
                 alert(response);
                 // visualizzo risultato
-                $("#risultato").html(response);
+                $("#main-content").html(response);
 
                 // chiudo il pannello di login
                 $("button.close").click();
@@ -186,7 +182,7 @@
                 alert(response);
 
                 //visualizzo risultato
-                $("#risultato").html(response);
+                $("#main-content").html(response);
 
                 // chiudo il pannello di registrazione
                 $("button.close").click();
@@ -195,7 +191,7 @@
         });
 
         // !!! important !!!
-        // allaccio trigger in questo modo poiche l'elemento i cui devo
+        // allaccio trigger in questo modo poiche l'elemento di cui devo
         // intercettare il click non esiste nel DOM al momento della sua creazione
         // ma viene caricato successivamente tramite registration.php facendo una chiamata AJAX
         $(document).on('click', '.alert > a', function(){
