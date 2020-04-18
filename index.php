@@ -50,6 +50,8 @@
     </div>
 </nav>
 
+ <div class="container-fluid">
+
  <div id="main-content">
  </div>
 
@@ -116,7 +118,7 @@
      </div>
  </div>
 
-
+</div>
 
  <!-- Optional JavaScript -->
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
