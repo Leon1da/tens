@@ -19,9 +19,7 @@ function load() {
         console.log(token);
         api.setAccessToken(token);
         loadsongs(playlistsIds.pop());
-        //TODO migliorare
-        document.getElementById("gioca").innerText = "Gioca";
-        document.getElementById("gioca").disabled = false;
+        document.getElementById("gioca_btn").disabled = false;
     });
     playlistsIds = getPlaylistIds();
 
@@ -68,7 +66,6 @@ function loadsongs(playlistId){
 /*
 * Imposta i pulsanti e inizia la riproduzione
  */
-
 function play() {
 
     if(onPlay != null){
