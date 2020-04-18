@@ -4,7 +4,7 @@
 
             <select id="category" class="form-control">
                 <option selected>All categories</option>
-                 <? include_once('load/category.php'); ?>
+                 <?php include_once('load/category.php'); ?>
             </select>
 
         </div>
