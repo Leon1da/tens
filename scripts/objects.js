@@ -1,3 +1,15 @@
+const api = new SpotifyWebApi(); //API
+
+var songs_objs; //Array contenente oggetti song
+var wrong_songs_objs; //oggetti wrongSong
+
+var onPlay; //canzone in riproduzione
+var correct; //indice della risposta corretta
+
+const PLAY_DURATION = 10; //durata della riproduzione in secondi
+
+
+
 /*
 * Song obj:
 * name = nome canzone

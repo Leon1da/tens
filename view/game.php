@@ -6,7 +6,9 @@
     <script src="./scripts/spotify-web-api.js" type="text/javascript" ></script>
     <script src="./scripts/game.js" type="text/javascript"></script>
     <script src="./scripts/objects.js" type="text/javascript"></script>
-    <script src="./scripts/utils.js" type="text/javascript"></script>
+    <script src="./scripts/modes.js" type="text/javascript"></script>
+    <script src="./scripts/stats.js" type="text/javascript"></script>
+    <script src="./scripts/graphic.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.js" type="text/javascript"></script>
@@ -24,7 +26,8 @@
             </div>
         </div>
         <div class="col-6 border">
-            Qui andranno le istruzioni e roba durante la riproduzione
+            <p>score: <span id="totScore">0</span> + <span id="deltaScore">0</span> + <span id="timeScore">0</span> </p>
+            <p id="endGame"></p>
         </div>
     </div>
 
@@ -49,7 +52,7 @@
                         <div class="media-body align-self-center">
                             <h5 class="text-light" id="titolo1"></h5>
                             <p class="text-light" id="artista1"></p>
-                            <a class="stretched-link" onclick="stopPlay(0)" href="#"></a>
+                            <a class="stretched-link" onclick="stopPlay(1)" href="#"></a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
                         <div class="media-body align-self-center">
                             <h5 class="text-dark" id="titolo2"></h5>
                             <p class="text-dark" id="artista2"></p>
-                            <a class="stretched-link" onclick="stopPlay(0)" href="#"></a>
+                            <a class="stretched-link" onclick="stopPlay(2)" href="#"></a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +74,7 @@
                         <div class="media-body align-self-center">
                             <h5 class="text-light" id="titolo3"></h5>
                             <p class="text-light" id="artista3"></p>
-                            <a class="stretched-link" onclick="stopPlay(0)" href="#"></a>
+                            <a class="stretched-link" onclick="stopPlay(3)" href="#"></a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +82,7 @@
         </div>
     </div>
 <script>
-    load();
+    firstLoad();
 </script>
 </body>
 </html>
