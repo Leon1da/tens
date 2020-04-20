@@ -28,7 +28,9 @@
         <div class="col-6 border">
             <p>score: <span id="totScore">0</span> + <span id="deltaScore">0</span> + <span id="timeScore">0</span> </p>
             <label for="artista">Artista</label><input type="text" id="artista"><button class="btn btn-primary" onclick="load('ARTIST')">Ok</button>
-            <label for="genere">Genere</label><input type="text" id="genere"><button class="btn btn-primary" onclick="load('GENRE')">Ok</button>
+            <label for="genere">Genere</label><input type="text" id="genere"><button class="btn btn-primary" onclick="load('GENRE')">Ok</button><br>
+            <label for="prova">Query artista</label><input type="text" id="prova"><button class="btn btn-primary" onclick="load('PROVA')">Ok</button>
+            <label for="playlist">playlist</label><input type="text" id="playlist"><button class="btn btn-primary" onclick="load('PLAYLIST')">Ok</button>
             <p id="endGame"></p>
         </div>
     </div>

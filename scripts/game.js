@@ -32,6 +32,12 @@ function selectMode(mode) {
         case "GENRE" :
             genreMode();
             break;
+        case "PROVA" :
+            provaMode();
+            break;
+        case "PLAYLIST" :
+            playlistMode();
+            break;
     }
 }
 

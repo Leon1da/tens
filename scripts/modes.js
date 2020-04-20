@@ -25,4 +25,24 @@ function genreMode() {
     });
 }
 
+function playlistMode(){
+    $(function () {
+        let query = "playlist:"+$("#playlist").val();
+        api.searchPlaylists(query,{limit:50},function (err,suc) {
+            console.log(suc);
+            loadTracks(suc.tracks.items);
+        });
+    });
+}
+
+function provaMode() {
+    $(function () {
+        let query = "artist:"+$("#prova").val();
+        api.searchArtists(query,{limit:50},function (err,suc) {
+            console.log(suc);
+            //loadTracks(suc.tracks.items);
+        });
+    });
+}
+
 
