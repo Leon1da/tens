@@ -1,3 +1,14 @@
+const api = new SpotifyWebApi(); //API
+
+var songs_objs; //Array contenente oggetti song
+var wrong_songs_objs; //oggetti wrongSong
+
+var onPlay; //canzone in riproduzione
+var correct; //indice della risposta corretta
+var autoTimer;
+
+const PLAY_DURATION = 10; //durata della riproduzione in secondi
+
 
 function firstLoad() {
     $.get("./model/token.php",function (token,status) {
@@ -15,11 +26,9 @@ function firstLoad() {
 * 3 - Carica i file Audio
 */
 function load(mode = "NORMAL") {
-    selectMode(mode)
-    document.getElementById("gioca_btn").disabled = false;
-    initStats(levels.NORMAL,10,0);
-
+    selectMode(mode);
 }
+
 
 function selectMode(mode) {
     switch (mode) {
@@ -67,8 +76,12 @@ function loadTracks(items) {
                 wrong_songs_objs.push(new WrongSong(name,artist,image));
             }
         }
-        console.log(songs_objs.length,wrong_songs_objs.length);
     }
+    if(songs_objs.length < 10 || wrong_songs_objs.length < 30){
+        alert("Numero insufficiente di canzoni :(");
+        return;
+    }
+    g_ready();
 }
 
 /*
@@ -97,18 +110,31 @@ function loadByPlaylist(playlistId){
 * Imposta i pulsanti e inizia la riproduzione
  */
 function play() {
-
-    if(onPlay != null || !ended()){
+    if((onPlay != null && !onPlay.player.paused) || !ended()){
         return;
     }
     onPlay = songs_objs.pop();
     correct = Math.floor(Math.random() * 4); //Scelta del pulsante random
 
+    autoplay();
     g_setButtons();
     g_updateTotalScore();
+    g_play();
+
     onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION;
     console.log(onPlay.player.currentTime);
     onPlay.player.play();
+}
+
+
+function autoplay() {
+    if(onPlay == null)
+        return;
+    console.log("qui");
+    onPlay.player.addEventListener("pause",() => {
+        autoTimer = setTimeout(play,2000);
+        console.log("tigger");
+    })
 }
 
 /*
@@ -119,7 +145,6 @@ function stopPlay(id) {
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
     let result = updateStats(id===correct,timeLeft);
     g_updateScore(result.score,result.timeBonus);
-    onPlay = null;
     ended();
 }
 
@@ -128,5 +153,7 @@ function ended() {
     if(songs_objs.length > 0)
         return true;
     sendStats();
+    g_updateTotalScore();
     g_endGame();
+
 }

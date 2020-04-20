@@ -10,7 +10,7 @@ var levels = {
 }
 
 
-function initStats(level,total,time) {
+function initStats(level,total = 10) {
     bonus = 1;
     statsData = {
         level: level,
@@ -18,7 +18,6 @@ function initStats(level,total,time) {
         correct: 0,
         wrong: 0,
         total: total,
-        startTime: time
     }
 }
 

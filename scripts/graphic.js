@@ -1,3 +1,8 @@
+function g_ready() {
+    $(function () {
+        $("#gioca_btn").attr("disabled",false);
+    });
+}
 
 function g_setButtons() {
     $(function () {
@@ -15,6 +20,19 @@ function g_setButtons() {
                 }
             }
         }
+    });
+}
+
+function g_play() {
+    $(function () {
+        if(onPlay == null)
+            return;
+        $("#gioca_btn").attr("disabled",true);
+
+        onPlay.player.addEventListener("pause",() => {
+            $("#gioca_btn").attr("disabled",false);
+
+        })
     });
 }
 
@@ -38,3 +56,4 @@ function g_endGame(){
     })
 
 }
+
