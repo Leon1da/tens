@@ -14,16 +14,25 @@ function firstLoad() {
 * 2 - TODO richiesta al webserver una lista di ids
 * 3 - Carica i file Audio
 */
-function load() {
-    //loadByPlaylist(getPlaylist());
-    prova();
+function load(mode = "NORMAL") {
+    selectMode(mode)
     document.getElementById("gioca_btn").disabled = false;
     initStats(levels.NORMAL,10,0);
 
 }
 
-function getPlaylist() {
-    return normalMode();
+function selectMode(mode) {
+    switch (mode) {
+        case "NORMAL" :
+            normalMode();
+            break;
+        case "ARTIST" :
+            artistMode();
+            break;
+        case "GENRE" :
+            genreMode();
+            break;
+    }
 }
 
 function loadTracks(items) {
@@ -114,11 +123,4 @@ function ended() {
         return true;
     sendStats();
     g_endGame();
-}
-
-function prova() {
-    api.searchTracks("artist:salmo",{limit:50},function (err,suc) {
-        console.log(suc);
-        loadTracks(suc.tracks.items);
-    });
 }
