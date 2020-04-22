@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Gioca | Myousic</title>
-    <script src="./js/spotify-web-api.js" type="text/javascript" ></script>
-    <script src="./js/game.js" type="text/javascript"></script>
-    <script src="./js/game_objects.js" type="text/javascript"></script>
-    <script src="./js/game_modes.js" type="text/javascript"></script>
-    <script src="./js/game_stats.js" type="text/javascript"></script>
-    <script src="./js/game_graphic.js" type="text/javascript"></script>
+    <script src="./js/game/spotify-web-api.js" type="text/javascript" ></script>
+    <script src="./js/game/game.js" type="text/javascript"></script>
+    <script src="./js/game/game_objects.js" type="text/javascript"></script>
+    <script src="./js/game/game_modes.js" type="text/javascript"></script>
+    <script src="./js/game/game_stats.js" type="text/javascript"></script>
+    <script src="./js/game/game_graphic.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.js" type="text/javascript"></script>
