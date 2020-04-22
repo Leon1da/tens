@@ -7,17 +7,15 @@ function g_ready() {
 function g_setButtons() {
     $(function () {
         for(let i = 0;i<4;i++){
-            if(i === correct){
-                document.getElementById("titolo" + i).innerText = onPlay.name;
-                document.getElementById("artista"+i).innerText = onPlay.artist;
-                document.getElementById("cover"+i).src = onPlay.image;
-            } else {
-                let song = wrong_songs_objs.pop();
-                if(song != null) {
-                    document.getElementById("titolo"+i).innerText = song.name;
-                    document.getElementById("artista"+i).innerText = song.artist;
-                    document.getElementById("cover"+i).src = song.image;
-                }
+            let song;
+            if(i === correct)
+                song = onPlay;
+            else
+                song = wrong_songs_objs.pop();
+            if(song != null) {
+                $("#titolo"+i).text(song.name);
+                $("#artista"+i).text(song.artist);
+                $("#cover"+i).attr("src",song.image);
             }
         }
     });

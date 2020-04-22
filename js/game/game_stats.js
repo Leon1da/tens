@@ -40,5 +40,9 @@ function updateStats(correct,remainingTime) {
 }
 
 function sendStats() {
-
+    $.ajax({
+        url: './model/update_stats.php',
+        type: 'POST',
+        data: statsData,
+    });
 }

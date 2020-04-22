@@ -3,8 +3,8 @@ $config = [
     'db_engine' => 'mysql',
     'db_host' => '127.0.0.1',
     'db_name' => 'test',
-    'db_user' => 'admin',
-    'db_password' => 'Y8CzvisLTNjk',
+    'db_user' => 'root',
+    'db_password' => '',
 ];
 
 $db_config = $config['db_engine'] . ":host=".$config['db_host'] . ";dbname=" . $config['db_name'];
