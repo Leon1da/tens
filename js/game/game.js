@@ -51,8 +51,6 @@ function selectMode(mode) {
 }
 
 function loadTracks(items) {
-    console.log("items");
-    console.log(items);
     songs_objs = [];
     wrong_songs_objs = [];
     while((songs_objs.length < 10 || wrong_songs_objs.length < 30 ) && items.length !== 0){
@@ -90,29 +88,16 @@ function loadTracks(items) {
 * 2 - TODO Carica random la playlist (alcune canzoni vengono riprodotte ed altre vengono usate solo per mostrare il nome)
 */
 function loadByPlaylist(playlistId){
-    songs_objs = [];
-    wrong_songs_objs = [];
-    api.getPlaylistTracks(playlistId,function (err,suc) {
-        if(err){
-            console.log("error getting playlist");
-            return;
-        }
-        if(suc.items.length < 40){
-            console.log("Playlist troppo corta: " + suc.items.length);
-            return;
-        }
-        console.log(suc);
-        loadTracks(suc.items);
-    });
+
 }
 
 /*
 * Imposta i pulsanti e inizia la riproduzione
  */
 function play() {
-    if((onPlay != null && !onPlay.player.paused) || !ended()){
+    if(isPlaying())
         return;
-    }
+
     onPlay = songs_objs.pop();
     correct = Math.floor(Math.random() * 4); //Scelta del pulsante random
 
@@ -141,6 +126,8 @@ function autoplay() {
 * TODO
 * */
 function stopPlay(id) {
+    if(!isPlaying())
+        return;
     onPlay.player.pause();
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
     let result = updateStats(id===correct,timeLeft);
@@ -150,10 +137,18 @@ function stopPlay(id) {
 
 
 function ended() {
-    if(songs_objs.length > 0)
-        return true;
+    if(!isEnded())
+        return;
     sendStats();
     g_updateTotalScore();
     g_endGame();
 
+}
+
+function isPlaying() {
+    return onPlay != null && !onPlay.player.paused;
+}
+
+function isEnded() {
+    return songs_objs.length <= 0;
 }
