@@ -1,12 +1,18 @@
 
 function normalMode() {
-    initStats(new Level(levels.NORMAL));
-    let playlistsIds = ["37i9dQZEVXbIQnj7RRhdSX"]; //TODO getPlaylists
-    let playlist = playlistsIds.splice(Math.floor(Math.random()*playlistsIds.length),1).pop();
+    function getPlaylist(playlists,status) {
+        if(status !== "success"){
+            console.log("Errore Caricamento Playlists");
+            return;
+        }
+        console.log(playlists);
+        let playlist = playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
+        api.getPlaylistTracks(playlist,loadPlaylist);
+    }
 
-    api.getPlaylistTracks(playlist,function (err,suc) {
+    function loadPlaylist(err,suc){
         if(err){
-            console.log("error getting playlist");
+            console.log("Errore caricamento Playlist da Spotify");
             return;
         }
         if(suc.items.length < 40){
@@ -14,15 +20,12 @@ function normalMode() {
             return;
         }
         loadTracks(suc.items);
-    });
+    }
+    initStats(new Level(levels.NORMAL));
+    $.get("model/getPlaylist.php",{genre:"Normale"},getPlaylist,"json");
 }
 
 function genreMode(genre) {
    //TODO
     console.log(genre);
-}
-
-
-function _getPlaylists(genre) {
-
 }

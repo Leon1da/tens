@@ -32,7 +32,7 @@ function g_notReady() {
 }
 
 function g_start() {
-
+    //TODO
 }
 
 function g_setButtons() {
