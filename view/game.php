@@ -37,33 +37,36 @@
             </div>
             <!-- Contenuto -->
             <div class="col-9 h-100 p-3">
-                <div class="tab-content h-100">
+                <div class="tab-content h-75">
                     <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
                         Qui andranno le istruzioni carine e coccolose <br> <br> <br><br> <br> <br> Anche qui
                     </div>
 
                     <div class="tab-pane fade h-100" id="impostazioni-cont" role="tabpanel">
-
-                            <div class="row justify-content-center h-75">
-                                    <h3 class="text-center">Modalità</h3>
+                        <!-- zona scelte -->
+                        <div class="row justify-content-center h-75">
+                            <div class="col-12">
+                                <h2 class="text-center">Modalità</h2>
                             </div>
-                            <!-- zona pulsante e bar -->
-                            <div class="row justify-content-center h-25">
-                                <div class="col-12">
-                                    <div class="progress" style="height: 1px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="col-10 col-sm-6 col-md-3 align-self-end">
-                                    <button class="btn btn-primary btn-block" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                        Caricamento
-                                    </button>
-                                </div>
+                            <div class="col-10 col-sm-6 col-md-3">
+                                <select class="form-control" id="selettore_modalita"></select>
                             </div>
+                        </div>
                     </div>
-
                     <div class="tab-pane fade" id="partita-cont" role="tabpanel">Punteggi ecc</div>
+                </div>
+                <!-- zona pulsante e bar -->
+                <div class="row justify-content-center h-25">
+                    <div class="col-12">
+                        <div class="progress" style="height: 1px;">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-10 col-sm-6 col-md-3 align-self-end">
+                        <button class="btn btn-primary btn-block" type="button" id="gioca_btn" disabled>
+
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

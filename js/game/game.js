@@ -11,42 +11,25 @@ const PLAY_DURATION = 10; //durata della riproduzione in secondi
 
 
 function firstLoad() {
+    g_notReady();
+    g_initCategories();
+
     $.get("./model/token.php",function (token,status) {
         console.log(status);
         api.setAccessToken(token);
-        load();
-
+        selectMode("Normale");
     });
-}
-
-/*
-* Caricamento dati:
-* 1 - TODO Richiesta al webserver di un token Spotify necessario per accedere ai servizi API Spotify
-* 2 - TODO richiesta al webserver una lista di ids
-* 3 - Carica i file Audio
-*/
-function load(mode = "NORMAL") {
-    selectMode(mode);
 }
 
 
 function selectMode(mode) {
+    g_notReady();
     switch (mode) {
-        case "NORMAL" :
+        case "Normale" :
             normalMode();
             break;
-        case "ARTIST" :
-            artistMode();
-            break;
-        case "GENRE" :
-            genreMode();
-            break;
-        case "PROVA" :
-            provaMode();
-            break;
-        case "PLAYLIST" :
-            playlistMode();
-            break;
+        default:
+            genreMode(mode);
     }
 }
 
@@ -82,14 +65,10 @@ function loadTracks(items) {
     g_ready();
 }
 
-/*
-* Richiede i dati necessari ai server Spotify:
-* 1 - Richiede la playlist id
-* 2 - TODO Carica random la playlist (alcune canzoni vengono riprodotte ed altre vengono usate solo per mostrare il nome)
-*/
-function loadByPlaylist(playlistId){
-
+function start() {
+    play();
 }
+
 
 /*
 * Imposta i pulsanti e inizia la riproduzione
@@ -104,7 +83,6 @@ function play() {
     autoplay();
     g_setButtons();
     g_updateTotalScore();
-    g_play();
 
     onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION;
     console.log(onPlay.player.currentTime);
