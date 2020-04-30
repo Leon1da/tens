@@ -8,7 +8,7 @@ var correct; //indice della risposta corretta
 var autoTimer;
 
 const PLAY_DURATION = 10; //durata della riproduzione in secondi
-
+const AUTOPLAY_DURATION = 2; //in secondi
 
 function firstLoad() {
     g_notReady();
@@ -65,8 +65,20 @@ function loadTracks(items) {
     g_ready();
 }
 
-function start() {
+function startGame() {
+    console.log("startgame");
     play();
+    g_start();
+}
+
+function stopGame() {
+    if(isPlaying()){
+        onPlay.player.pause();
+        onPlay.player.removeEventListener("pause",startTimerCallback);
+    } else
+        clearTimeout(autoTimer);
+    onPlay = null;
+    g_stop();
 }
 
 
@@ -74,13 +86,15 @@ function start() {
 * Imposta i pulsanti e inizia la riproduzione
  */
 function play() {
-    if(isPlaying())
+    if(isPlaying() || isEnded())
         return;
 
     onPlay = songs_objs.pop();
     correct = Math.floor(Math.random() * 4); //Scelta del pulsante random
 
-    autoplay();
+    setAutoplay();
+    g_setGameProgressBar(10-songs_objs.length);
+    g_startRoundProgressBar();
     g_setButtons();
     g_updateTotalScore();
 
@@ -90,14 +104,17 @@ function play() {
 }
 
 
-function autoplay() {
-    if(onPlay == null)
+function setAutoplay() {
+    if(onPlay == null || songs_objs.length < 1)
         return;
     console.log("qui");
-    onPlay.player.addEventListener("pause",() => {
-        autoTimer = setTimeout(play,2000);
-        console.log("tigger");
-    })
+    onPlay.player.addEventListener("pause",startTimerCallback);
+}
+
+function startTimerCallback() {
+    g_startAutoplayProgressBar();
+    autoTimer = setTimeout(play,AUTOPLAY_DURATION*1000);
+    console.log("trigger");
 }
 
 /*
@@ -121,6 +138,39 @@ function ended() {
     g_updateTotalScore();
     g_endGame();
 
+}
+
+function normalMode() {
+
+    initStats(new Level(levels.NORMAL));
+    $.get("model/getPlaylist.php",{genre:"Normale"},getPlaylistCallback,"json");
+}
+
+function genreMode(genre) {
+    initStats(new Level((levels.GENRE)));
+    $.get("model/getPlaylist.php",{genre:genre},getPlaylistCallback,"json");
+}
+
+function getPlaylistCallback(playlists,status) {
+    if(status !== "success"){
+        console.log("Errore Caricamento Playlists");
+        return;
+    }
+    console.log(playlists);
+    let playlist = playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
+    api.getPlaylistTracks(playlist,loadPlaylistCallback);
+}
+
+function loadPlaylistCallback(err,suc){
+    if(err){
+        console.log("Errore caricamento Playlist da Spotify");
+        return;
+    }
+    if(suc.items.length < 40){
+        console.log("Playlist troppo corta: " + suc.items.length);
+        return;
+    }
+    loadTracks(suc.items);
 }
 
 function isPlaying() {

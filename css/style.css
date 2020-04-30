@@ -14,3 +14,8 @@
 .form-group > input{
     border-radius: 20px;
 }
+
+.progress-custom{
+    -webkit-transition: none !important;
+    transition: none !important;
+}

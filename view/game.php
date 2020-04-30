@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-12 p-0">
         <div class="progress rounded-0">
-            <div class="progress-bar" id="game-progress" role="progressbar" style="width: 50%"></div>
+            <div class="progress-bar" id="progesso_gioco" role="progressbar" style="width: 0%"></div>
         </div>
     </div>
 </div>
@@ -59,12 +59,11 @@
                 <div class="row justify-content-center h-25">
                     <div class="col-12">
                         <div class="progress" style="height: 1px;">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-custom" id="progresso_round" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="col-10 col-sm-6 col-md-3 align-self-end">
                         <button class="btn btn-primary btn-block" type="button" id="gioca_btn" disabled>
-
                         </button>
                     </div>
                 </div>

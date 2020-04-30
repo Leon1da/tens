@@ -16,23 +16,40 @@ function g_initCategories() {
 
 function g_ready() {
     $(function () {
-        let btn = $("#gioca_btn");
-        btn.text("Gioca");
-        btn.on("click",start);
-        btn.attr("disabled",false);
+        $("#gioca_btn")
+            .text("Gioca")
+            .one("click",startGame)
+            .attr("disabled",false)
+            .removeClass("btn-danger")
+            .addClass("btn-primary");
     });
 }
 
 function g_notReady() {
     $(function () {
-        let btn = $("#gioca_btn");
-        btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Caricamento')
-        btn.attr("disabled",true);
+        $("#gioca_btn")
+            .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Caricamento')
+            .attr("disabled",true);
     });
 }
 
 function g_start() {
-    //TODO
+    $(function () {
+        $("#gioca_btn")
+            .text("Annulla")
+            .one("click",stopGame)
+            .attr("disabled",false)
+            .removeClass("btn-primary")
+            .addClass("btn-danger");
+    });
+}
+
+function g_stop() {
+    $(function () {
+        //TODO pulire btns
+        g_setGameProgressBar(0);
+        selectMode($("#selettore_modalita").val());
+    })
 }
 
 function g_setButtons() {
@@ -70,3 +87,28 @@ function g_endGame(){
 
 }
 
+
+
+function g_setGameProgressBar(progress) {
+    let percent = (progress * 10) + "%";
+    $(function () {
+        $("#progesso_gioco").width(percent);
+    })
+}
+
+function g_startRoundProgressBar() {
+    $(function () {
+        $("#progresso_round")
+            .stop(true,true)
+            .animate({width: "0%"},PLAY_DURATION*1000);
+    })
+}
+
+function g_startAutoplayProgressBar() {
+    $(function () {
+        $("#progresso_round")
+            .stop(true,false)
+            .animate({width: "0%"},AUTOPLAY_DURATION*250) //Scende da dove rimasta fino alla fine in 1/4 del tempo di autoplay
+            .animate({width: "100%"},AUTOPLAY_DURATION*750); //Sale fino al 100% nel tempo rimanente
+    })
+}
