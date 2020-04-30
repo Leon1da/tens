@@ -7,6 +7,10 @@ $status = Status::Success;
 if (isset($_POST['register'])) {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $sesso = $_POST['sesso'] ?? '';
+
+    // [todo] rimuovere/modificare
     $isUsernameValid = filter_var(
         $username,
         FILTER_VALIDATE_REGEXP, [
@@ -50,12 +54,14 @@ if (isset($_POST['register'])) {
         } else {
             $query = "
                 INSERT INTO users
-                VALUES (0, :username, :password)
+                VALUES (0, :username, :password, :email, :sesso)
             ";
 
             $check = $pdo->prepare($query);
             $check->bindParam(':username', $username, PDO::PARAM_STR);
             $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
+            $check->bindParam(':email', $email, PDO::PARAM_STR);
+            $check->bindParam(':sesso', $sesso, PDO::PARAM_STR);
             $check->execute();
 
             if ($check->rowCount() > 0) {

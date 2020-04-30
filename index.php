@@ -40,6 +40,7 @@
                     Multiplayer
                 </a>
             </li>
+
         </ul>
     </div>
     <div class="col-md-3 offset-md-1">
@@ -96,18 +97,50 @@
              <div class="modal-body">
                  <form method="post" id="register-form">
                      <div class="form-group">
+                         <div class="row">
+                             <div class="col">
+                                 <input type="text" class="form-control" id="name-reg" placeholder="Nome*" required>
+                             </div>
+                             <div class="col">
+                                 <input type="text" class="form-control" id="surname-reg" placeholder="Cognome*" required>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="row">
+                             <div class="col-md-7">
+                                 <input type="email" placeholder="Email*" id="email-reg" class="form-control">
+                             </div>
+                             <div class="col-md-5">
+                                 <div class="input-group mb-3">
+                                     <div class="input-group-prepend">
+                                         <label class="input-group-text" for="inputGroupSelect01">Sesso</label>
+                                     </div>
+                                     <select class="custom-select" id="sesso-reg">
+                                         <option value="N" selected>Scegli</option>
+                                         <option value="M">Uomo</option>
+                                         <option value="F">Donna</option>
+                                         <option value="A">Altro</option>
+                                     </select>
+                                 </div>
 
-                         <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                             </div>
+                         </div>
                      </div>
 
                      <div class="form-group">
-                         <input type="text" class="form-control" id="username-reg" placeholder="Username" name="username" maxlength="50" required>
+                         <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username" maxlength="50" required>
                      </div>
                      <div class="form-group">
-                         <input type="password" class="form-control" id="password-reg" placeholder="Password" name="password" required>
+                         <input type="password" class="form-control" id="password-reg" placeholder="Password*" name="password" required>
                      </div>
-
+                     <small class="form-text text-muted">
+                         Utilizzeremo le informazioni che ci fornisci al solo scopo di mogliorare la tua esperienza di gioco.
+                         <br>
+                         I tuoi dati personali non saranno condivisi con nessun altro, nel rispetto della tua privacy.
+                         <br>
+                         *Campo obbligatorio
+                     </small>
                  </form>
 
              </div>
@@ -171,13 +204,30 @@
 
         // register
         $("#register-btn").click(function () {
+
+            var nome = $("#name-reg").val();
+            var cognome = $("#surname-reg").val();
+            var email = $("#email-reg").val();
+            var sesso = $("#sesso-reg").val();
+
             var username = $("#username-reg").val();
             var password = $("#password-reg").val();
+
+            alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
+
             var register = '1';
             var request = $.ajax({
                 type: "POST",
                 url: "model/registration.php",
-                data: {username: username, password: password, register : register},
+                data: {
+                    nome: nome,
+                    cognome: cognome,
+                    email: email,
+                    sesso: sesso,
+                    username: username,
+                    password: password,
+                    register : register
+                },
                 dataType: "html"
             });
             request.done( function (response) {

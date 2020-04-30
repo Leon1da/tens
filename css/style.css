@@ -11,6 +11,18 @@
     text-align: center;
 }
 
-.form-group > input{
+.form-group input {
     border-radius: 20px;
+}
+
+.input-group-text{
+    border-radius: 20px;
+}
+.custom-select{
+    border-radius: 20px;
+}
+
+.my-card{
+    margin: 20px;
+    padding: 20px;
 }
