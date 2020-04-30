@@ -37,13 +37,13 @@
             </div>
             <!-- Contenuto -->
             <div class="col-9 h-100 p-3">
-                <div class="tab-content h-75">
+                <div class="tab-content h-75 pt-2">
                     <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
                         Qui andranno le istruzioni carine e coccolose <br> <br> <br><br> <br> <br> Anche qui
                     </div>
 
+                    <!-- Tab impostazioni -->
                     <div class="tab-pane fade h-100" id="impostazioni-cont" role="tabpanel">
-                        <!-- zona scelte -->
                         <div class="row justify-content-center h-75">
                             <div class="col-12">
                                 <h2 class="text-center">Modalità</h2>

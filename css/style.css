@@ -26,3 +26,8 @@
     margin: 20px;
     padding: 20px;
 }
+
+.progress-custom {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
