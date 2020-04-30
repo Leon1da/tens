@@ -1,9 +1,20 @@
 
 function normalMode() {
-    initStats(levels.NORMAL);
+    initStats(new Level(levels.NORMAL));
     let playlistsIds = ["37i9dQZEVXbIQnj7RRhdSX"];
     let playlist = playlistsIds.splice(Math.floor(Math.random()*playlistsIds.length),1).pop();
-    loadByPlaylist(playlist);
+
+    api.getPlaylistTracks(playlist,function (err,suc) {
+        if(err){
+            console.log("error getting playlist");
+            return;
+        }
+        if(suc.items.length < 40){
+            console.log("Playlist troppo corta: " + suc.items.length);
+            return;
+        }
+        loadTracks(suc.items);
+    });
 }
 
 function artistMode() {

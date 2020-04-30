@@ -2,21 +2,16 @@ var statsData;
 let bonus; //risposte corrette di seguito
 
 const timeMultiplier = 100; //Moltiplicatore del punteggio del tempo
-var levels = {
-    HARD: 5000,
-    NORMAL: 1000,
-    EASY: 500,
-    CUSTOM: 100
-}
-
 
 function initStats(level,total = 10) {
     bonus = 1;
     statsData = {
-        level: level,
+        category: level.category,
+        multiplier: level.multiplier,
         score: 0,
         correct: 0,
         wrong: 0,
+        missed: 0,
         total: total,
     }
 }
@@ -28,7 +23,7 @@ function updateStats(correct,remainingTime) {
         return {score: 0,timeBonus: 0};
     }
 
-    let score = statsData.level * bonus;
+    let score = statsData.multiplier * bonus;
     let timeBonus = Math.round(remainingTime*timeMultiplier);
 
     statsData.score += score+timeBonus;
@@ -40,5 +35,10 @@ function updateStats(correct,remainingTime) {
 }
 
 function sendStats() {
-
+    statsData.missed = statsData.total - statsData.correct - statsData.wrong;
+    $.ajax({
+        url: './model/update_stats.php',
+        type: 'POST',
+        data: statsData,
+    });
 }

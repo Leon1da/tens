@@ -3,41 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>Gioca | Myousic</title>
-    <script src="./scripts/spotify-web-api.js" type="text/javascript" ></script>
-    <script src="./scripts/game.js" type="text/javascript"></script>
-    <script src="./scripts/objects.js" type="text/javascript"></script>
-    <script src="./scripts/modes.js" type="text/javascript"></script>
-    <script src="./scripts/stats.js" type="text/javascript"></script>
-    <script src="./scripts/graphic.js" type="text/javascript"></script>
-
+    <script src="./js/game/spotify-web-api.js" type="text/javascript" ></script>
+    <script src="./js/game/game.js" type="text/javascript"></script>
+    <script src="./js/game/game_objects.js" type="text/javascript"></script>
+    <script src="./js/game/game_modes.js" type="text/javascript"></script>
+    <script src="./js/game/game_stats.js" type="text/javascript"></script>
+    <script src="./js/game/game_graphic.js" type="text/javascript"></script>
+    <!-- TODO remove -->
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body>
-    <!-- Play e info -->
-    <div class="row justify-content-center my-3">
-        <div class="col-4">
-            <div class="d-flex justify-content-center">
-            <button class="btn btn-outline-dark border-0 rounded-circle shadow-lg" id="gioca_btn" type="button" onclick="play()" disabled>
-                <svg class="bi bi-play" width="100%" height="100%" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 010 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" clip-rule="evenodd"/>
-                </svg>
-            </button>
-            </div>
-        </div>
-        <div class="col-6 border">
-            <p>score: <span id="totScore">0</span> + <span id="deltaScore">0</span> + <span id="timeScore">0</span> </p>
-            <label for="artista">Artista</label><input type="text" id="artista"><button class="btn btn-primary" onclick="load('ARTIST')">Ok</button>
-            <label for="genere">Genere</label><input type="text" id="genere"><button class="btn btn-primary" onclick="load('GENRE')">Ok</button><br>
-            <label for="prova">Query artista</label><input type="text" id="prova"><button class="btn btn-primary" onclick="load('PROVA')">Ok</button>
-            <label for="playlist">playlist</label><input type="text" id="playlist"><button class="btn btn-primary" onclick="load('PLAYLIST')">Ok</button>
-            <p id="endGame"></p>
+<!-- Progresso partita -->
+<div class="row">
+    <div class="col-12 p-0">
+        <div class="progress rounded-0">
+            <div class="progress-bar" id="game-progress" role="progressbar" style="width: 50%"></div>
         </div>
     </div>
+</div>
+
+<!-- Play e info -->
+<div class="row justify-content-center mt-3 mb-4" style="height: 16rem">
+    <div class="col-10">
+        <div class="row align-items-center rounded shadow-lg mx-auto h-100">
+            <!-- struttura tabs -->
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" role="tablist" id="menu">
+                    <a class="nav-link active" id="istruzioni-tab" href="#istruzioni-cont" data-toggle="pill" role="tab">Istruzioni</a>
+                    <a class="nav-link" id="impostazioni-tab" href="#impostazioni-cont" data-toggle="pill" role="tab">Impostazioni</a>
+                    <a class="nav-link disabled" id="partita-tab" href="#partita-cont" data-toggle="pill" role="tab">Partita</a>
+                </div>
+            </div>
+            <!-- Contenuto -->
+            <div class="col-9 h-100 p-3">
+                <div class="tab-content h-100">
+                    <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
+                        Qui andranno le istruzioni carine e coccolose <br> <br> <br><br> <br> <br> Anche qui
+                    </div>
+
+                    <div class="tab-pane fade h-100" id="impostazioni-cont" role="tabpanel">
+
+                            <div class="row justify-content-center h-75">
+                                    <h3 class="text-center">Modalità</h3>
+                            </div>
+                            <!-- zona pulsante e bar -->
+                            <div class="row justify-content-center h-25">
+                                <div class="col-12">
+                                    <div class="progress" style="height: 1px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="col-10 col-sm-6 col-md-3 align-self-end">
+                                    <button class="btn btn-primary btn-block" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Caricamento
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="partita-cont" role="tabpanel">Punteggi ecc</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <!-- Zona risposte -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center h-50">
         <div class="col-10">
             <div class="row">
                 <div class="col-sm-6 my-1">
@@ -46,16 +81,16 @@
                         <div class="media-body align-self-center">
                             <h5 class="text-dark" id="titolo0"></h5>
                             <p class="text-dark" id="artista0"></p>
-                            <a class="stretched-link" onclick="stopPlay(0)" href="#"></a>
+                            <a class="stretched-link" onclick="stopPlay(0)" href="#" disabled></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 my-1">
-                    <div class="media rounded shadow-lg p-2 bg-dark">
+                    <div class="media rounded shadow-lg p-2 bg-light">
                         <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover1" src="./resources/Transparent.png" alt="Cover">
                         <div class="media-body align-self-center">
-                            <h5 class="text-light" id="titolo1"></h5>
-                            <p class="text-light" id="artista1"></p>
+                            <h5 class="text-dark" id="titolo1"></h5>
+                            <p class="text-dark" id="artista1"></p>
                             <a class="stretched-link" onclick="stopPlay(1)" href="#"></a>
                         </div>
                     </div>
@@ -73,11 +108,11 @@
                     </div>
                 </div>
                 <div class="col-sm-6 my-1">
-                    <div class="media rounded shadow p-2 bg-dark">
+                    <div class="media rounded shadow p-2 bg-light">
                         <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover3" src="./resources/Transparent.png" alt="Cover">
                         <div class="media-body align-self-center">
-                            <h5 class="text-light" id="titolo3"></h5>
-                            <p class="text-light" id="artista3"></p>
+                            <h5 class="text-dark" id="titolo3"></h5>
+                            <p class="text-dark" id="artista3"></p>
                             <a class="stretched-link" onclick="stopPlay(3)" href="#"></a>
                         </div>
                     </div>
