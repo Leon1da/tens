@@ -26,3 +26,8 @@
     margin: 20px;
     padding: 20px;
 }
+
+#account-dropdown-link{
+    padding-left: 5px;
+    color: black;
+}

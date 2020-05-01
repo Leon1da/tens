@@ -73,28 +73,6 @@ if (isset($_POST['register'])) {
             }
         }
     }
-
-    $html ='';
-    switch ($status) {
-        case Status::Success :
-            $html .= '<div class="alert alert-success" role="alert" >';
-            $html .= $msg;
-            $html .=' <a href="#sign-in">effettua il login</a>';
-            $html .= "</div>";
-            break;
-        case Status::Warning :
-            $html .= '<div class="alert alert-warning" role="alert" >';
-            $html .= $msg;
-            $html .=' <a href="#sign-up">riprova</a>';
-            $html .= "</div>";
-            break;
-        case Status::Error :
-            $html .= '<div class="alert alert-danger" role="alert" >';
-            $html .= $msg;
-            $html .=' <a href="#sign-up">riprova</a>';
-            $html .= "</div>";
-            break;
-    }
+    printErrorMessage($status, $msg);
 
 }
-    echo $html;

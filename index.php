@@ -16,13 +16,14 @@
 <body>
  <!-- Header -->
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="col-md-6 offset-md-2 collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+    <div class="offset-md-2 collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" name="home" href="#">Home </a>
             </li>
@@ -42,28 +43,48 @@
             </li>
 
         </ul>
-    </div>
-    <div class="col-md-3 offset-md-1">
+        <div class="row mx-auto">
+            <div class="nav-item dropdown invisible" id="account-panel">
+                <div class="row align-items-center">
+                    Ciao
+                    <a class="nav-link dropdown-toggle" href="#" id="account-dropdown-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-dark my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" > Sign In</button>
-        <button type="button" class="btn btn-outline-dark my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" > Sign Up </button>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Le mie statistiche</a>
+                        <a class="dropdown-item" href="#">Il mio profilo </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" id="logout-btn">Esci</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="visible" id="access-panel">
+                <button type="button" class="btn btn-outline-dark my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" > Sign In</button>
+                <button type="button" class="btn btn-outline-dark my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" > Sign Up </button>
+
+            </div>
+
+        </div>
+
+
+
     </div>
 </nav>
-
- <div class="container-fluid">
 
  <div id="main-content">
  </div>
 
 
- <!-- Modal --> <!-- Sign In -->
+ <!-- Modal --> <!-- Login -->
  <div class="modal fade" id="in-panel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title" id="exampleModalCenterTitle">Account Sign In</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <button type="button" class="close" id="btn-close-login"data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
@@ -90,7 +111,7 @@
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title" id="exampleModalCenterTitle">Create your free account</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <button type="button" class="close" id="btn-close-signup" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
@@ -179,6 +200,7 @@
             });
         });
 
+
         // login
         $("#login-btn").click(function () {
             var username = $("#username-lgn").val();
@@ -196,7 +218,12 @@
                 $("#main-content").html(response);
 
                 // chiudo il pannello di login
-                $("button.close").click();
+                $("#btn-close-login").click();
+
+                // // nascondo i bottoni di login e registrazione
+                // $("#access-panel").toggleClass("invisible");
+                // // mostro il menu del profilo
+                // $("#account-panel").toggleClass("invisible");
 
             });
 
@@ -232,14 +259,26 @@
             });
             request.done( function (response) {
                 alert(response);
-
                 //visualizzo risultato
                 $("#main-content").html(response);
-
                 // chiudo il pannello di registrazione
-                $("button.close").click();
+                $("#btn-close-signup").click();
 
             });
+        });
+
+        //logout
+        $("#logout-btn").click(function () {
+            $.get("model/logout.php", function (response) {
+                alert("logout");
+                //visualizzo risultato
+                $("#main-content").html(response);
+                // nascondo i bottoni di login e registrazione
+                $("#access-panel").toggleClass("invisible");
+                // mostro il menu del profilo
+                $("#account-panel").toggleClass("invisible");
+            });
+
         });
 
         // !!! important !!!

@@ -6,7 +6,6 @@ require_once ('utility.php');
 $status = Status::Success;
 
 if (isset($_SESSION['session_id'])) {
-
     // sei gia` loggato (sessione salvata)
     // #area riservata
     include "dashboard.php";
@@ -47,10 +46,13 @@ if (isset($_POST['login'])) {
             exit;
         }
     }
-//    echo $msg;
+
+    printErrorMessage($status,$msg);
+    exit;
 //    echo "<br>";
 //    echo "<a href='index.php'>torna indietro</a>";
-    //printf($msg, '<a href="../user.php">torna indietro</a>');
-}
+//    printf($msg, '<a href="#">torna indietro</a>');
+    printErrorMessage(Status::Error, "Errore interno, per favore contatta l'amministratore del sistema.");
 
+}
 ?>
