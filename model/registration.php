@@ -25,11 +25,12 @@ if (empty($username) || empty($password)) {
     $query = "
         SELECT id
         FROM users
-        WHERE username = :username || email = :email
+        WHERE username = :username or email = :email
     ";
 
     $check = $pdo->prepare($query);
     $check->bindParam(':username', $username, PDO::PARAM_STR);
+    $check->bindParam(':email', $email, PDO::PARAM_STR);
     $check->execute();
 
     $user = $check->fetchAll(PDO::FETCH_ASSOC);
