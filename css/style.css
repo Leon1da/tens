@@ -27,7 +27,7 @@
     padding: 20px;
 }
 
-#account-dropdown-link{
-    padding-left: 5px;
-    color: black;
+.progress-custom {
+    -webkit-transition: none !important;
+    transition: none !important;
 }

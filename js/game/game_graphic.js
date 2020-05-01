@@ -100,6 +100,7 @@ function g_startRoundProgressBar() {
     $(function () {
         $("#progresso_round")
             .stop(true,true)
+            .width("100%")
             .animate({width: "0%"},PLAY_DURATION*1000);
     })
 }
