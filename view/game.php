@@ -32,14 +32,14 @@
                 <div class="nav flex-column nav-pills" role="tablist" id="menu">
                     <a class="nav-link active" id="istruzioni-tab" href="#istruzioni-cont" data-toggle="pill" role="tab">Istruzioni</a>
                     <a class="nav-link" id="impostazioni-tab" href="#impostazioni-cont" data-toggle="pill" role="tab">Impostazioni</a>
-                    <a class="nav-link disabled" id="partita-tab" href="#partita-cont" data-toggle="pill" role="tab">Partita</a>
+                    <a class="nav-link" id="partita-tab" href="#partita-cont" data-toggle="pill" role="tab">Partita</a>
                 </div>
             </div>
             <!-- Contenuto -->
             <div class="col-9 h-100 p-3">
                 <div class="tab-content h-75 pt-2">
                     <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
-                        Qui andranno le istruzioni carine e coccolose <br> <br> <br><br> <br> <br> Anche qui
+                        Qui andranno le istruzioni carine e coccolose <br> <br> <br> <br> Anche qui
                     </div>
 
                     <!-- Tab impostazioni -->
@@ -53,8 +53,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="partita-cont" role="tabpanel">Punteggi ecc</div>
+                    <div class="tab-pane fade" id="partita-cont" role="tabpanel">
+                        <div class="row justify-content-center h-75">
+                            <div class="col-12">
+                                <h2 class="text-center">Punteggio</h2>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center" id="punteggio_testo">Totale</p>
+                                <h2 class="text-center" id="punteggio_valore">0</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
                 <!-- zona pulsante e bar -->
                 <div class="row justify-content-center h-25">
                     <div class="col-12">

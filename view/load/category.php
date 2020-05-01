@@ -1,5 +1,5 @@
 <?php
-require_once('../../model/database.php');
+require_once('../model/database.php');
 
 $query = "SELECT * FROM category";
 $check = $pdo->prepare($query);

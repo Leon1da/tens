@@ -13,6 +13,7 @@ function initStats(level,total = 10) {
         wrong: 0,
         missed: 0,
         total: total,
+        //TODO time
     }
 }
 
