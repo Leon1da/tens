@@ -2,77 +2,61 @@
 require_once('database.php');
 require_once ('utility.php');
 
-$status = Status::Success;
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+$email = $_POST['email'] ?? '';
+$sesso = $_POST['sesso'] ?? '';
 
-if (isset($_POST['register'])) {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $sesso = $_POST['sesso'] ?? '';
 
-    // [todo] rimuovere/modificare
-    $isUsernameValid = filter_var(
-        $username,
-        FILTER_VALIDATE_REGEXP, [
-            "options" => [
-                "regexp" => "/^[a-z\d_]{3,20}$/i"
-            ]
-        ]
-    );
-    $pwdLenght = mb_strlen($password);
+$pwdLenght = mb_strlen($password);
 
-    if (empty($username) || empty($password)) {
-        $msg = 'Compila tutti i campi %s';
-        $status = Status::Warning;
-    } elseif (false === $isUsernameValid) {
-        $msg = 'L\'username non è valido. Sono ammessi solamente caratteri 
-                alfanumerici e l\'underscore. Lunghezza minina 3 caratteri.
-                Lunghezza massima 20 caratteri';
-        $status = Status::Warning;
-    } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $msg = 'Lunghezza minima password 8 caratteri.
-                Lunghezza massima 20 caratteri.';
-        $status = Status::Warning;
+
+if (empty($username) || empty($password)) {
+    $msg = 'Compila tutti i campi';
+    printErrorMessage(Status::Warning, $msg);
+
+} elseif ($pwdLenght < 8 || $pwdLenght > 20) {
+    $msg = 'Lunghezza minima password 8 caratteri.
+            Lunghezza massima 20 caratteri.';
+    printErrorMessage(Status::Warning, $msg);
+} else {
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+    $query = "
+        SELECT id
+        FROM users
+        WHERE username = :username || email = :email
+    ";
+
+    $check = $pdo->prepare($query);
+    $check->bindParam(':username', $username, PDO::PARAM_STR);
+    $check->execute();
+
+    $user = $check->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($user) > 0) {
+        $msg = 'Username o email già in uso';
+        printErrorMessage(Status::Warning, $msg);
     } else {
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
-
         $query = "
-            SELECT id
-            FROM users
-            WHERE username = :username
+            INSERT INTO users
+            VALUES (0, :username, :password, :email, :sesso)
         ";
 
         $check = $pdo->prepare($query);
         $check->bindParam(':username', $username, PDO::PARAM_STR);
+        $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
+        $check->bindParam(':email', $email, PDO::PARAM_STR);
+        $check->bindParam(':sesso', $sesso, PDO::PARAM_STR);
         $check->execute();
 
-        $user = $check->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($user) > 0) {
-            $msg = 'Username già in uso %s';
-            $status = Status::Warning;
+        if ($check->rowCount() > 0) {
+            $msg = 'Registrazione eseguita con successo';
+            printErrorMessage(Status::Success,$msg);
         } else {
-            $query = "
-                INSERT INTO users
-                VALUES (0, :username, :password, :email, :sesso)
-            ";
-
-            $check = $pdo->prepare($query);
-            $check->bindParam(':username', $username, PDO::PARAM_STR);
-            $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
-            $check->bindParam(':email', $email, PDO::PARAM_STR);
-            $check->bindParam(':sesso', $sesso, PDO::PARAM_STR);
-            $check->execute();
-
-            if ($check->rowCount() > 0) {
-                $msg = 'Registrazione eseguita con successo';   // [TODO] indirizzare verso il login
-                $status = Status::Success;
-            } else {
-                $msg = 'Problemi con l\'inserimento dei dati %s'; //[TODO] indirizzare verso la registrazione
-                $status = Status::Error;
-            }
+            $msg = 'La registrazione non e` andata a buon fine.';
+            printErrorMessage(Status::Error, $msg);
         }
     }
-    printErrorMessage($status, $msg);
-
 }
+

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -91,10 +92,10 @@
              <div class="modal-body">
                  <form method="post" id="login-form">
                      <div class="form-group">
-                         <input type="text" class="form-control" id="username-lgn" placeholder="Username" name="username">
+                         <input type="text" class="form-control" id="username-lgn" placeholder="Username" name="username" required>
                      </div>
                      <div class="form-group">
-                         <input type="password" class="form-control" id="password-lgn" placeholder="Password" name="password">
+                         <input type="password" class="form-control" id="password-lgn" placeholder="Password" name="password" required>
                      </div>
                  </form>
              </div>
@@ -183,7 +184,11 @@
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="js/model_view.js"></script>
 
+ <?php
+ require_once('model/controller.php');
+ ?>
 <script>
     $(document).ready(function() {
 
@@ -205,25 +210,19 @@
         $("#login-btn").click(function () {
             var username = $("#username-lgn").val();
             var password = $("#password-lgn").val();
-            var login = '1'
             var request = $.ajax({
                 type: "POST",
                 url: "model/login.php",
-                data: {username: username, password: password, login: login},
+                data: {username: username, password: password},
                 dataType: "html"
             });
             request.done( function (response) {
                 alert(response);
                 // visualizzo risultato
                 $("#main-content").html(response);
-
                 // chiudo il pannello di login
                 $("#btn-close-login").click();
 
-                // // nascondo i bottoni di login e registrazione
-                // $("#access-panel").toggleClass("invisible");
-                // // mostro il menu del profilo
-                // $("#account-panel").toggleClass("invisible");
 
             });
 
@@ -242,7 +241,6 @@
 
             alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
 
-            var register = '1';
             var request = $.ajax({
                 type: "POST",
                 url: "model/registration.php",
@@ -253,7 +251,6 @@
                     sesso: sesso,
                     username: username,
                     password: password,
-                    register : register
                 },
                 dataType: "html"
             });
@@ -273,10 +270,8 @@
                 alert("logout");
                 //visualizzo risultato
                 $("#main-content").html(response);
-                // nascondo i bottoni di login e registrazione
-                $("#access-panel").toggleClass("invisible");
-                // mostro il menu del profilo
-                $("#account-panel").toggleClass("invisible");
+
+                show_hide_logged_panel(false);
             });
 
         });
