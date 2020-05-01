@@ -190,8 +190,8 @@
  require_once('model/controller.php');
  ?>
 <script>
-    $(document).ready(function() {
 
+    $(document).ready(function() {
         // load pages when a nav-anchor is clicked
         $(".nav-link").click(function () {
             var old_active = $(".nav-item.active"); // old page
@@ -222,7 +222,6 @@
                 $("#main-content").html(response);
                 // chiudo il pannello di login
                 $("#btn-close-login").click();
-
 
             });
 
@@ -270,8 +269,6 @@
                 alert("logout");
                 //visualizzo risultato
                 $("#main-content").html(response);
-
-                show_hide_logged_panel(false);
             });
 
         });

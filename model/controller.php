@@ -7,5 +7,14 @@ if(isset($_SESSION["session_id"])){
         show_hide_logged_panel(true);
     </script>
     <?php
+}else{
+    ?>
+
+    <script>
+        show_hide_logged_panel(false);
+    </script>
+
+    <?php
 }
+
 ?>
