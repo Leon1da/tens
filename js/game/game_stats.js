@@ -1,4 +1,5 @@
 var statsData;
+
 let bonus; //risposte corrette di seguito
 
 const timeMultiplier = 100; //Moltiplicatore del punteggio del tempo
@@ -13,7 +14,8 @@ function initStats(level,total = 10) {
         wrong: 0,
         missed: 0,
         total: total,
-        //TODO time
+        start: Date.now()/1000,
+        stop: 0,
     }
 }
 
@@ -37,6 +39,7 @@ function updateStats(correct,remainingTime) {
 
 function sendStats() {
     statsData.missed = statsData.total - statsData.correct - statsData.wrong;
+    statsData.stop = Date.now()/1000;
     $.ajax({
         url: './model/update_stats.php',
         type: 'POST',
