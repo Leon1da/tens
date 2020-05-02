@@ -142,12 +142,12 @@ function ended() {
 
 function normalMode() {
 
-    initStats(new Level(levels.NORMAL));
+    initStats(new Level(levels.NORMAL,'Normale'));
     $.get("model/getPlaylist.php",{genre:"Normale"},getPlaylistCallback,"json");
 }
 
 function genreMode(genre) {
-    initStats(new Level((levels.GENRE)));
+    initStats(new Level((levels.GENRE,genre)));
     $.get("model/getPlaylist.php",{genre:genre},getPlaylistCallback,"json");
 }
 
