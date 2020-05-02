@@ -1,16 +1,21 @@
 function g_initCategories() {
     $(function () {
-        $.get("view/load/category.php",function (data,status) {
+        function callback(data,status){
             if(status !== "success"){
                 console.log("Errore caricamento categorie");
                 return;
             }
+            let html = '';
             let selector = $("#selettore_modalita");
-            selector.html(data);
+            data.forEach((category) => {html += '<option>'+category+'</option>'});
+
+            selector.html(html);
             selector.on("change",function () {
                 selectMode(selector.val());
             });
-        });
+
+        }
+        $.get("model/getCategories.php",callback,"json");
     });
 }
 
