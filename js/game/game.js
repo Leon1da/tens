@@ -43,12 +43,17 @@ function selectCategory(category) {
 }
 
 
-function autoload() {
+function autoload(i = 30) {
     let category = getCategory("Normale");
-    if(category == null){
-        setTimeout(autoload,500);
+    if(i === 0){
+        alert("Errore Caricamento... Riprova più tardi");
         return;
     }
+    if(category == null){
+        setTimeout(autoload,500,--i);
+        return;
+    }
+
     selectCategory(category);
 }
 
