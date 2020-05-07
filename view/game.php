@@ -31,8 +31,8 @@
 </div>
 
 
-<!-- Progresso partita -->
-<div class="row">
+<!-- Barra progresso partita -->
+<div class="row vw-100 m-0" >
     <div class="col-12 p-0">
         <div class="progress rounded-0">
             <div class="progress-bar" id="progesso_gioco" role="progressbar" style="width: 0%"></div>
@@ -41,11 +41,11 @@
 </div>
 
 <!-- Finestra -->
-<div class="row my-3 justify-content-center" style="min-height: 85vh">
+<div class="row my-3 mx-0 justify-content-center" style="min-height: 85vh; max-width: 100vw">
     <div class="col-12 col-md-10">
         <div class="row justify-content-center m-0" style="height: 90% ; width: 100%">
             <!-- Menu tabs -->
-            <div class="row" style="height: 0%; width: 100%">
+            <div class="row invisible" style="height: 0%; width: 100%">
                 <div class="col-12">
                     <ul class="nav nav-pills" role="tablist">
                         <li class="nav-item">
