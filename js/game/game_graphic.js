@@ -1,21 +1,18 @@
 function g_initCategories() {
     $(function () {
-        function callback(data,status){
-            if(status !== "success"){
-                console.log("Errore caricamento categorie");
-                return;
-            }
-            let html = '';
-            let selector = $("#selettore_modalita");
-            data.forEach((category) => {html += '<option>'+category+'</option>'});
+        let html = '';
+        let selector = $("#selettore_modalita");
 
-            selector.html(html);
-            selector.on("change",function () {
-                selectMode(selector.val());
-            });
+        categories.forEach(function (category) {
+            html += '<option>'+category.nome+'</option>';
+        });
 
-        }
-        $.get("model/getCategories.php",callback,"json");
+        selector.html(html);
+        selector.on("change",() => {
+            selectCategory(getCategory(selector.val()));
+        });
+        selector.trigger("change"); //Avvia il caricamento della partita in automatico
+
     });
 }
 
@@ -40,6 +37,7 @@ function g_notReady() {
 
 function g_start() {
     $(function () {
+        $('#partita-tab').tab('show');
         $("#gioca_btn")
             .text("Annulla")
             .one("click",stopGame)
@@ -53,7 +51,9 @@ function g_stop() {
     $(function () {
         //TODO pulire btns
         g_setGameProgressBar(0);
-        selectMode($("#selettore_modalita").val());
+        $("#istruzioni-tab").tab('show');
+        $("#selettore_modalita").trigger("change");
+
     })
 }
 

@@ -4,11 +4,11 @@ let bonus; //risposte corrette di seguito
 
 const timeMultiplier = 100; //Moltiplicatore del punteggio del tempo
 
-function initStats(level,total = 10) {
+function initStats(category,total = 10) {
     bonus = 1;
     statsData = {
-        category: level.category,
-        multiplier: level.multiplier,
+        category: category.nome,
+        multiplier: category.moltiplicatore,
         score: 0,
         correct: 0,
         wrong: 0,

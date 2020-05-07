@@ -24,11 +24,11 @@
 </div>
 
 <!-- Play e info -->
-<div class="row my-3 justify-content-center" style="height: 85vh">
-    <div class="col-10">
-        <div class="row justify-content-center " style="height: 90% ; width: 100%">
+<div class="row my-3 justify-content-center" style="min-height: 85vh">
+    <div class="col-12 col-md-10">
+        <div class="row justify-content-center m-0" style="height: 90% ; width: 100%">
             <!-- Menu tabs -->
-            <div class="row" style="height: 10%; width: 100%">
+            <div class="row" style="height: 0%; width: 100%">
                 <div class="col-12">
                     <ul class="nav nav-pills" role="tablist">
                         <li class="nav-item">
@@ -43,12 +43,36 @@
 
 
             <!-- contenuto tabs -->
-            <div class="row justify-content-center" style="height: 90%; width: 100%">
+            <div class="row justify-content-center m-0 mt-md-5" style="height: 100%; width: 100%">
                 <div class="col-12">
                     <div class="tab-content">
                         <!-- Istruzioni e impostazioni -->
                         <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
-                            Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.
+
+                            <div class="row justify-content-center h-75 mb-3">
+                                <div class="col-12">
+                                    <h2 class="text-center">Benvenuto</h2>
+                                </div>
+                                <div class="col-12">
+                                    <p class="text-center">Il chicken tikka masala, comunemente noto in italiano come pollo al curry, è un tipo di curry indiano[2] o britannico,[1] nel quale pezzi cotti in padella di carne di pollo, simili al pollo tikka, vengono serviti assieme a una delicata e cremosa salsa speziata di colore arancione a base di pomodoro, panna e curry.
+
+                                        Le origini del pollo tikka masala sono attualmente oggetto di disputa. La più antica rivendicazione è quella legata agli imperatori dell'Impero Moghul come primi creatori del piatto, tuttavia altre rivendicazioni indicano come luogo di nascita del piatto Glasgow, città della Scozia.[3]
+
+                                        Varie indagini hanno rivelato che il chicken tikka masala è uno dei più popolari piatti serviti nei ristoranti britannici, dove viene chiamato "Britain's true national dish", ovvero il "vero piatto nazionale britannico"</p>
+                                </div>
+                            </div>
+
+
+                            <div class="row justify-content-center h-75">
+                                <div class="col-12">
+                                    <h2 class="text-center">Playlist</h2>
+                                </div>
+                                <div class="col-10 col-sm-6 col-md-3">
+                                    <select class="form-control" id="selettore_modalita"></select>
+                                    <p>Tranquillo è provvisorio</p>
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -57,10 +81,15 @@
                             <!-- Punteggio -->
                             <div class="row justify-content-center h-25">
                                 <div class="col">
-                                    <div class="row justify-content-center h-75 mb-4">
-                                        <div class="col-12">
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-12 mb-4">
                                             <h2 class="text-center" id="punteggio_testo">Totale</h2>
                                             <h1 class="text-center" id="punteggio_valore">0</h1>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="progress" style="height: 1px;">
+                                                <div class="progress-bar progress-custom" id="progresso_round" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +144,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -128,14 +156,16 @@
 
 
         <!-- Bar e pulsante gioca -->
-        <div class="row justify-content-center" style="height: 10%; width: 100%">
-            <div class="col-12">
+        <div class="row justify-content-center m-0" style="height: 10%; width: 100%">
+            <!-- TODO Remove
+            <div class="col-12 d-none">
+
                 <div class="progress" style="height: 1px;">
-                    <div class="progress-bar progress-custom" id="progresso_round" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar progress-custom" id="progresso_round_old" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-            </div>
-            <div class="col-10 col-sm-6 col-md-3 align-self-end">
-                <button class="btn btn-primary btn-block" type="button" id="gioca_btn" disabled>
+            </div> -->
+            <div class="col-10 col-sm-6 col-md-3 pt-1 align-self-end">
+                <button class="btn btn-primary btn-block rounded-pill" type="button" id="gioca_btn" disabled>
                 </button>
             </div>
         </div>

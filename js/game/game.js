@@ -2,6 +2,7 @@ const api = new SpotifyWebApi(); //API
 
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
+var categories;
 
 var onPlay; //canzone in riproduzione
 var correct; //indice della risposta corretta
@@ -12,25 +13,29 @@ const AUTOPLAY_DURATION = 2; //in secondi
 
 function firstLoad() {
     g_notReady();
-    g_initCategories();
+    getCategories();
 
     $.get("./model/token.php",function (token,status) {
         console.log(status);
         api.setAccessToken(token);
-        selectMode("Normale");
     });
 }
 
+function getCategories() {
+    $.get("model/getCategories.php",function (data,status) {
+        if(status !== "success"){
+            console.log("Errore caricamento categorie");
+            return;
+        }
+        categories = data;
+        g_initCategories();
+    },"json");
+}
 
-function selectMode(mode) {
+function selectCategory(category) {
     g_notReady();
-    switch (mode) {
-        case "Normale" :
-            normalMode();
-            break;
-        default:
-            genreMode(mode);
-    }
+    initStats(category);
+    $.get("model/getPlaylist.php",{genre:category.nome},getPlaylistCallback,"json");
 }
 
 function loadTracks(items) {
@@ -140,17 +145,6 @@ function ended() {
 
 }
 
-function normalMode() {
-
-    initStats(new Level(levels.NORMAL,'Normale'));
-    $.get("model/getPlaylist.php",{genre:"Normale"},getPlaylistCallback,"json");
-}
-
-function genreMode(genre) {
-    initStats(new Level((levels.GENRE,genre)));
-    $.get("model/getPlaylist.php",{genre:genre},getPlaylistCallback,"json");
-}
-
 function getPlaylistCallback(playlists,status) {
     if(status !== "success"){
         console.log("Errore Caricamento Playlists");
@@ -173,10 +167,22 @@ function loadPlaylistCallback(err,suc){
     loadTracks(suc.items);
 }
 
+
+/*
+* UTILS
+*
+*/
+
 function isPlaying() {
     return onPlay != null && !onPlay.player.paused;
 }
 
 function isEnded() {
     return songs_objs.length <= 0;
+}
+
+function getCategory(name) {
+    return categories.find( (category) => {
+        return category.nome === name
+    })
 }
