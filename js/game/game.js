@@ -2,7 +2,7 @@ const api = new SpotifyWebApi(); //API
 
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
-var categories;
+var categories = [];
 
 var onPlay; //canzone in riproduzione
 var correct; //indice della risposta corretta
@@ -16,9 +16,12 @@ function firstLoad() {
     getCategories();
 
     $.get("./model/token.php",function (token,status) {
-        console.log(status);
+        if(status !== "success"){
+            console.log("Errore caricamento Token" + status);
+            return;
+        }
         api.setAccessToken(token);
-        selectCategory(getCategory("Normale"));
+        autoload();
     });
 }
 
@@ -37,6 +40,16 @@ function selectCategory(category) {
     g_notReady();
     initStats(category);
     $.get("model/getPlaylist.php",{genre:category.nome},getPlaylistCallback,"json");
+}
+
+
+function autoload() {
+    let category = getCategory("Normale");
+    if(category == null){
+        setTimeout(autoload,500);
+        return;
+    }
+    selectCategory(category);
 }
 
 function loadTracks(items) {
@@ -102,7 +115,6 @@ function play() {
     g_setGameProgressBar(10-songs_objs.length);
     g_startRoundProgressBar();
     g_setButtons();
-    g_updateTotalScore();
 
     onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION;
     console.log(onPlay.player.currentTime);
@@ -141,7 +153,6 @@ function ended() {
     if(!isEnded())
         return;
     sendStats();
-    g_updateTotalScore();
     g_endGame();
 
 }

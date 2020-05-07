@@ -41,7 +41,7 @@ function g_start() {
     $(function () {
         $('#partita-tab').tab('show');
         $("#gioca_btn")
-            .text("Annulla")
+            .text("Esci")
             .one("click",stopGame)
             .attr("disabled",false)
             .removeClass("btn-primary")
@@ -51,7 +51,6 @@ function g_start() {
 
 function g_stop() {
     $(function () {
-        //TODO pulire btns
         g_setGameProgressBar(0);
         $("#istruzioni-tab").tab('show');
         $("#selettore_modalita").trigger("change");
@@ -73,19 +72,6 @@ function g_setButtons() {
                 $("#cover"+i).attr("src",song.image);
             }
         }
-    });
-}
-
-
-function g_updateTotalScore() {
-    return;
-    $(function () {
-        let score = $("#punteggio_valore");
-        score.fadeOut(100,function () {
-            score.text(statsData.score);
-            score.fadeIn(100);
-        });
-
     });
 }
 
@@ -121,6 +107,10 @@ function g_updateScore(score,timeScore) {
 }
 //TODO
 function g_endGame(){
+
+}
+
+function g_save() {
 
 }
 

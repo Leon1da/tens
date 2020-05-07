@@ -14,6 +14,23 @@
     <script src="../boostrap/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body>
+
+<!-- Notifiche -->
+<div class="toast my-toast" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="mr-auto">Salvataggio</strong>
+        <small class="text-muted">Ora</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body" id="notifiche">
+        <div class="spinner-border spinner-border-sm text-dark" role="status"></div>
+        Salvataggio in corso...
+    </div>
+</div>
+
+
 <!-- Progresso partita -->
 <div class="row">
     <div class="col-12 p-0">
@@ -23,7 +40,7 @@
     </div>
 </div>
 
-<!-- Play e info -->
+<!-- Finestra -->
 <div class="row my-3 justify-content-center" style="min-height: 85vh">
     <div class="col-12 col-md-10">
         <div class="row justify-content-center m-0" style="height: 90% ; width: 100%">
@@ -152,18 +169,8 @@
         </div>
 
 
-
-
-
-        <!-- Bar e pulsante gioca -->
+        <!--Pulsante gioca -->
         <div class="row justify-content-center m-0" style="height: 10%; width: 100%">
-            <!-- TODO Remove
-            <div class="col-12 d-none">
-
-                <div class="progress" style="height: 1px;">
-                    <div class="progress-bar progress-custom" id="progresso_round_old" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div> -->
             <div class="col-10 col-sm-6 col-md-3 pt-1 align-self-end">
                 <button class="btn btn-primary btn-block rounded-pill" type="button" id="gioca_btn" disabled>
                 </button>
