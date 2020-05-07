@@ -28,7 +28,7 @@
     <div class="col-12 col-md-10">
         <div class="row justify-content-center m-0" style="height: 90% ; width: 100%">
             <!-- Menu tabs -->
-            <div class="row invisible" style="height: 0%; width: 100%">
+            <div class="row" style="height: 0%; width: 100%">
                 <div class="col-12">
                     <ul class="nav nav-pills" role="tablist">
                         <li class="nav-item">

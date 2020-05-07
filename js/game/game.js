@@ -9,7 +9,7 @@ var correct; //indice della risposta corretta
 var autoTimer;
 
 const PLAY_DURATION = 10; //durata della riproduzione in secondi
-const AUTOPLAY_DURATION = 2; //in secondi
+const AUTOPLAY_DURATION = 3; //in secondi
 
 function firstLoad() {
     g_notReady();
@@ -18,6 +18,7 @@ function firstLoad() {
     $.get("./model/token.php",function (token,status) {
         console.log(status);
         api.setAccessToken(token);
+        selectCategory(getCategory("Normale"));
     });
 }
 
