@@ -3,20 +3,31 @@ const FADE_TIME = 100;
 function g_initCategories() {
     $(function () {
         let html = '';
-        let selector = $("#selettore_categoria");
-
         categories.forEach(function (category) {
-            if(category !== "Normale")
+            if(category.nome !== "Normale")
                 html += '<option>'+category.nome+'</option>';
         });
 
-        selector.html(html);
-        selector.on("change",() => {
-            selectCategory(getCategory(selector.val()));
-        });
-
-
+        $("#selettore_categoria").html(html);
     });
+}
+
+function g_initSelectors() {
+    $("#normale_btn").on("click", () => {
+        $("#selettore_categoria_collapse").collapse("hide");
+        selectCategory(getCategory("Normale"));
+    });
+
+    let category_selector = $("#selettore_categoria");
+    $("#categoria_btn").on("click", () => {
+        selectCategory(getCategory(category_selector.val()));
+    });
+    category_selector.on("change",() => {
+        selectCategory(getCategory(category_selector.val()));
+    });
+
+    $("#ricomincia_finale_btn").on("click", stopGame);
+
 }
 
 function g_ready() {
@@ -54,8 +65,7 @@ function g_stop() {
     $(function () {
         g_setGameProgressBar(0);
         $("#istruzioni-tab").tab('show');
-        $("#selettore_modalita").trigger("change");
-
+        $("#normale_btn").trigger("click");
     })
 }
 
@@ -149,7 +159,7 @@ function g_saveStats(response = null) {
             default:
                 notifiche.html('Errore salvataggio');
         }
-        setTimeout(() => {$(".my-toast").toast('hide');},5000);
+        setTimeout(() => {$(".my-toast").toast('hide');},10000);
     })
 }
 

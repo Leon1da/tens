@@ -45,3 +45,13 @@ account-dropdown-link{
     min-height: 50px;
     min-width: 300px;
 }
+
+.my-rounded-pill-left {
+    border-top-left-radius: 50rem!important;
+    border-bottom-left-radius: 50rem!important;
+}
+
+.my-rounded-pill-right {
+    border-top-right-radius: 50rem!important;
+    border-bottom-right-radius: 50rem!important;
+}

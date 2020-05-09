@@ -14,6 +14,7 @@ const AUTOPLAY_DURATION = 3; //in secondi
 function firstLoad() {
     g_notReady();
     getCategories();
+    g_initSelectors();
 
     $.get("./model/token.php",function (token,status) {
         if(status !== "success"){

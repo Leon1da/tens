@@ -44,17 +44,17 @@
                     </h3>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <h4 class="text-center">Corrette<br>
                             <span class="text-center h2" id="corrette_finale">0</span>
                         </h4>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <h4 class="text-center">Errate<br>
                             <span class="text-center h2" id="errate_finale">0</span>
                         </h4>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <h4 class="text-center">Mancate<br>
                             <span class="text-center h2" id="mancate_finale">0</span>
                         </h4>
@@ -62,8 +62,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                <button type="button" class="btn btn-primary">Classifiche TODO</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="ricomincia_finale_btn">Ricomincia</button>
             </div>
         </div>
     </div>
@@ -105,34 +104,45 @@
                         <!-- Istruzioni e impostazioni -->
                         <div class="tab-pane fade show active" id="istruzioni-cont" role="tabpanel">
 
-                            <div class="row justify-content-center h-75 mb-3">
-                                <div class="col-12">
+                            <!-- Istruzioni -->
+                            <div class="row justify-content-center h-75 mb-3 mb-md-5">
+                                <div class="col-12 mb-3">
                                     <h2 class="text-center">Benvenuto</h2>
                                 </div>
                                 <div class="col-12">
-                                    <p class="text-center">Il chicken tikka masala, comunemente noto in italiano come pollo al curry, è un tipo di curry indiano[2] o britannico,[1] nel quale pezzi cotti in padella di carne di pollo, simili al pollo tikka, vengono serviti assieme a una delicata e cremosa salsa speziata di colore arancione a base di pomodoro, panna e curry.
+                                    <p class="m-0">
+                                        <b>Tens</b> è un gioco di velocità, destrezza e un pizzico di fortuna. <br>
+                                        Avrai <em>dieci</em> secondi per indovinare <em>dieci</em> canzoni. <small class="text-muted">Si chiama Tens ricordi?</small> <br> <br>
+                                        Modalità di gioco:
+                                    </p>
+                                    <ul>
+                                        <li>Hits: Le grandi hits del presente e del passato, è la modalità di gioco standard che ti permette di raggiungere punteggi altissimi!</li>
+                                        <li>Genere: Gioca con il tuo genere preferito e fai capire agli altri che sei il migliore.</li>
+                                    </ul>
+                                    <p>
+                                        Seleziona gioca per iniziare subito o cambia la modalità di gioco. <br>
+                                        Buona fortuna!
+                                    </p>
 
-                                        Le origini del pollo tikka masala sono attualmente oggetto di disputa. La più antica rivendicazione è quella legata agli imperatori dell'Impero Moghul come primi creatori del piatto, tuttavia altre rivendicazioni indicano come luogo di nascita del piatto Glasgow, città della Scozia.[3]
-
-                                        Varie indagini hanno rivelato che il chicken tikka masala è uno dei più popolari piatti serviti nei ristoranti britannici, dove viene chiamato "Britain's true national dish", ovvero il "vero piatto nazionale britannico"</p>
                                 </div>
                             </div>
 
-
-                            <div class="row justify-content-center h-75">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h2 class="text-center">Modalità</h2>
-
-                                    <div class="btn-group btn-group-lg btn-group-toggle mb-3" role="group" aria-label="scelta modalità" data-toggle="buttons">
-                                        <label class="btn btn-primary active">
+                            <!-- Impostazioni -->
+                            <div class="row justify-content-center h-25">
+                                <div class="col-12 mb-3">
+                                    <h2 class="text-center">Modalità di gioco</h2>
+                                </div>
+                                <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="btn-group btn-group-lg btn-block btn-group-toggle mb-3" role="group" aria-label="scelta modalità" data-toggle="buttons">
+                                        <label class="btn btn-primary my-rounded-pill-left active">
                                             <input type="radio" name="normale" id="normale_btn" checked> Hits
                                         </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="options" id="categoria_btn" data-toggle="collapse" data-target="#selettore_categoria_div"> Genere
+                                        <label class="btn btn-primary my-rounded-pill-right">
+                                            <input type="radio" name="options" id="categoria_btn" data-toggle="collapse" data-target="#selettore_categoria_collapse"> Genere
                                         </label>
                                     </div>
-                                    <div class="collapse" id="selettore_categoria_div">
-                                        <select class=" form-control" id="selettore_categoria"></select>
+                                    <div class="collapse input-group" id="selettore_categoria_collapse">
+                                        <select class="custom-select custom-select-lg my-rounded-pill-left my-rounded-pill-right" id="selettore_categoria"></select>
                                     </div>
                                 </div>
                             </div>
@@ -164,23 +174,23 @@
                             <div class="row justify-content-center h-75">
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-sm-6 my-1">
+                                        <div class="col-sm-6 my-1 mb-sm-3">
                                             <div class="media rounded shadow-lg p-2 bg-light">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover0" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo0"></h5>
                                                     <p class="text-dark" id="artista0"></p>
-                                                    <a class="stretched-link" onclick="stopPlay(0)" href="#" disabled></a>
+                                                    <a class="stretched-link" onclick="stopPlay(0)" href="#progesso_gioco" disabled></a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 my-1">
+                                        <div class="col-sm-6 my-1 mb-sm-3">
                                             <div class="media rounded shadow-lg p-2 bg-light">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover1" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo1"></h5>
                                                     <p class="text-dark" id="artista1"></p>
-                                                    <a class="stretched-link" onclick="stopPlay(1)" href="#"></a>
+                                                    <a class="stretched-link" onclick="stopPlay(1)" href="#progesso_gioco"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +202,7 @@
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo2"></h5>
                                                     <p class="text-dark" id="artista2"></p>
-                                                    <a class="stretched-link" onclick="stopPlay(2)" href="#"></a>
+                                                    <a class="stretched-link" onclick="stopPlay(2)" href="#progesso_gioco"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +212,7 @@
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo3"></h5>
                                                     <p class="text-dark" id="artista3"></p>
-                                                    <a class="stretched-link" onclick="stopPlay(3)" href="#"></a>
+                                                    <a class="stretched-link" onclick="stopPlay(3)" href="#progesso_gioco"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,8 +228,8 @@
 
         <!--Pulsante gioca -->
         <div class="row justify-content-center m-0" style="height: 10%; width: 100%">
-            <div class="col-10 col-sm-6 col-md-3 pt-1 align-self-end">
-                <button class="btn btn-primary btn-block rounded-pill" type="button" id="gioca_btn" disabled>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 pt-1 align-self-end">
+                <button class="btn btn-primary btn-lg btn-block rounded-pill" type="button" id="gioca_btn" disabled>
                 </button>
             </div>
         </div>
