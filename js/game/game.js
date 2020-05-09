@@ -158,6 +158,7 @@ function ended() {
     if(!isEnded())
         return;
     sendStats();
+    g_saveStats();
     g_endGame();
 
 }

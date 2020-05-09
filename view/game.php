@@ -24,9 +24,48 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="toast-body" id="notifiche">
-        <div class="spinner-border spinner-border-sm text-dark" role="status"></div>
-        Salvataggio in corso...
+    <div class="toast-body" id="notifiche"></div>
+</div>
+
+<!-- Finale -->
+<div class="modal fade" id="modal_finale" tabindex="-1" role="dialog" aria-labelledby="finale" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titolo_finale">Partita conclusa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-md-3">
+                    <h3 class="text-center">Punteggio<br>
+                        <span class="text-center h1" id="punteggio_finale">0</span>
+                    </h3>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <h4 class="text-center">Corrette<br>
+                            <span class="text-center h2" id="corrette_finale">0</span>
+                        </h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="text-center">Errate<br>
+                            <span class="text-center h2" id="errate_finale">0</span>
+                        </h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="text-center">Mancate<br>
+                            <span class="text-center h2" id="mancate_finale">0</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                <button type="button" class="btn btn-primary">Classifiche TODO</button>
+            </div>
+        </div>
     </div>
 </div>
 

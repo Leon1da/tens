@@ -105,13 +105,51 @@ function g_updateScore(score,timeScore) {
 
     });
 }
-//TODO
-function g_endGame(){
 
+
+function g_endGame(){
+    $(function () {
+        let title;
+        if(statsData.victory === 1)
+            title = "Complimenti";
+        else
+            title = "Puoi migliorare";
+        $("#titolo_finale").text(title);
+        $("#punteggio_finale").text(statsData.score);
+        $("#corrette_finale").text(statsData.correct);
+        $("#errate_finale").text(statsData.wrong);
+        $("#mancate_finale").text(statsData.missed);
+
+        $("#modal_finale").modal("show");
+
+        $("#gioca_btn")
+            .text("Rigioca")
+            .one("click",stopGame)
+            .attr("disabled",false)
+            .removeClass("btn-danger")
+            .addClass("btn-primary");
+    })
 }
 
-function g_save() {
-
+function g_saveStats(response = null) {
+    $(function () {
+        $(".my-toast").toast('show');
+        let notifiche = $("#notifiche");
+        switch (response) {
+            case null:
+                notifiche.html('<div class="spinner-border spinner-border-sm text-dark" role="status"></div> Salvataggio in corso...');
+                return;
+            case "done":
+                notifiche.html('Salvataggio riuscito');
+                break;
+            case "login":
+                notifiche.html('Effettua il login per salvare i risultati');
+                break;
+            default:
+                notifiche.html('Errore salvataggio');
+        }
+        setTimeout(() => {$(".my-toast").toast('hide');},5000);
+    })
 }
 
 

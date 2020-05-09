@@ -13,6 +13,7 @@ function initStats(category,total = 10) {
         correct: 0,
         wrong: 0,
         missed: 0,
+        victory: 0,
         total: total,
         start: Date.now()/1000,
         stop: 0,
@@ -39,10 +40,13 @@ function updateStats(correct,remainingTime) {
 
 function sendStats() {
     statsData.missed = statsData.total - statsData.correct - statsData.wrong;
+    statsData.victory = statsData.correct > 5 ? 1 : 0;
     statsData.stop = Date.now()/1000;
     $.ajax({
         url: './model/update_stats.php',
         type: 'POST',
         data: statsData,
+        dataType : "text",
+        success: data => g_saveStats(data),
     });
 }
