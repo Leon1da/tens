@@ -108,7 +108,8 @@
                                 <div class="col-12">
                                     <p class="m-0">
                                         <b>Tens</b> è un gioco di velocità, destrezza e un pizzico di fortuna. <br>
-                                        Avrai <em>dieci</em> secondi per indovinare <em>dieci</em> canzoni. <small class="text-muted">Si chiama Tens ricordi?</small> <br> <br>
+                                        Indossa le cuffie o alza lo stereo al massimo, avrai solo <em>dieci</em> secondi per riconoscere il brano e solo <em>dieci</em> turni per fare il punteggio migliore. <small class="text-muted">Si chiama Tens ricordi?</small> <br>
+                                        Riuscirai a battere tutti? <br><br>
                                         Modalità di gioco:
                                     </p>
                                     <ul>
