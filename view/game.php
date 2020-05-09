@@ -120,12 +120,20 @@
 
 
                             <div class="row justify-content-center h-75">
-                                <div class="col-12">
-                                    <h2 class="text-center">Playlist</h2>
-                                </div>
-                                <div class="col-10 col-sm-6 col-md-3">
-                                    <select class="form-control" id="selettore_modalita"></select>
-                                    <p>Tranquillo è provvisorio</p>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h2 class="text-center">Modalità</h2>
+
+                                    <div class="btn-group btn-group-lg btn-group-toggle mb-3" role="group" aria-label="scelta modalità" data-toggle="buttons">
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="normale" id="normale_btn" checked> Hits
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="options" id="categoria_btn" data-toggle="collapse" data-target="#selettore_categoria_div"> Genere
+                                        </label>
+                                    </div>
+                                    <div class="collapse" id="selettore_categoria_div">
+                                        <select class=" form-control" id="selettore_categoria"></select>
+                                    </div>
                                 </div>
                             </div>
 

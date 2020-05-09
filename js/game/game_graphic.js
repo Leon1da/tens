@@ -3,10 +3,11 @@ const FADE_TIME = 100;
 function g_initCategories() {
     $(function () {
         let html = '';
-        let selector = $("#selettore_modalita");
+        let selector = $("#selettore_categoria");
 
         categories.forEach(function (category) {
-            html += '<option>'+category.nome+'</option>';
+            if(category !== "Normale")
+                html += '<option>'+category.nome+'</option>';
         });
 
         selector.html(html);
