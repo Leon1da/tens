@@ -87,7 +87,7 @@ function loadTracks(items) {
         }
     }
     if(songs_objs.length < 10 || wrong_songs_objs.length < 30){
-        alert("Numero insufficiente di canzoni :(");
+        alert("Numero insufficiente di canzoni :( \n Riprova");
         return;
     }
     g_ready();
@@ -178,7 +178,7 @@ function loadPlaylistCallback(res,status){
         return;
     }
     if(res.items.length < 40){
-        console.log("Playlist troppo corta: " + suc.items.length);
+        console.log("Playlist troppo corta: " + res.items.length);
         return;
     }
     loadTracks(res.items);
