@@ -26,7 +26,10 @@ function g_initSelectors() {
         selectCategory(getCategory(category_selector.val()));
     });
 
-    $("#ricomincia_finale_btn").on("click", stopGame);
+    $("#ricomincia_finale_btn").on("click", () => {
+        $("#modal_finale").modal("hide");
+        $("#gioca_btn").trigger("click");
+    });
 
 }
 
@@ -64,6 +67,7 @@ function g_start() {
 function g_stop() {
     $(function () {
         g_setGameProgressBar(0);
+        $("#punteggio_valore").text(0);
         $("#istruzioni-tab").tab('show');
         $("#normale_btn").trigger("click");
     })

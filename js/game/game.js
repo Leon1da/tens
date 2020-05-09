@@ -1,4 +1,4 @@
-const api = new SpotifyWebApi(); //API
+const api = new Spotify_api(); //API
 
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
@@ -13,9 +13,14 @@ const AUTOPLAY_DURATION = 3; //in secondi
 
 function firstLoad() {
     g_notReady();
-    getCategories();
     g_initSelectors();
 
+    getAccessToken();
+    getCategories();
+
+}
+
+function getAccessToken() {
     $.get("./model/token.php",function (token,status) {
         if(status !== "success"){
             console.log("Errore caricamento Token" + status);
@@ -39,7 +44,7 @@ function getCategories() {
 
 function selectCategory(category) {
     g_notReady();
-    initStats(category);
+    s_init(category);
     $.get("model/getPlaylist.php",{genre:category.nome},getPlaylistCallback,"json");
 }
 
@@ -75,10 +80,8 @@ function loadTracks(items) {
             //Altrimenti viene usata solo per avere delle scelte sbagliate
             if(track.preview_url != null && songs_objs.length < 10){
                 let url = track.preview_url;
-                console.log("Trovato: "+ name);
                 songs_objs.push(new Song(url,name,artist,image));
             } else {
-                console.log("Trovato wrong: "+ name);
                 wrong_songs_objs.push(new WrongSong(name,artist,image));
             }
         }
@@ -91,7 +94,6 @@ function loadTracks(items) {
 }
 
 function startGame() {
-    console.log("startgame");
     play();
     g_start();
 }
@@ -123,7 +125,6 @@ function play() {
     g_setButtons();
 
     onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION;
-    console.log(onPlay.player.currentTime);
     onPlay.player.play();
 }
 
@@ -131,14 +132,12 @@ function play() {
 function setAutoplay() {
     if(onPlay == null || songs_objs.length < 1)
         return;
-    console.log("qui");
     onPlay.player.addEventListener("pause",startTimerCallback);
 }
 
 function startTimerCallback() {
     g_startAutoplayProgressBar();
     autoTimer = setTimeout(play,AUTOPLAY_DURATION*1000);
-    console.log("trigger");
 }
 
 /*
@@ -149,7 +148,7 @@ function stopPlay(id) {
         return;
     onPlay.player.pause();
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
-    let result = updateStats(id===correct,timeLeft);
+    let result = s_update(id===correct,timeLeft);
     g_updateScore(result.score,result.timeBonus);
     ended();
 }
@@ -158,7 +157,7 @@ function stopPlay(id) {
 function ended() {
     if(!isEnded())
         return;
-    sendStats();
+    s_send();
     g_saveStats();
     g_endGame();
 
@@ -169,21 +168,20 @@ function getPlaylistCallback(playlists,status) {
         console.log("Errore Caricamento Playlists");
         return;
     }
-    console.log(playlists);
     let playlist = playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
     api.getPlaylistTracks(playlist,loadPlaylistCallback);
 }
 
-function loadPlaylistCallback(err,suc){
-    if(err){
+function loadPlaylistCallback(res,status){
+    if(status !== "success"){
         console.log("Errore caricamento Playlist da Spotify");
         return;
     }
-    if(suc.items.length < 40){
+    if(res.items.length < 40){
         console.log("Playlist troppo corta: " + suc.items.length);
         return;
     }
-    loadTracks(suc.items);
+    loadTracks(res.items);
 }
 
 

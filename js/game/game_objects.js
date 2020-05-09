@@ -1,5 +1,3 @@
-
-
 /*
 * Song obj:
 * name = nome canzone

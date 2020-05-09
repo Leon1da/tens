@@ -2,16 +2,12 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Gioca | Myousic</title>
-    <script src="./js/game/spotify-web-api.js" type="text/javascript" ></script>
+    <title>Gioca | Tens</title>
+    <script src="./js/game/spotify_api.js" type="text/javascript"></script>
     <script src="./js/game/game.js" type="text/javascript"></script>
     <script src="./js/game/game_objects.js" type="text/javascript"></script>
-    <script src="./js/game/game_modes.js" type="text/javascript"></script>
     <script src="./js/game/game_stats.js" type="text/javascript"></script>
     <script src="./js/game/game_graphic.js" type="text/javascript"></script>
-    <!-- TODO remove -->
-    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
-    <script src="../boostrap/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -62,7 +58,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="ricomincia_finale_btn">Ricomincia</button>
+                <button type="button" class="btn btn-primary" id="ricomincia_finale_btn">Rigioca</button>
             </div>
         </div>
     </div>
