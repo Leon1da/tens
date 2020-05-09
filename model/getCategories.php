@@ -1,7 +1,7 @@
 <?php
 require_once('./database.php');
 
-$query = "SELECT nome,moltiplicatore FROM category";
+$query = "SELECT nome,moltiplicatore FROM category ORDER BY nome";
 $check = $pdo->prepare($query);
 $check->execute();
 
