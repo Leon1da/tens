@@ -32,7 +32,15 @@
     transition: none !important;
 }
 
-account-dropdown-link{
+#account-dropdown-link{
     padding-left: 5px;
     color: black;
+}
+
+#access-panel{
+    position: fixed;
+}
+
+#data-profile-container{
+    padding: 20px;
 }

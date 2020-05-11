@@ -46,16 +46,15 @@
         </ul>
         <div class="row mx-auto">
             <div class="nav-item dropdown invisible" id="account-panel">
-                <div class="row align-items-center">
+                <div class="row align-items-center" >
                     Ciao
                     <a class="nav-link dropdown-toggle" href="#" id="account-dropdown-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Le mie statistiche</a>
-                        <a class="dropdown-item" href="#">Il mio profilo </a>
+                        <a class="dropdown-item" href="#profile">Il mio profilo </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" id="logout-btn">Esci</a>
+                        <a class="dropdown-item" href="#logout" id="logout-btn">Esci</a>
                     </div>
 
                 </div>
@@ -192,6 +191,22 @@
 <script>
 
     $(document).ready(function() {
+
+        // load user profile stat and data
+        $(".dropdown-item").click(function () {
+            var page = $(this).attr("href");
+            var url = "view/" + page.substring(1, page.length) + ".php";
+            alert(url);
+            switch (page) {
+                case "#profile":
+                     $("#main-content").load(url, function () {
+
+                     });
+                     break;
+
+            }
+        });
+
         // load pages when a nav-anchor is clicked
         $(".nav-link").click(function () {
             var old_active = $(".nav-item.active"); // old page

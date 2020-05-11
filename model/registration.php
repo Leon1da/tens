@@ -2,6 +2,8 @@
 require_once('database.php');
 require_once ('utility.php');
 
+$nome = $_POST['nome'] ?? '';
+$cognome = $_POST['cognome'] ?? '';
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 $email = $_POST['email'] ?? '';
@@ -41,13 +43,15 @@ if (empty($username) || empty($password)) {
     } else {
         $query = "
             INSERT INTO users
-            VALUES (0, :username, :password, :email, :sesso)
+            VALUES (0, :username, :password, :email, :nome, :cognome, :sesso)
         ";
 
         $check = $pdo->prepare($query);
         $check->bindParam(':username', $username, PDO::PARAM_STR);
         $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
         $check->bindParam(':email', $email, PDO::PARAM_STR);
+        $check->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $check->bindParam(':cognome', $cognome, PDO::PARAM_STR);
         $check->bindParam(':sesso', $sesso, PDO::PARAM_STR);
         $check->execute();
 
