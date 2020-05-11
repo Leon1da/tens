@@ -6,7 +6,7 @@ require_once('database.php');
         //TODO vittoria
         $query = "
             INSERT into games (user,categoria,score,numero_domande,esatte,errate,mancate,vittoria,start,stop)
-            VALUES ((SELECT id FROM users WHERE username = :username), (SELECT id FROM category WHERE nome = :category), :score, :total, :correct, :wrong, :missed, 1, :start, :stop);
+            VALUES ((SELECT id FROM users WHERE username = :username), (SELECT id FROM category WHERE nome = :category), :score, :total, :correct, :wrong, :missed, :victory, :start, :stop);
         ";
 
         //Conversione tempo
@@ -21,7 +21,12 @@ require_once('database.php');
         $req->bindParam(':correct',$_POST['correct'],PDO::PARAM_STR);
         $req->bindParam(':wrong',$_POST['wrong'],PDO::PARAM_STR);
         $req->bindParam(':missed',$_POST['missed'],PDO::PARAM_STR);
+        $req->bindParam(':victory',$_POST['victory'],PDO::PARAM_STR);
         $req->bindParam(':start',$start,PDO::PARAM_STR);
         $req->bindParam(':stop',$stop,PDO::PARAM_STR);
         $req->execute();
+        echo "done";
+        return;
     }
+
+    echo "login";

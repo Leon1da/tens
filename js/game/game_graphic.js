@@ -1,22 +1,36 @@
+const FADE_TIME = 100;
+
 function g_initCategories() {
     $(function () {
-        function callback(data,status){
-            if(status !== "success"){
-                console.log("Errore caricamento categorie");
-                return;
-            }
-            let html = '';
-            let selector = $("#selettore_modalita");
-            data.forEach((category) => {html += '<option>'+category+'</option>'});
+        let html = '';
+        categories.forEach(function (category) {
+            if(category.nome !== "Normale")
+                html += '<option>'+category.nome+'</option>';
+        });
 
-            selector.html(html);
-            selector.on("change",function () {
-                selectMode(selector.val());
-            });
-
-        }
-        $.get("model/getCategories.php",callback,"json");
+        $("#selettore_categoria").html(html);
     });
+}
+
+function g_initSelectors() {
+    $("#normale_btn").on("click", () => {
+        $("#selettore_categoria_collapse").collapse("hide");
+        selectCategory(getCategory("Normale"));
+    });
+
+    let category_selector = $("#selettore_categoria");
+    $("#categoria_btn").on("click", () => {
+        selectCategory(getCategory(category_selector.val()));
+    });
+    category_selector.on("change",() => {
+        selectCategory(getCategory(category_selector.val()));
+    });
+
+    $("#ricomincia_finale_btn").on("click", () => {
+        $("#modal_finale").modal("hide");
+        $("#gioca_btn").trigger("click");
+    });
+
 }
 
 function g_ready() {
@@ -40,8 +54,9 @@ function g_notReady() {
 
 function g_start() {
     $(function () {
+        $('#partita-tab').tab('show');
         $("#gioca_btn")
-            .text("Annulla")
+            .text("Esci")
             .one("click",stopGame)
             .attr("disabled",false)
             .removeClass("btn-primary")
@@ -51,9 +66,10 @@ function g_start() {
 
 function g_stop() {
     $(function () {
-        //TODO pulire btns
         g_setGameProgressBar(0);
-        selectMode($("#selettore_modalita").val());
+        $("#punteggio_valore").text(0);
+        $("#istruzioni-tab").tab('show');
+        $("#normale_btn").trigger("click");
     })
 }
 
@@ -74,22 +90,81 @@ function g_setButtons() {
     });
 }
 
-
-function g_updateTotalScore() {
-    $(function () {
-        $("#totScore").text(statsData.score);
-    });
-}
-
 function g_updateScore(score,timeScore) {
     $(function () {
-       $("#deltaScore").text(score);
-       $("#timeScore").text(timeScore);
+        let text_obj = $("#punteggio_testo");
+        let score_obj = $("#punteggio_valore");
+
+        function animator(testo,punteggio,start){
+            text_obj.fadeOut(FADE_TIME);
+            score_obj.fadeOut(FADE_TIME,() => {
+                text_obj.text(testo).fadeIn(FADE_TIME);
+                score_obj.text(start).fadeIn(FADE_TIME);
+                $({ num: score_obj.html() }).animate({ num: punteggio }, {
+                    duration: (AUTOPLAY_DURATION*200)-(2*FADE_TIME),
+                    easing: 'swing',
+                    step: function () {
+                        score_obj.html(Math.floor(this.num));
+                    },
+                    complete: function () {
+                        score_obj.html(this.num);
+                    }
+                });
+            });
+        }
+
+        let old_score = score_obj.text();
+        animator(score === 0 ? "Risposta Errata" : "Risposta Esatta",score, 0);
+        setTimeout(animator, (AUTOPLAY_DURATION*400)-FADE_TIME,"Bonus Tempo",timeScore, 0);
+        setTimeout(animator, (AUTOPLAY_DURATION*800)-FADE_TIME,"Totale",statsData.score,old_score);
+
     });
 }
-//TODO
-function g_endGame(){
 
+
+function g_endGame(){
+    $(function () {
+        let title;
+        if(statsData.victory === 1)
+            title = "Complimenti";
+        else
+            title = "Puoi migliorare";
+        $("#titolo_finale").text(title);
+        $("#punteggio_finale").text(statsData.score);
+        $("#corrette_finale").text(statsData.correct);
+        $("#errate_finale").text(statsData.wrong);
+        $("#mancate_finale").text(statsData.missed);
+
+        $("#modal_finale").modal("show");
+
+        $("#gioca_btn")
+            .text("Rigioca")
+            .one("click",stopGame)
+            .attr("disabled",false)
+            .removeClass("btn-danger")
+            .addClass("btn-primary");
+    })
+}
+
+function g_saveStats(response = null) {
+    $(function () {
+        $(".my-toast").toast('show');
+        let notifiche = $("#notifiche");
+        switch (response) {
+            case null:
+                notifiche.html('<div class="spinner-border spinner-border-sm text-dark" role="status"></div> Salvataggio in corso...');
+                return;
+            case "done":
+                notifiche.html('Salvataggio riuscito');
+                break;
+            case "login":
+                notifiche.html('Effettua il login per salvare i risultati');
+                break;
+            default:
+                notifiche.html('Errore salvataggio');
+        }
+        setTimeout(() => {$(".my-toast").toast('hide');},10000);
+    })
 }
 
 
@@ -114,7 +189,8 @@ function g_startAutoplayProgressBar() {
     $(function () {
         $("#progresso_round")
             .stop(true,false)
-            .animate({width: "0%"},AUTOPLAY_DURATION*250) //Scende da dove rimasta fino alla fine in 1/4 del tempo di autoplay
-            .animate({width: "100%"},AUTOPLAY_DURATION*750); //Sale fino al 100% nel tempo rimanente
+            .delay(AUTOPLAY_DURATION*400)
+            .animate({width: "0%"},AUTOPLAY_DURATION*400) //Scende da dove rimasta fino alla fine in 1/4 del tempo di autoplay
+            .animate({width: "100%"},AUTOPLAY_DURATION*200); //Sale fino al 100% nel tempo rimanente
     })
 }

@@ -32,15 +32,26 @@
     transition: none !important;
 }
 
-#account-dropdown-link{
+account-dropdown-link{
     padding-left: 5px;
     color: black;
 }
 
-#access-panel{
-    position: fixed;
+.my-toast {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 1;
+    min-height: 50px;
+    min-width: 300px;
 }
 
-#data-profile-container{
-    padding: 20px;
+.my-rounded-pill-left {
+    border-top-left-radius: 50rem!important;
+    border-bottom-left-radius: 50rem!important;
+}
+
+.my-rounded-pill-right {
+    border-top-right-radius: 50rem!important;
+    border-bottom-right-radius: 50rem!important;
 }

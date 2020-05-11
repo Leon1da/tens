@@ -1,25 +1,28 @@
 var statsData;
+var toSave = false;
 
 let bonus; //risposte corrette di seguito
 
 const timeMultiplier = 100; //Moltiplicatore del punteggio del tempo
 
-function initStats(level,total = 10) {
+function s_init(category,total = 10) {
     bonus = 1;
+    toSave = false;
     statsData = {
-        category: level.category,
-        multiplier: level.multiplier,
+        category: category.nome,
+        multiplier: category.moltiplicatore,
         score: 0,
         correct: 0,
         wrong: 0,
         missed: 0,
+        victory: 0,
         total: total,
         start: Date.now()/1000,
         stop: 0,
     }
 }
 
-function updateStats(correct,remainingTime) {
+function s_update(correct,remainingTime) {
     if(!correct){
         bonus = 1;
         statsData.wrong++;
@@ -33,16 +36,23 @@ function updateStats(correct,remainingTime) {
     statsData.correct++;
     bonus++;
 
-    console.log("aaa"+score);
     return {score: score,timeBonus:timeBonus};
 }
 
-function sendStats() {
+function s_send() {
+    toSave = true;
     statsData.missed = statsData.total - statsData.correct - statsData.wrong;
+    statsData.victory = statsData.correct > 5 ? 1 : 0;
     statsData.stop = Date.now()/1000;
     $.ajax({
-        url: './model/update_stats.php',
+        url: './model/updateStats.php',
         type: 'POST',
         data: statsData,
+        dataType : "text",
+        success: data => {
+            if(data === "done")
+                toSave = false;
+            g_saveStats(data);
+            },
     });
 }
