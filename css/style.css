@@ -37,6 +37,15 @@ account-dropdown-link{
     color: black;
 }
 
+#access-panel{
+    position: fixed;
+}
+
+#data-profile-container{
+    padding: 20px;
+}
+
+
 .my-toast {
     position: absolute;
     bottom: 0;
