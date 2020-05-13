@@ -32,13 +32,9 @@
     transition: none !important;
 }
 
-account-dropdown-link{
+#profile-name-link{
     padding-left: 5px;
     color: black;
-}
-
-#access-panel{
-    position: fixed;
 }
 
 #data-profile-container{
@@ -63,4 +59,55 @@ account-dropdown-link{
 .my-rounded-pill-right {
     border-top-right-radius: 50rem!important;
     border-bottom-right-radius: 50rem!important;
+}
+
+#home-play-btn{
+ width: 20vw;
+
+}
+
+.jumbotron{
+    height: 50vh;
+}
+
+#first{
+    background-color: red;
+    width: fit-content;
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+#first:hover{
+    transform:rotate(2deg);
+    -ms-transform:rotate(2deg);
+    -webkit-transform:rotate(2deg);
+
+}
+#second{
+    background-color: green;
+    width: fit-content;
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+#second:hover{
+    transform:rotate(2deg);
+    -ms-transform:rotate(2deg);
+    -webkit-transform:rotate(2deg);
+
+}
+#third{
+    background-color: blue;
+    width: fit-content;
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+#third:hover{
+    transform:rotate(2deg);
+    -ms-transform:rotate(2deg);
+    -webkit-transform:rotate(2deg);
 }

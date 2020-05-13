@@ -1,5 +1,8 @@
 
 <div class="row justify-content-center">
+
+    <div class="row">
+
         <div class="card" style="width: 25rem; margin: 5rem;">
             <img src="..." class="card-img-top" style="width: 25rem; height: 25rem;" alt="...">
             <div class="card-body">
@@ -17,6 +20,8 @@
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
+
+    </div>
 
 </div>
 

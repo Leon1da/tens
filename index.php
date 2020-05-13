@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v6">
+    <link rel="stylesheet" href="css/style.css?v10">
+
+    <link rel="stylesheet" href="css/effect.css?v8">
 
     <title>Myousic</title>
 </head>
 <body>
  <!-- Header -->
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,16 +27,16 @@
     <div class="offset-md-2 collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" name="home" href="#">Home </a>
+                <a class="nav-link" href="#home">Home </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" name="about-us" href="#">About us</a>
+                <a class="nav-link" href="#about-us">About us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" name="statistics" href="#">Statistics</a>
+                <a class="nav-link" href="#statistics">Statistics</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" name="game" href="#">Game</a>
+                <a class="nav-link" href="#game">Game</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
@@ -48,13 +49,13 @@
             <div class="nav-item dropdown invisible" id="account-panel">
                 <div class="row align-items-center" >
                     Ciao
-                    <a class="nav-link dropdown-toggle" href="#" id="account-dropdown-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="profile-name-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#profile">Il mio profilo </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#logout" id="logout-btn">Esci</a>
+                        <a class="dropdown-item" href="#logout">Esci</a>
                     </div>
 
                 </div>
@@ -75,6 +76,7 @@
 </nav>
 
  <div id="main-content">
+
  </div>
 
 
@@ -191,26 +193,40 @@
 
     $(document).ready(function() {
 
-        // load user profile stat and data
+        $("#main-content").load("view/home.php");
+
+
+        // load pages when dropdown-item (PROFILE SUB-MENU) is clicked
+        // - Il mio profilo
+        // - logout
         $(".dropdown-item").click(function () {
             var page = $(this).attr("href");
-            var url = "view/" + page.substring(1, page.length) + ".php";
             alert(url);
             switch (page) {
                 case "#profile":
-                     $("#main-content").load(url, function () {
-
-                     });
-                     break;
-
+                    var url = "view/profile.php";
+                    $("#main-content").load(url);
+                    break;
+                case "#logout":
+                    var url = "model/logout.php";
+                    $.get(url, function (response) {
+                        $("#main-content").prepend(response);
+                    });
+                    break;
             }
         });
 
-        // load pages when a nav-anchor is clicked
+        // load pages when a nav-anchor (MAIN MENU) is clicked
+        // - home
+        // - about us
+        // - statistics
+        // - game
+        // - multiplayers (coming soon)
         $(".nav-link").click(function () {
             var old_active = $(".nav-item.active"); // old page
             var anchor = $(this);   // clicked anchor
-            var page = anchor.attr("name"); // page to visit
+            var page = anchor.attr("href"); // page to visit
+            page = page.substring(1,page.length);
             var url = "view/"+page + ".php"; // url to load
             $("#main-content").load(url, function () {
                 anchor.parent().addClass("active"); // active new anchor
@@ -220,7 +236,7 @@
         });
 
 
-        // login
+        // load login modal when sign-in btn is clicked
         $("#login-btn").click(function () {
             var username = $("#username-lgn").val();
             var password = $("#password-lgn").val();
@@ -233,7 +249,8 @@
             request.done( function (response) {
                 alert(response);
                 // visualizzo risultato
-                $("#main-content").html(response);
+                //rimosso perche non devo visualizzare nulla
+                $("#main-content").prepend(response);
                 // chiudo il pannello di login
                 $("#btn-close-login").click();
 
@@ -241,7 +258,8 @@
 
         });
 
-        // register
+
+        // load registration modal when sign-up btn is clicked
         $("#register-btn").click(function () {
 
             var nome = $("#name-reg").val();
@@ -270,40 +288,57 @@
             request.done( function (response) {
                 alert(response);
                 //visualizzo risultato
-                $("#main-content").html(response);
+                $("#main-content").prepend(response);
                 // chiudo il pannello di registrazione
                 $("#btn-close-signup").click();
 
             });
         });
 
-        //logout
-        $("#logout-btn").click(function () {
-            $.get("model/logout.php", function (response) {
-                alert("logout");
-                //visualizzo risultato
-                $("#main-content").html(response);
-            });
 
+        $(document).on('change','select', function() {
+            var category = $("select option:selected").text();
+            // non riesco a capire per quale motivo il testo dell'option selezionato
+            // e` <nome_catogoria>Scegli, quindi faccio un substring per rimuovere
+            // la parte inutile
+            category = category.substring(0, category.length - 6);
+            alert(category);
+            var request = $.ajax({
+                type: "POST",
+                url: "view/elements/GetRankingTable.php",
+                data: {category: category},
+                dataType: "html"
+            });
+            request.done( function (response) {
+                alert(response);
+                //visualizzo risultato
+                $("#rank").html(response);
+
+            });
         });
+        // .trigger( "change" );
+
+
+
+ // non dovrebbe essere piu necessario
 
         // !!! important !!!
         // allaccio trigger in questo modo poiche l'elemento di cui devo
         // intercettare il click non esiste nel DOM al momento della sua creazione
         // ma viene caricato successivamente tramite registration.php facendo una chiamata AJAX
-        $(document).on('click', '.alert > a', function(){
-            var ref = $(this).attr("href");
-            alert(ref);
-            switch (ref) {
-                case "#sign-in":
-                    $("#sign-in").click();  //apro pannello di login
-                    break;
-
-                case "#sign-up":
-                    $("#sign-up").click();  //apro pannello di registrazione
-                    break;
-            }
-        });
+        // $(document).on('click', '.alert > a', function(){
+        //     var ref = $(this).attr("href");
+        //     alert(ref);
+        //     switch (ref) {
+        //         case "#sign-in":
+        //             $("#sign-in").click();  //apro pannello di login
+        //             break;
+        //
+        //         case "#sign-up":
+        //             $("#sign-up").click();  //apro pannello di registrazione
+        //             break;
+        //     }
+        // });
     });
 
 </script>
