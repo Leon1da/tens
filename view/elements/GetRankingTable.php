@@ -48,9 +48,11 @@ if (count($categories) > 0) {
     $result = $check->fetchAll(PDO::FETCH_ASSOC);
 
 }
-
-echo printRankingTable($result);
-
+if(count($result)>0){
+    echo printRankingTable($result);
+}else{
+    echo "<h6>Nessuno si e` ancora classificato in <b>".$category."</b> <br> Che cosa aspetti? Diventa il primo!</h6>";
+}
 // stampa la risposta del db in formato tabellare
 function printRankingTable($vector){
     $table='

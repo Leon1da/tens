@@ -1,3 +1,6 @@
+body{
+    font-family: 'Maven Pro', sans-serif;
+}
 /* remove modal shadow*/
 .modal-content{
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
@@ -19,7 +22,7 @@
     text-align: center;
 }
 
-.form-group input {
+.form-control{
     border-radius: 20px;
 }
 
@@ -91,10 +94,11 @@
 }
 .jumbotron{
     height: 50vh;
+    width: 100vw;
 }
 
 #first{
-    background-color: red;
+    margin-left: -100vw;
     width: fit-content;
     -webkit-transition: -webkit-transform .4s ease-in-out;
     -ms-transition: -ms-transform .4s ease-in-out;
@@ -108,7 +112,8 @@
 
 }
 #second{
-    background-color: green;
+
+    margin-left: 100vw;
     width: fit-content;
     -webkit-transition: -webkit-transform .4s ease-in-out;
     -ms-transition: -ms-transform .4s ease-in-out;
@@ -122,11 +127,12 @@
 
 }
 #third{
-    background-color: blue;
+    margin-left: -100vw;
     width: fit-content;
     -webkit-transition: -webkit-transform .4s ease-in-out;
     -ms-transition: -ms-transform .4s ease-in-out;
     transition: transform .4s ease-in-out;
+
 }
 
 #third:hover{
@@ -139,42 +145,29 @@
 
 
 /* Statistics page */
+
 .statistics-up{
-    margin-top: 5vh;
+    margin-top: 5rem;
 }
 .statistics-down{
-    margin-top: 5vh;
+    margin-top: 12.5rem;
+}
+#categories{
+    margin-top: 10rem;
 }
 
-#text-up{
-    background-color: darkcyan;
-    -webkit-transition: -webkit-transform .4s ease-in-out;
-    -ms-transition: -ms-transform .4s ease-in-out;
-    transition: transform .4s ease-in-out;
-
-    border-bottom: 3px black ;
-    margin-bottom: 0px;
+#d-0{
+    margin-left: -100vw;
 }
 
-#text-up:hover{
-    transform:rotateX(90deg);
-    -ms-transform:rotateX(90deg);
-    -webkit-transform:rotateX(90deg);
-
+#d-1{
+    margin-left: -100vw;
 }
-
-#text-down{
-    background-color: aquamarine;
-    -webkit-transition: -webkit-transform .4s ease-in-out;
-    -ms-transition: -ms-transform .4s ease-in-out;
-    transition: transform .4s ease-in-out;
+#d-2{
+    margin-left: -100vw;
 }
-
-#text-down:hover{
-    transform:rotateX(90deg);
-    -ms-transform:rotateX(90deg);
-    -webkit-transform:rotateX(90deg);
-
+#d-3{
+    margin-left: -100vw;
 }
 
 /*End statistic page*/
@@ -184,7 +177,7 @@
 .hide-my-profile-modal{
     display: none;
 }
-.my-profile-modal{
+#profile-modal{
     /*width: 60vw;*/
     position: fixed;
     z-index: 100;
