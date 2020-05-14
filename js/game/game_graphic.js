@@ -148,6 +148,7 @@ function g_endGame(){
 
 function g_saveStats(response = null) {
     $(function () {
+        $("#notifiche_titolo").text("Salvataggio");
         $(".my-toast").toast('show');
         let notifiche = $("#notifiche");
         switch (response) {
@@ -164,6 +165,16 @@ function g_saveStats(response = null) {
                 notifiche.html('Errore salvataggio');
         }
         setTimeout(() => {$(".my-toast").toast('hide');},10000);
+    })
+}
+
+function g_notification(msg) {
+    $(function () {
+        let toast = $(".my-toast");
+        $("#notifiche").text(msg);
+        $("#notifiche_titolo").text("Errore");
+        toast.toast('show');
+        setTimeout(() => {toast.toast('hide')},5000);
     })
 }
 

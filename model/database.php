@@ -2,7 +2,7 @@
 $config = [
     'db_engine' => 'mysql',
     'db_host' => '127.0.0.1',
-    'db_name' => 'test',
+    'db_name' => 'tens_schema',
     'db_user' => 'root',
     'db_password' => '',
 ];
