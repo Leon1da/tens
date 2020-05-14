@@ -6,11 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- font google -->
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&family=Nunito:ital,wght@1,600&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v27">
+    <link rel="stylesheet" href="css/style.css?v49">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -79,9 +81,9 @@
 
 
  <!-- Profile Modal -->
- <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content my-profile-modal hide-my-profile-modal" style="position: fixed;" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+ <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content hide-my-profile-modal" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
      <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalCenterTitle">Il tuo profilo</h5>
+         <h5 class="modal-title" id="exampleModalCenterTitle">Profilo</h5>
          <button type="button" class="close"  id="close-profile-modal" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
          </button>
@@ -89,14 +91,7 @@
      <div class="modal-body" id="profile-modal-body">
 
      </div>
-     <div class="modal-footer">
-<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--         <button type="button" class="btn btn-primary">Save changes</button>-->
-     </div>
  </div>
-
-
-
 
  <div id="main-content">
 
@@ -118,7 +113,7 @@
                      <div class="form-group">
                          <input type="text" class="form-control" id="username-lgn" placeholder="Username" name="username" required>
                      </div>
-                     <div class="form-group">
+                     <div class="form-group" style="margin-bottom: 0;">
                          <input type="password" class="form-control" id="password-lgn" placeholder="Password" name="password" required>
                      </div>
                  </form>
@@ -142,6 +137,8 @@
              </div>
              <div class="modal-body">
                  <form method="post" id="register-form">
+<!--                     Dati Personali-->
+<!--                     <br><br>-->
                      <div class="form-group">
                          <div class="row">
                              <div class="col">
@@ -152,7 +149,7 @@
                              </div>
                          </div>
                      </div>
-                     <div class="form-group">
+                     <div class="form-group" style="margin-bottom: 0;">
                          <div class="row">
                              <div class="col-md-7">
                                  <input type="email" placeholder="Email*" id="email-reg" class="form-control">
@@ -173,7 +170,9 @@
                              </div>
                          </div>
                      </div>
-
+                     <hr style="margin-top: 0;">
+<!--                     Credenziali-->
+<!--                     <br><br>-->
                      <div class="form-group">
                          <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username" maxlength="50" required>
                      </div>
@@ -220,10 +219,10 @@
 
         // rendo la modal del profilo draggable e resizable
         $("#profile-modal").draggable();
-        $("#profile-modal").resizable({
-            minWidth: 500,
-            minHeight: 350,
-        });
+        // $("#profile-modal").resizable({
+        //     minWidth: 500,
+        //     minHeight: 350,
+        // });
 
 
         $("#main-content").load("view/home.php");
@@ -247,7 +246,6 @@
                         $("#main-content").prepend(response);
                     });
 
-                    $("profile-modal-body").html("");
                     $("#profile-modal").addClass("hide-my-profile-modal");
 
                     break;
