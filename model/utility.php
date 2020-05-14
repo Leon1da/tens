@@ -12,7 +12,7 @@ function printErrorMessage($status, $msg){
         case Status::Success :
             ?>
             <div class="alert alert-success" role="alert" >
-                <? echo $msg; ?>
+                <?php echo $msg; ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -22,7 +22,7 @@ function printErrorMessage($status, $msg){
         case Status::Warning :
             ?>
             <div class="alert alert-warning" role="alert" >
-                <? echo $msg; ?>
+                <?php echo $msg; ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,7 +32,7 @@ function printErrorMessage($status, $msg){
         case Status::Error :
             ?>
             <div class="alert alert-danger" role="alert" >
-                <? echo $msg; ?>
+                <?php echo $msg; ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

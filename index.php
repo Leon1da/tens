@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v49">
+    <link rel="stylesheet" href="css/style.css?v57">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -288,7 +288,7 @@
                 dataType: "html"
             });
             request.done( function (response) {
-                alert(response);
+                // alert(response);
                 // visualizzo risultato
                 //rimosso perche non devo visualizzare nulla
                 $("#main-content").prepend(response);
@@ -311,7 +311,7 @@
             var username = $("#username-reg").val();
             var password = $("#password-reg").val();
 
-            alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
+            // alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
 
             var request = $.ajax({
                 type: "POST",
@@ -327,7 +327,7 @@
                 dataType: "html"
             });
             request.done( function (response) {
-                alert(response);
+                // alert(response);
                 //visualizzo risultato
                 $("#main-content").prepend(response);
                 // chiudo il pannello di registrazione
@@ -343,7 +343,7 @@
             // e` <nome_catogoria>Scegli, quindi faccio un substring per rimuovere
             // la parte inutile
             category = category.substring(0, category.length - 6);
-            alert(category);
+            // alert(category);
             var request = $.ajax({
                 type: "POST",
                 url: "view/elements/GetRankingTable.php",
@@ -351,7 +351,7 @@
                 dataType: "html"
             });
             request.done( function (response) {
-                alert(response);
+                // alert(response);
                 //visualizzo risultato
                 $("#rank").html(response);
 

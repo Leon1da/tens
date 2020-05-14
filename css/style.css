@@ -182,3 +182,139 @@ body{
     position: fixed;
     z-index: 100;
 }
+
+/*// Extra small devices (portrait phones, less than 576px)*/
+/*// No media query since this is the default in Bootstrap*/
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    #d-0{font-size: 1.5rem;
+    }
+    #d-1{
+        font-size: 1.2rem;
+    }
+    #d-2{
+        font-size: 1.2rem;
+    }
+    #d-3{
+        font-size: 1.2rem;
+    }
+
+    #zero{
+        font-size: 1.2rem;
+    }
+    /*#first{*/
+    /*    font-size: 1.5rem;*/
+    /*}*/
+    /*#second{*/
+    /*    font-size: 1.5rem;*/
+    /*}*/
+    /*#third{*/
+    /*    font-size: 1.5rem;*/
+    /*}*/
+    body{
+        color: blue;
+
+    }
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    #d-0{
+        font-size: 1.2rem;
+    }
+    #d-1{
+        font-size: 1.2rem;
+    }
+    #d-2{
+        font-size: 1.2rem;
+    }
+    #d-3{
+        font-size: 1.2rem;
+    }
+
+    #zero{
+        font-size: 2rem;
+    }
+    /*#first{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+    /*#second{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+    /*#third{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+
+    body{
+        color: red;
+    }
+}
+
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    #d-0{
+        font-size: 1.6rem;
+    }
+
+    #d-1{
+        font-size: 1.2rem;
+    }
+    #d-2{
+        font-size: 1.2rem;
+    }
+    #d-3{
+        font-size: 1.2rem;
+    }
+
+    #zero{
+
+        font-size: 2rem;
+    }
+    /*#first{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+    /*#second{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+    /*#third{*/
+    /*    font-size: 2rem;*/
+    /*}*/
+
+    body{
+        color: yellow;
+    }
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    #d-0{
+        font-size: 1.9rem;
+    }
+
+    #d-1{
+        font-size: 1.2rem;
+    }
+    #d-2{
+        font-size: 1.2rem;
+    }
+    #d-3{
+        font-size: 1.2rem;
+    }
+
+    #zero{
+        font-size: 3.5rem;
+    }
+    #first{
+        font-size: 2.8rem;
+    }
+    #second{
+        font-size: 2.8rem;
+    }
+    #third{
+        font-size: 2.8rem;
+    }
+    body{
+        color: green;
+    }
+}

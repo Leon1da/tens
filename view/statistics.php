@@ -1,16 +1,15 @@
 <div class="row m-0">
     <div class="col-12">
         <div class="row statistics-up">
-            <div class="col-sm-12 offset-md-1 col-md-7">
-                <div class="row" id="d-0">
-                    <h1> Scala le classifiche per diventare il Campione ! </h1>
-                </div>
-                <div class="row"  id="d-1"> <h3>Gioca con le playlist piu in voga</h3> </div>
-                <div class="row"  id="d-2"> <h3>Scegli il genere che preferisci </h3></div>
-                <div class="row"  id="d-3"> <h3>Mostra di che pasta sei fatto! </h3></div>
+<!--             offset-md-1 col-md-7-->
+            <div class="col-xs-12 col-sm-12 offset-md-1 col-md-7">
+                <div class="row" id="d-0"> Scala le classifiche per diventare il Campione ! </div>
+                <div class="row"  id="d-1">Gioca con le playlist piu in voga </div>
+                <div class="row"  id="d-2">Scegli il genere che preferisci </div>
+                <div class="row"  id="d-3">Mostra di che pasta sei fatto! </div>
             </div>
-
-            <div class="col-sm-12 col-md-2" id="categories"></div>
+<!--col-md-2-->
+            <div class="col-xs-12 col-sm-12 col-md-2" id="categories"></div>
 
         </div>
 
@@ -41,9 +40,9 @@
                     setTimeout(function () {
                         $("#d-3").animate({'margin-left': '+=105vw'}, 1000);
                         setTimeout(function () {
-                            $("#d-1").animate({'margin-top': '+=4rem'}, 500);
+                            $("#d-1").animate({'margin-top': '+=3rem'}, 500);
                             // $("#d-2").animate({'margin-top': '+=5vh'}, 500);
-                            $("#d-3").animate({'margin-top': '-=7.5rem'}, 500);
+                            $("#d-3").animate({'margin-top': '-=5.4rem'}, 500);
                         },1500);
 
                         setTimeout(function () {

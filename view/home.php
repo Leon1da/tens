@@ -1,12 +1,10 @@
 <div class="row m-0">
     <div class="jumbotron">
-       <div class="row" id="zero">
-           <h1 class="display-4">Benvenuto su Ten's</h1>
-       </div>
+       <div class="row" id="zero">Benvenuto su Ten's</div>
 
-        <div class="row" id="first"><h2>Ti piace la musica e ami le sfide ?</h2></div>
-        <div class="row" id="second"><h2> Hai bisogno di un passatempo ? </h2></div>
-        <div class="row" id="third"><h2> Ten's e` quello che fa per te. </h2></div>
+        <div class="row" id="first">Ti piace la musica e ami le sfide ?</div>
+        <div class="row" id="second">Hai bisogno di un passatempo ?</div>
+        <div class="row" id="third">Ten's e` quello che fa per te.</div>
 
 
     </div>
