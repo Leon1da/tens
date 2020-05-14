@@ -14,7 +14,7 @@ class Spotify_api {
                 'Authorization' : 'Bearer ' + this._token
             },
             success : callback,
-            error : (xhr,status,error) => console.error("Errore chiamata ajax api: " + status + "\n" + error),
+            error : callback,
             dataType : "json",
         });
     }

@@ -23,7 +23,8 @@ function firstLoad() {
 function getAccessToken() {
     $.get("./model/token.php",function (token,status) {
         if(status !== "success"){
-            console.log("Errore caricamento Token" + status);
+            console.warn("Errore caricamento Token" + status);
+            g_notification("Errore caricamento. Ricarica la pagina");
             return;
         }
         api.setAccessToken(token);
@@ -34,7 +35,8 @@ function getAccessToken() {
 function getCategories() {
     $.get("model/getCategories.php",function (data,status) {
         if(status !== "success"){
-            console.log("Errore caricamento categorie");
+            console.warn("Errore caricamento categorie");
+            g_notification("Errore caricamento. Ricarica la pagina");
             return;
         }
         categories = data;
@@ -52,7 +54,8 @@ function selectCategory(category) {
 function autoload(i = 30) {
     let category = getCategory("Normale");
     if(i === 0){
-        alert("Errore Caricamento... Riprova più tardi");
+        console.warn("Errore autoload");
+        g_notification("Errore caricamento. Ricarica la pagina");
         return;
     }
     if(category == null){
@@ -87,7 +90,8 @@ function loadTracks(items) {
         }
     }
     if(songs_objs.length < 10 || wrong_songs_objs.length < 30){
-        alert("Numero insufficiente di canzoni :( \n Riprova");
+        console.warn("Errore numero di canzoni\n corrette: " + songs_objs.length + "\nErrate: " + wrong_songs_objs.length);
+        g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
         return;
     }
     g_ready();
@@ -166,6 +170,7 @@ function ended() {
 function getPlaylistCallback(playlists,status) {
     if(status !== "success"){
         console.log("Errore Caricamento Playlists");
+        g_notification("Errore caricamento. Ricarica la pagina");
         return;
     }
     let playlist = playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
@@ -174,11 +179,13 @@ function getPlaylistCallback(playlists,status) {
 
 function loadPlaylistCallback(res,status){
     if(status !== "success"){
-        console.log("Errore caricamento Playlist da Spotify");
+        console.warn("Errore caricamento Playlist da Spotify\n Risultato: " + res);
+        g_notification("Errore caricamento. Ricarica la pagina");
         return;
     }
     if(res.items.length < 40){
         console.log("Playlist troppo corta: " + res.items.length);
+        g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
         return;
     }
     loadTracks(res.items);
