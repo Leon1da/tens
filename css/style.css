@@ -212,10 +212,10 @@ body{
     /*#third{*/
     /*    font-size: 1.5rem;*/
     /*}*/
-    body{
-        color: blue;
+    /*body{*/
+    /*    color: blue;*/
 
-    }
+    /*}*/
 }
 
 /*// Medium devices (tablets, 768px and up)*/
@@ -246,9 +246,9 @@ body{
     /*    font-size: 2rem;*/
     /*}*/
 
-    body{
-        color: red;
-    }
+    /*body{*/
+    /*    color: red;*/
+    /*}*/
 }
 
 /*// Large devices (desktops, 992px and up)*/
@@ -281,9 +281,9 @@ body{
     /*    font-size: 2rem;*/
     /*}*/
 
-    body{
-        color: yellow;
-    }
+    /*body{*/
+    /*    color: yellow;*/
+    /*}*/
 }
 
 /*// Extra large devices (large desktops, 1200px and up)*/
@@ -314,7 +314,7 @@ body{
     #third{
         font-size: 2.8rem;
     }
-    body{
-        color: green;
-    }
+    /*body{*/
+    /*    color: green;*/
+    /*}*/
 }
