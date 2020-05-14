@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v10">
+    <link rel="stylesheet" href="css/style.css?v27">
 
-    <link rel="stylesheet" href="css/effect.css?v8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <title>Myousic</title>
+    <title>Ten's</title>
 </head>
 <body>
  <!-- Header -->
@@ -27,16 +27,16 @@
     <div class="offset-md-2 collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#home">Home </a>
+                <a class="nav-link menu" href="#home">Home </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#about-us">About us</a>
+                <a class="nav-link menu" href="#about-us">About us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#statistics">Statistics</a>
+                <a class="nav-link menu" href="#statistics">Statistics</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#game">Game</a>
+                <a class="nav-link menu" href="#game">Game</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
@@ -53,7 +53,7 @@
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#profile">Il mio profilo </a>
+                        <a class="dropdown-item" href="#profile" id="apri">Il mio profilo </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#logout">Esci</a>
                     </div>
@@ -74,6 +74,27 @@
 
     </div>
 </nav>
+
+
+ <!-- Profile Modal -->
+ <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content my-profile-modal hide-my-profile-modal" style="position: fixed;" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+     <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalCenterTitle">Il tuo profilo</h5>
+         <button type="button" class="close"  id="close-profile-modal" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button>
+     </div>
+     <div class="modal-body" id="profile-modal-body">
+
+     </div>
+     <div class="modal-footer">
+<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--         <button type="button" class="btn btn-primary">Save changes</button>-->
+     </div>
+ </div>
+
+
+
 
  <div id="main-content">
 
@@ -183,15 +204,28 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
  <script src="js/model_view.js"></script>
 
  <?php
  require_once('model/controller.php');
  ?>
+
 <script>
 
     $(document).ready(function() {
+
+
+        // rendo la modal del profilo draggable e resizable
+        $("#profile-modal").draggable();
+        $("#profile-modal").resizable({
+            minWidth: 500,
+            minHeight: 350,
+        });
+
 
         $("#main-content").load("view/home.php");
 
@@ -201,19 +235,31 @@
         // - logout
         $(".dropdown-item").click(function () {
             var page = $(this).attr("href");
-            alert(url);
             switch (page) {
                 case "#profile":
+                    // mostro modal profilo
+                    $("#profile-modal").removeClass("hide-my-profile-modal");
+
                     var url = "view/profile.php";
-                    $("#main-content").load(url);
-                    break;
+                    $("#profile-modal-body").load(url);
+
+                                break;
                 case "#logout":
                     var url = "model/logout.php";
                     $.get(url, function (response) {
                         $("#main-content").prepend(response);
                     });
+
+                    $("profile-modal-body").html("");
+                    $("#profile-modal").addClass("hide-my-profile-modal");
+
                     break;
             }
+        });
+
+        // chiudo modal profilo se viene clickata la [X]
+        $("#close-profile-modal").click(function () {
+            $("#profile-modal").addClass("hide-my-profile-modal");
         });
 
         // load pages when a nav-anchor (MAIN MENU) is clicked
@@ -222,7 +268,7 @@
         // - statistics
         // - game
         // - multiplayers (coming soon)
-        $(".nav-link").click(function () {
+        $(".nav-link.menu").click(function () {
             var old_active = $(".nav-item.active"); // old page
             var anchor = $(this);   // clicked anchor
             var page = anchor.attr("href"); // page to visit

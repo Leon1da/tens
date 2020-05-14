@@ -1,3 +1,11 @@
+/* remove modal shadow*/
+.modal-content{
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -moz-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -o-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0);
+}
+
 .nav-item{
     margin-left: 10px;
     margin-right: 10px;
@@ -61,11 +69,26 @@
     border-bottom-right-radius: 50rem!important;
 }
 
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    #user-info{
+        position: relative;
+    }
+}
+
+#user-info{
+    position: fixed;
+    top: 76px;
+    right: 20px;
+}
+
+
+
+/* Homepage */
 #home-play-btn{
  width: 20vw;
 
 }
-
 .jumbotron{
     height: 50vh;
 }
@@ -110,4 +133,59 @@
     transform:rotate(2deg);
     -ms-transform:rotate(2deg);
     -webkit-transform:rotate(2deg);
+}
+
+/* End Homepage */
+
+
+/* Statistics page */
+.statistics-up{
+    margin-top: 5vh;
+}
+.statistics-down{
+    margin-top: 5vh;
+}
+
+#text-up{
+    background-color: darkcyan;
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+
+    border-bottom: 3px black ;
+    margin-bottom: 0px;
+}
+
+#text-up:hover{
+    transform:rotateX(90deg);
+    -ms-transform:rotateX(90deg);
+    -webkit-transform:rotateX(90deg);
+
+}
+
+#text-down{
+    background-color: aquamarine;
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+#text-down:hover{
+    transform:rotateX(90deg);
+    -ms-transform:rotateX(90deg);
+    -webkit-transform:rotateX(90deg);
+
+}
+
+/*End statistic page*/
+
+
+/* profile modal */
+.hide-my-profile-modal{
+    display: none;
+}
+.my-profile-modal{
+    /*width: 60vw;*/
+    position: fixed;
+    z-index: 100;
 }

@@ -1,8 +1,5 @@
 
-<div class="row justify-content-center">
-
-    <div class="row">
-
+    <div class="row justify-content-center m-0">
         <div class="card" style="width: 25rem; margin: 5rem;">
             <img src="..." class="card-img-top" style="width: 25rem; height: 25rem;" alt="...">
             <div class="card-body">
@@ -22,7 +19,3 @@
         </div>
 
     </div>
-
-</div>
-
-

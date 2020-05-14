@@ -23,9 +23,10 @@ if(isset($_SESSION['session_id'])){
 
     // query statistiche utente
     $query = "
-        SELECT * 
+        SELECT sum(score) as total, sum(numero_domande) as domande, sum(esatte) as esatte, sum(errate) as errate
         FROM games
         WHERE user = :user_id
+        GROUP BY user  
     ";
 
     $check = $pdo->prepare($query);
@@ -34,62 +35,97 @@ if(isset($_SESSION['session_id'])){
     $stats = $check->fetchAll(PDO::FETCH_ASSOC);
 
     ?>
-    <br><br>
-    <br><br>
 
-    <div class="row justify-content-center">
-<!--            <span class="border" id="data-profile-container">-->
-                <form class="border rounded col-xs-10 col-sm-8 col-md-6 col-xl-4" id="data-profile-container">
-                    <h2> Dati Personali </h2>
-                    <br>
-                    <div class="form-group form-row">
-                        <label for="nome" class="col-md-4 col-form-label">Nome</label>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="<?php echo $user['nome']; ?>" readonly>
-                        </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Nome</div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $user['nome']; ?>" readonly>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Cognome</div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $user['cognome']; ?>" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Mail</div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $user['email']; ?>" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">User</div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $user['username']; ?>" readonly>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+<!--    <div class="row justify-content-center">-->
+<!--            <button type="submit" class="btn btn-primary mb-2">Modifica</button>-->
+<!--        </div>-->
+
+
+    <h5> I tuoi punteggi </h5>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <svg class="bi bi-star" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 00-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 00-.163-.505L1.71 6.745l4.052-.576a.525.525 0 00.393-.288l1.847-3.658 1.846 3.658a.525.525 0 00.393.288l4.052.575-2.906 2.77a.564.564 0 00-.163.506l.694 3.957-3.686-1.894a.503.503 0 00-.461 0z" clip-rule="evenodd"/>
+                        </svg>
                     </div>
-                    <div class="form-group form-row">
-                        <label for="cognome" class="col-md-4 col-form-label">Cognome</label>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="<?php echo $user['cognome']; ?>" readonly>
-                        </div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $stats[0]['total']; ?>" readonly>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                        </svg>
                     </div>
-                    <div class="form-group form-row">
-                        <label for="mail" class="col-md-4 col-form-label">Mail</label>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="<?php echo $user['email']; ?>" readonly>
-                        </div>
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $stats[0]['esatte']; ?>" readonly>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                        </svg>
                     </div>
-                    <div class="form-group form-row">
-                        <label for="username" class="col-md-4 col-form-label">Username</label>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">#</div>
-                                </div>
-                                <input type="text" class="form-control" placeholder="<?php echo $user['username']; ?>" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row justify-content-center">
-                        <button type="submit" class="btn btn-primary mb-2">Modifica</button>
-                    </div>
-                </form>
-<!--            </span>-->
+                </div>
+                <input type="text" class="form-control" placeholder="<?php echo $stats[0]['errate']; ?>" readonly>
+            </div>
+        </div>
     </div>
 
-    <?php
-    echo "<br>";
-    // stampa statistiche
-    foreach ($stats as $rows){
-        foreach ($rows as $col){
-            echo $col." ";
-        }
-        echo "<br>";
-    }
 
 
-    ?>
+
     <?php
 }
 
