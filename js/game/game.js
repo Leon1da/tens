@@ -3,6 +3,7 @@ const api = new Spotify_api(); //API
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
 var categories = [];
+var playlists;
 
 var onPlay; //canzone in riproduzione
 var correct; //indice della risposta corretta
@@ -14,7 +15,6 @@ const AUTOPLAY_DURATION = 3; //in secondi
 function firstLoad() {
     g_notReady();
     g_initSelectors();
-
     getAccessToken();
     getCategories();
 
@@ -47,7 +47,7 @@ function getCategories() {
 function selectCategory(category) {
     g_notReady();
     s_init(category);
-    $.get("model/getPlaylist.php",{genre:category.nome},getPlaylistCallback,"json");
+    $.get("model/getPlaylists.php",{genre:category.nome},getPlaylistsCallback,"json");
 }
 
 
@@ -91,7 +91,7 @@ function loadTracks(items) {
     }
     if(songs_objs.length < 10 || wrong_songs_objs.length < 30){
         console.warn("Errore numero di canzoni\n corrette: " + songs_objs.length + "\nErrate: " + wrong_songs_objs.length);
-        g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
+        loadRandomPlaylist();
         return;
     }
     g_ready();
@@ -144,9 +144,7 @@ function startTimerCallback() {
     autoTimer = setTimeout(play,AUTOPLAY_DURATION*1000);
 }
 
-/*
-* TODO
-* */
+
 function stopPlay(id) {
     if(!isPlaying())
         return;
@@ -167,28 +165,40 @@ function ended() {
 
 }
 
-function getPlaylistCallback(playlists,status) {
+function getPlaylistsCallback(playlists_result,status) {
     if(status !== "success"){
         console.log("Errore Caricamento Playlists");
         g_notification("Errore caricamento. Ricarica la pagina");
         return;
     }
-    let playlist = playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
-    api.getPlaylistTracks(playlist,loadPlaylistCallback);
+    playlists = playlists_result;
+    loadRandomPlaylist();
 }
 
-function loadPlaylistCallback(res,status){
-    if(status !== "success"){
-        console.warn("Errore caricamento Playlist da Spotify\n Risultato: " + res);
-        g_notification("Errore caricamento. Ricarica la pagina");
-        return;
+
+
+function loadRandomPlaylist() {
+    function loadPlaylistCallback(res,status){
+        if(status !== "success"){
+            console.warn("Errore caricamento Playlist da Spotify\n Risultato: " + res);
+            loadRandomPlaylist();
+            return;
+        }
+        if(res.items.length < 40){
+            console.warn("Playlist troppo corta: " + res.items.length);
+            loadRandomPlaylist();
+            return;
+        }
+        loadTracks(res.items);
     }
-    if(res.items.length < 40){
-        console.log("Playlist troppo corta: " + res.items.length);
+
+    let playlist = getRandomPlaylist();
+    if(playlist == null){
+        console.error("Nessuna playlist utilizzabile");
         g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
         return;
     }
-    loadTracks(res.items);
+    api.getPlaylistTracks(playlist,loadPlaylistCallback);
 }
 
 
@@ -209,4 +219,8 @@ function getCategory(name) {
     return categories.find( (category) => {
         return category.nome === name
     })
+}
+
+function getRandomPlaylist() {
+    return playlists.splice(Math.floor(Math.random()*playlists.length),1).pop();
 }

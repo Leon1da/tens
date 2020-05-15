@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Gioca | Tens</title>
+    <title>Gioca | Ten's</title>
     <script src="./js/game/spotify_api.js" type="text/javascript"></script>
     <script src="./js/game/game.js" type="text/javascript"></script>
     <script src="./js/game/game_objects.js" type="text/javascript"></script>
