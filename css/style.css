@@ -1,7 +1,47 @@
+/*
+* ROOT
+*/
+:root {
+    --bg-color: rgba(255, 255, 255, 1);
+    --light-color: rgba(92, 158, 173, 1);
+    --medium-color: rgba(85, 130, 139, 1);
+    --dark-color: rgba(2, 108, 124, 1);
+    --darker-color: rgba(5, 88, 100, 1);
+
+    --light-blur-color: rgba(92, 158, 173, .25);
+    --medium-blur-color: rgba(85, 130, 139, .25);
+    --dark-blur-color: rgba(2, 108, 124, .25);
+    --darker-blur-color: rgba(5, 88, 100, .25);
+}
+
 body{
     font-family: 'Maven Pro', sans-serif;
+    background-color: var(--bg-color);
+
 }
-/* remove modal shadow*/
+
+/*
+* Bootstrap override
+*/
+
+.form-control:focus, .custom-select:focus {
+    box-shadow: 0 0 0 0.2rem var(--dark-blur-color) !important;
+    border-color: var(--dark-blur-color) !important;
+}
+
+
+.btn-primary, .btn-primary:disabled{
+    background-color: var(--dark-color) !important;
+    border-color: var(--dark-color) !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:focus,.btn-primary:hover ,.btn-primary:active:focus{
+    background-color: var(--darker-color) !important;
+    border-color: var(--darker-color) !important;
+    box-shadow: none !important;
+}
+
+
 .modal-content{
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
     -moz-box-shadow: 0 5px 15px rgba(0,0,0,0);
@@ -29,49 +69,22 @@ body{
 .input-group-text{
     border-radius: 20px;
 }
-.custom-select{
-    border-radius: 20px;
-}
+
 
 .my-card{
     margin: 20px;
     padding: 20px;
 }
 
-.progress-custom {
-    -webkit-transition: none !important;
-    transition: none !important;
-}
+
 
 #profile-name-link{
     padding-left: 5px;
-    color: black;
+    color: white;
 }
 
 #data-profile-container{
     padding: 20px;
-}
-
-.toast.hide {
-    z-index: initial;
-}
-.my-toast {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-    z-index: 1;
-    min-height: 50px;
-    min-width: 300px;
-}
-
-.my-rounded-pill-left {
-    border-top-left-radius: 50rem!important;
-    border-bottom-left-radius: 50rem!important;
-}
-
-.my-rounded-pill-right {
-    border-top-right-radius: 50rem!important;
-    border-bottom-right-radius: 50rem!important;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -87,9 +100,17 @@ body{
     right: 20px;
 }
 
+/*
+ Navbar
+ */
+.navbar-custom{
+    background-color: var(--darker-color);
+}
+/* End navbar */
 
-
-/* Homepage */
+/*
+ Homepage
+ */
 #home-play-btn{
  width: 20vw;
 
@@ -146,7 +167,9 @@ body{
 /* End Homepage */
 
 
-/* Statistics page */
+/*
+Statistics page
+*/
 
 .statistics-up{
     margin-top: 5rem;
@@ -175,7 +198,64 @@ body{
 /*End statistic page*/
 
 
-/* profile modal */
+/*
+Game page
+*/
+
+.toast.hide {
+    z-index: initial;
+}
+.my-toast {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 1;
+    min-height: 50px;
+    min-width: 300px;
+}
+
+.my-rounded-pill-left {
+    border-top-left-radius: 50rem!important;
+    border-bottom-left-radius: 50rem!important;
+}
+
+.my-rounded-pill-right {
+    border-top-right-radius: 50rem!important;
+    border-bottom-right-radius: 50rem!important;
+}
+
+#progresso_gioco_bg {
+    background-color: var(--bg-color);
+    height: 12px;
+}
+
+.progress-custom {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+.progress-bar{
+    background-color: var(--medium-color);
+    width: 0;
+}
+
+.media {
+    background-color: var(--light-blur-color);
+}
+
+.media:hover, .media:active {
+    background-color: var(--medium-color);
+}
+
+.media:hover h5, .media:hover p {
+    color: white !important;
+}
+
+/* End game page */
+
+
+/*
+profile modal
+ */
 .hide-my-profile-modal{
     display: none;
 }
@@ -184,6 +264,9 @@ body{
     position: fixed;
     z-index: 100;
 }
+/* end profile modal */
+
+
 
 /*// Extra small devices (portrait phones, less than 576px)*/
 /*// No media query since this is the default in Bootstrap*/

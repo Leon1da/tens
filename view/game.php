@@ -68,8 +68,8 @@
 <!-- Barra progresso partita -->
 <div class="row vw-100 m-0" >
     <div class="col-12 p-0">
-        <div class="progress rounded-0">
-            <div class="progress-bar" id="progesso_gioco" role="progressbar" style="width: 0%"></div>
+        <div class="progress rounded-0" id="progresso_gioco_bg">
+            <div class="progress-bar" id="progesso_gioco" role="progressbar"></div>
         </div>
     </div>
 </div>
@@ -172,7 +172,7 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-sm-6 my-1 mb-sm-3">
-                                            <div class="media rounded shadow-lg p-2 bg-light">
+                                            <div class="media rounded shadow p-2">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover0" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo0"></h5>
@@ -182,7 +182,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 my-1 mb-sm-3">
-                                            <div class="media rounded shadow-lg p-2 bg-light">
+                                            <div class="media rounded shadow p-2">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover1" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo1"></h5>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 my-1">
-                                            <div class="media rounded shadow-lg p-2 bg-light">
+                                            <div class="media rounded shadow p-2">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover2" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo2"></h5>
@@ -204,7 +204,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 my-1">
-                                            <div class="media rounded shadow p-2 bg-light">
+                                            <div class="media rounded shadow p-2">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover3" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo3"></h5>

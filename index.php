@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v59">
+    <link rel="stylesheet" href="css/style.css?v76">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -23,7 +23,7 @@
 <body>
  <!-- Header -->
 
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -67,8 +67,8 @@
 
             <!-- Button trigger modal -->
             <div class="visible" id="access-panel">
-                <button type="button" class="btn btn-outline-dark my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" > Sign In</button>
-                <button type="button" class="btn btn-outline-dark my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" > Sign Up </button>
+                <button type="button" class="btn btn-outline-light my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" > Sign In</button>
+                <button type="button" class="btn btn-outline-light my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" > Sign Up </button>
 
             </div>
 
