@@ -12,7 +12,7 @@
 <body>
 
 <!-- Notifiche -->
-<div class="toast my-toast" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
+<div class="toast my-toast hide" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
         <strong class="mr-auto" id="notifiche_titolo">Salvataggio</strong>
         <small class="text-muted">Ora</small>
