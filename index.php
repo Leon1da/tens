@@ -24,23 +24,23 @@
  <!-- Header -->
 
  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Ten's</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offset-md-2 collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link menu" href="#home">Home </a>
+                <a class="nav-link menu" href="#home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link menu" href="#about-us">About us</a>
+                <a class="nav-link menu" href="#about-us">Chi siamo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link menu" href="#statistics">Statistics</a>
+                <a class="nav-link menu" href="#statistics">Classifiche</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link menu" href="#game">Game</a>
+                <a class="nav-link menu" href="#game">Gioca</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
@@ -52,7 +52,7 @@
         <div class="row mx-auto">
             <div class="nav-item dropdown invisible" id="account-panel">
                 <div class="row align-items-center" >
-                    Ciao
+                    <span style="color: white;">Ciao</span>
                     <a class="nav-link dropdown-toggle" href="#" id="profile-name-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                     </a>
@@ -67,8 +67,8 @@
 
             <!-- Button trigger modal -->
             <div class="visible" id="access-panel">
-                <button type="button" class="btn btn-outline-light my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" > Sign In</button>
-                <button type="button" class="btn btn-outline-light my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" > Sign Up </button>
+                <button type="button" class="btn btn-outline-light my-btn" id="sign-in" data-toggle="modal" data-target="#in-panel" >Accedi</button>
+                <button type="button" class="btn btn-outline-light my-btn" id="sign-up" data-toggle="modal" data-target="#up-panel" >Registrati</button>
 
             </div>
 
@@ -103,8 +103,8 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalCenterTitle">Account Sign In</h5>
-                 <button type="button" class="close" id="btn-close-login"data-dismiss="modal" aria-label="Close">
+                 <h5 class="modal-title" id="exampleModalCenterTitle">Accedi ora</h5>
+                 <button type="button" class="close" id="btn-close-login" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
@@ -119,7 +119,7 @@
                  </form>
              </div>
              <div class="modal-footer">
-                 <button type="button" class="btn btn-primary" id="login-btn">Sign In</button>
+                 <button type="button" class="btn btn-primary" id="login-btn">Accedi</button>
              </div>
          </div>
      </div>
@@ -130,7 +130,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalCenterTitle">Create your free account</h5>
+                 <h5 class="modal-title" id="exampleModalCenterTitle">Crea il tuo account gratuito</h5>
                  <button type="button" class="close" id="btn-close-signup" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
@@ -190,7 +190,7 @@
 
              </div>
              <div class="modal-footer">
-                 <button type="button" class="btn btn-primary" id="register-btn">Create an Account</button>
+                 <button type="button" class="btn btn-primary" id="register-btn">Crea Account</button>
              </div>
          </div>
      </div>

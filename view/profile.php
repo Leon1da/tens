@@ -58,7 +58,7 @@ if(isset($_SESSION['session_id'])){
             <div class="col">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">User</div>
+                        <div class="input-group-text">Username</div>
                     </div>
                     <input type="text" class="form-control" placeholder="<?php echo $user['username']; ?>" readonly>
                 </div>

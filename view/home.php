@@ -3,7 +3,7 @@
        <div class="row" id="zero">Benvenuto su Ten's</div>
 
         <div class="row" id="first">Ti piace la musica e ami le sfide ?</div>
-        <div class="row" id="second">Hai bisogno di un passatempo ?</div>
+        <div class="row" id="second">Riconosci le canzoni in un batter d'occhio ?</div>
         <div class="row" id="third">Ten's e` quello che fa per te.</div>
 
 

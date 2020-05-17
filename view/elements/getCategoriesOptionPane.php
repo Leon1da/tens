@@ -13,7 +13,7 @@ echo printOptionCategory($categories);
 // stampa il menu a tendina con tutte le categorie presenti nel database
 function printOptionCategory($categories){
     $html = '<select id="category" class="form-control">';
-    $html.= '<option selected>All categories</option>';
+    $html.= '<option selected>Tutte le categorie</option>';
 
     foreach ($categories as $category){
         $html.= '<option>'.$category["nome"].'</option>';
