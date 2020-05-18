@@ -4,9 +4,9 @@
 <!--             offset-md-1 col-md-7-->
             <div class="col-xs-12 col-sm-12 offset-md-1 col-md-7">
                 <div class="row" id="d-0"> Scala le classifiche per diventare il Campione ! </div>
-                <div class="row"  id="d-1">Gioca con le playlist piu in voga </div>
-                <div class="row"  id="d-2">Scegli il genere che preferisci </div>
-                <div class="row"  id="d-3">Mostra di che pasta sei fatto! </div>
+                <div class="row secondary-text-statistics"  id="d-1">Gioca con le playlist piu in voga </div>
+                <div class="row secondary-text-statistics"  id="d-2">Scegli il genere che preferisci </div>
+                <div class="row secondary-text-statistics"  id="d-3">Mostra di che pasta sei fatto! </div>
             </div>
 <!--col-md-2-->
             <div class="col-xs-12 col-sm-12 col-md-2" id="categories"></div>
@@ -30,7 +30,6 @@
         $("#rank").load("view/elements/GetRankingTable.php");
 
 
-        setTimeout(function () {
 
             $("#d-0").animate({'margin-left': '+=100vw'}, 500);
             setTimeout(function () {
@@ -42,19 +41,15 @@
                         setTimeout(function () {
                             $("#d-1").animate({'margin-top': '+=3rem'}, 500);
                             // $("#d-2").animate({'margin-top': '+=5vh'}, 500);
-                            $("#d-3").animate({'margin-top': '-=5.4rem'}, 500);
+                            $("#d-3").animate({'margin-top': '-=6.9rem'}, 500);
                         },1500);
 
-                        setTimeout(function () {
-                            $("#rank").fadeIn(2000);
-                            $("#categories").fadeIn(2000);
-                        },2000);
+                        $("#rank").fadeIn(1000);
+                        $("#categories").fadeIn(1000);
 
-                    },750);
-
-                },750);
-            },0);
-        },500);
+                    },300);
+                },300);
+            },300);
 
 
     });

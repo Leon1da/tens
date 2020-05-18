@@ -14,13 +14,13 @@ $pwdLenght = mb_strlen($password);
 
 
 if (empty($username) || empty($password)) {
-    $msg = 'Compila tutti i campi';
-    printErrorMessage(Status::Warning, $msg);
+//    $msg = 'Compila tutti i campi';
+//    printErrorMessage(Status::Warning, $msg);
 
-} elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-    $msg = 'Lunghezza minima password 8 caratteri.
-            Lunghezza massima 20 caratteri.';
-    printErrorMessage(Status::Warning, $msg);
+} elseif ($pwdLenght < 8 || $pwdLenght > 50) {
+//    $msg = 'Lunghezza minima password 8 caratteri.
+//            Lunghezza massima 20 caratteri.';
+//    printErrorMessage(Status::Warning, $msg);
 } else {
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 

@@ -1,0 +1,36 @@
+
+Tens
+Generale
+- [ ] Commentare codice?
+- [ ] Traduzioni
+- [ ] Nome navbar
+- [ V ] Collegamento home logo
+- [ v ] Rimuovere multiplayer
+- [ ] Messaggi login dentro il modal
+- [ ] Chiusura automatica messaggi top
+- [ ] Chiusura automatica navbar
+- [ ? ] Cambio font non piace a safari (non la facciamo piu
+- [ ] Organizzazione codice e pulizia
+- [ V ] Controllo input form
+
+Home
+- [ ] Pulsante registrati (Riempio con qualcosaltro)
+- [ ? ] Allungamento bg ---> mettere background immagine
+- [ V ] Cambio stile pulsanti
+
+About us
+- [ ] Tutta da fare
+
+Statistiche
+- [ ] Traduzione all categories
+- [ ] Titolo “classifiche”
+- [ ] Distanziamento tabella resto
+- [ ] Miglior score
+
+Game
+- [x] Raggae correzione
+- [ ] Pulsante esci in small screen
+- [ ] Cache
+
+Profilo
+- [ ] Totale partite

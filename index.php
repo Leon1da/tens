@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v76">
+    <link rel="stylesheet" href="css/style.css?v79">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -24,7 +24,7 @@
  <!-- Header -->
 
  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <a class="navbar-brand" href="#">Ten's</a>
+    <a class="navbar-brand" id="logo" href="#home">Ten's</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,11 +42,11 @@
             <li class="nav-item">
                 <a class="nav-link menu" href="#game">Gioca</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
-                    Multiplayer
-                </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">-->
+<!--                    Multiplayer-->
+<!--                </a>-->
+<!--            </li>-->
 
         </ul>
         <div class="row mx-auto">
@@ -117,6 +117,8 @@
                          <input type="password" class="form-control" id="password-lgn" placeholder="Password" name="password" required>
                      </div>
                  </form>
+
+                 <small class="form-text text-danger form-msg" style="color: red;"></small>
              </div>
              <div class="modal-footer">
                  <button type="button" class="btn btn-primary" id="login-btn">Accedi</button>
@@ -137,29 +139,30 @@
              </div>
              <div class="modal-body">
                  <form method="post" id="register-form">
-<!--                     Dati Personali-->
-<!--                     <br><br>-->
+                    <!-- Dati Personali-->
                      <div class="form-group">
                          <div class="row">
                              <div class="col">
-                                 <input type="text" class="form-control" id="name-reg" placeholder="Nome*" required>
+                                 <input type="text" class="form-control" id="name-reg" placeholder="Nome*" minlength="2" maxlength="30" required>
                              </div>
                              <div class="col">
-                                 <input type="text" class="form-control" id="surname-reg" placeholder="Cognome*" required>
+                                 <input type="text" class="form-control" id="surname-reg" placeholder="Cognome*" minlength="2" maxlength="30" required>
                              </div>
                          </div>
                      </div>
                      <div class="form-group" style="margin-bottom: 0;">
                          <div class="row">
                              <div class="col-md-7">
-                                 <input type="email" placeholder="Email*" id="email-reg" class="form-control">
+                                 <input type="email" placeholder="Email*" id="email-reg" class="form-control"
+                                        pattern="[\w-]+@([\w-]+\.)+[\w-]+" required>
                              </div>
                              <div class="col-md-5">
                                  <div class="input-group mb-3">
                                      <div class="input-group-prepend">
                                          <label class="input-group-text" for="inputGroupSelect01">Sesso</label>
                                      </div>
-                                     <select class="custom-select" id="sesso-reg">
+
+                                 <select class="custom-select my-rounded-pill-right" id="sesso-reg">
                                          <option value="N" selected>Scegli</option>
                                          <option value="M">Uomo</option>
                                          <option value="F">Donna</option>
@@ -171,13 +174,13 @@
                          </div>
                      </div>
                      <hr style="margin-top: 0;">
-<!--                     Credenziali-->
-<!--                     <br><br>-->
+                        <!-- Credenziali -->
+
                      <div class="form-group">
-                         <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username" maxlength="50" required>
+                         <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username"  minlength="8" max="50" required>
                      </div>
                      <div class="form-group">
-                         <input type="password" class="form-control" id="password-reg" placeholder="Password*" name="password" required>
+                         <input type="password" class="form-control" id="password-reg" placeholder="Password*" name="password"  minlength="8" maxlength="50" required>
                      </div>
                      <small class="form-text text-muted">
                          Utilizzeremo le informazioni che ci fornisci al solo scopo di mogliorare la tua esperienza di gioco.
@@ -186,6 +189,7 @@
                          <br>
                          *Campo obbligatorio
                      </small>
+                     <small class="form-text text-danger form-msg" style="color: red;"></small>
                  </form>
 
              </div>
@@ -217,13 +221,8 @@
     $(document).ready(function() {
 
 
-        // rendo la modal del profilo draggable e resizable
+        // rendo la modal del profilo draggable
         $("#profile-modal").draggable();
-        // $("#profile-modal").resizable({
-        //     minWidth: 500,
-        //     minHeight: 350,
-        // });
-
 
         $("#main-content").load("view/home.php");
 
@@ -276,64 +275,145 @@
             });
         });
 
+        // al click sul logo manda sulla home page
+        $("#logo").click(function () {
+            $("#main-content").load("view/home.php");
+        })
+
+        function clearLoginModalMessage() {
+            $(".form-msg").text("");
+            $("#username-lgn").removeClass("border border-danger");
+            $("#password-lgn").removeClass("border border-danger");
+        }
 
         // load login modal when sign-in btn is clicked
         $("#login-btn").click(function () {
-            var username = $("#username-lgn").val();
-            var password = $("#password-lgn").val();
-            var request = $.ajax({
-                type: "POST",
-                url: "model/login.php",
-                data: {username: username, password: password},
-                dataType: "html"
-            });
-            request.done( function (response) {
-                // alert(response);
-                // visualizzo risultato
-                //rimosso perche non devo visualizzare nulla
-                $("#main-content").prepend(response);
-                // chiudo il pannello di login
-                $("#btn-close-login").click();
 
-            });
+            clearLoginModalMessage();
+
+          if($("#login-form")[0].checkValidity()) {
+                // form validato
+                var username = $("#username-lgn").val();
+                var password = $("#password-lgn").val();
+                var request = $.ajax({
+                    type: "POST",
+                    url: "model/login.php",
+                    data: {username: username, password: password},
+                    dataType: "html"
+                });
+                request.done( function (response) {
+                    // alert(response);
+                    // visualizzo risultato
+                    //rimosso perche non devo visualizzare nulla
+                    $("#main-content").prepend(response);
+                    // chiudo il pannello di login
+                    $("#btn-close-login").click();
+
+                });
+            }else{
+                // form non valido
+                $(".form-msg").text("compila i campi contrassegnati in rosso");
+                if(!$("#username-lgn")[0].checkValidity()){
+                    $("#username-lgn").addClass("border border-danger");
+                }
+
+                if(!$("#password-lgn")[0].checkValidity()){
+                    $("#password-lgn").addClass("border border-danger");
+                }
+            }
+
 
         });
 
+        $("#in-panel").on("hidden.bs.modal", function () {
+            clearLoginModalMessage();
+        });
+
+        function clearRegistrationModalMessage() {
+            $(".form-msg").text("");
+            $("#name-reg").removeClass("border border-danger");
+            $("#surname-reg").removeClass("border border-danger");
+            $("#email-reg").removeClass("border border-danger");
+            $("#username-reg").removeClass("border border-danger");
+            $("#password-reg").removeClass("border border-danger");
+
+        }
 
         // load registration modal when sign-up btn is clicked
         $("#register-btn").click(function () {
 
-            var nome = $("#name-reg").val();
-            var cognome = $("#surname-reg").val();
-            var email = $("#email-reg").val();
-            var sesso = $("#sesso-reg").val();
+          clearRegistrationModalMessage();
+            // html form validation
+            // $("#register-form").reportValidity();
+            if($("#register-form")[0].checkValidity()){
+                var nome = $("#name-reg").val();
+                var cognome = $("#surname-reg").val();
+                var email = $("#email-reg").val();
+                var sesso = $("#sesso-reg").val();
 
-            var username = $("#username-reg").val();
-            var password = $("#password-reg").val();
+                var username = $("#username-reg").val();
+                var password = $("#password-reg").val();
 
-            // alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
+                // alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
 
-            var request = $.ajax({
-                type: "POST",
-                url: "model/registration.php",
-                data: {
-                    nome: nome,
-                    cognome: cognome,
-                    email: email,
-                    sesso: sesso,
-                    username: username,
-                    password: password,
-                },
-                dataType: "html"
-            });
-            request.done( function (response) {
-                // alert(response);
-                //visualizzo risultato
-                $("#main-content").prepend(response);
-                // chiudo il pannello di registrazione
-                $("#btn-close-signup").click();
+                var request = $.ajax({
+                    type: "POST",
+                    url: "model/registration.php",
+                    data: {
+                        nome: nome,
+                        cognome: cognome,
+                        email: email,
+                        sesso: sesso,
+                        username: username,
+                        password: password,
+                    },
+                    dataType: "html"
+                });
+                request.done(function (response) {
+                    // alert(response);
+                    //visualizzo risultato
+                    $("#main-content").prepend(response);
+                    // chiudo il pannello di registrazione
+                    $("#btn-close-signup").click();
 
-            });
+                });
+
+            }else{
+                if(!$("#name-reg")[0].checkValidity()){
+                    $("#name-reg").addClass("border border-danger");
+                    $(".form-msg").append("nome: almeno 3, massimo 50 caratteri<br>");
+
+
+                }
+
+                if(!$("#surname-reg")[0].checkValidity()){
+                    $("#surname-reg").addClass("border border-danger");
+                    $(".form-msg").append("cognome: almeno 3, massimo 50 caratteri<br>");
+                }
+
+                if(!$("#email-reg")[0].checkValidity()){
+                    $("#email-reg").addClass("border border-danger");
+                    $(".form-msg").append("mail: non valida<br>");
+                }
+
+                if(!$("#username-reg")[0].checkValidity()){
+                    $("#username-reg").addClass("border border-danger");
+                    $(".form-msg").append("username: almeno 8, massimo 30 caratteri<br>");
+                }
+
+                if(!$("#password-reg")[0].checkValidity()){
+                    $("#password-reg").addClass("border border-danger");
+                    $(".form-msg").append("password: almeno 8, massimo 30 caratteri<br>");
+
+                }
+
+            }
+
+
+        });
+
+        $("#up-panel").on("hidden.bs.modal", function () {
+            clearRegistrationModalMessage();
         });
 
 
