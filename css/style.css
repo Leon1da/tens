@@ -20,10 +20,6 @@ body{
 
 }
 
-.alert{
-    z-index: 100;
-    margin-bottom: 0;
-}
 
 /*
 * Bootstrap override
@@ -176,28 +172,19 @@ body{
 Statistics page
 */
 
-.statistics-up{
-    margin-top: 5rem;
-}
-.statistics-down{
-    margin-top: 12.5rem;
-}
-#categories{
-    margin-top: 10rem;
-}
+/*.statistics-up{*/
+/*    margin-top: 5rem;*/
+/*}*/
+/*.statistics-down{*/
+/*    margin-top: 5rem;*/
+/*}*/
 
 #d-0{
-    margin-left: -100vw;
+    margin-left: -150vw;
 }
 
-#d-1{
-    margin-left: -100vw;
-}
-#d-2{
-    margin-left: -100vw;
-}
-#d-3{
-    margin-left: -100vw;
+.secondary-text-statistics{
+    margin-left: -150vw;
 }
 
 /*End statistic page*/
@@ -285,10 +272,10 @@ profile modal
     }
 
     #zero{
-        font-size: 1.2rem;
+        font-size: 2rem;
     }
     .secondary-text-home{
-        font-size: 0.75rem;
+        font-size: 1.2rem;
     }
 }
 
@@ -311,6 +298,18 @@ profile modal
 
 /*// Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
+
+    .nav-link.menu{
+        border-bottom-style: solid;
+        border-bottom-width: 5px;
+        border-bottom-color: #055864;
+    }
+    .nav-link.menu:hover{
+        border-bottom-style: solid;
+        border-bottom-width: 5px;
+        border-bottom-color: #ffffff;
+    }
+
     #d-0{
         font-size: 1.6rem;
     }
@@ -329,6 +328,18 @@ profile modal
 
 /*// Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
+
+    .nav-link.menu{
+        border-bottom-style: solid;
+        border-bottom-width: 5px;
+        border-bottom-color: #055864;
+    }
+    .nav-link.menu:hover{
+        border-bottom-style: solid;
+        border-bottom-width: 5px;
+        border-bottom-color: #ffffff;
+    }
+
     #d-0{
         font-size: 1.9rem;
     }

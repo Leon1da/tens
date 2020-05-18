@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v79">
+    <link rel="stylesheet" href="css/style.css?v87">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -24,7 +24,11 @@
  <!-- Header -->
 
  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <a class="navbar-brand" id="logo" href="#home">Ten's</a>
+
+     <a class="navbar-brand" id="logo" href="#home">
+         <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+         Ten's
+     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -120,9 +124,10 @@
 
                  <small class="form-text text-danger form-msg" style="color: red;"></small>
              </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-primary" id="login-btn">Accedi</button>
+             <div class="modal-footer justify-content-center">
+                 <button type="button" class="btn btn-primary btn-block rounded-pill w-50" id="login-btn">Accedi</button>
              </div>
+
          </div>
      </div>
  </div>
@@ -193,8 +198,8 @@
                  </form>
 
              </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-primary" id="register-btn">Crea Account</button>
+             <div class="modal-footer justify-content-center">
+                 <button type="button" class="btn btn-primary btn-block rounded-pill w-50" id="register-btn">Crea Account</button>
              </div>
          </div>
      </div>
@@ -220,12 +225,10 @@
 
     $(document).ready(function() {
 
-
         // rendo la modal del profilo draggable
         $("#profile-modal").draggable();
 
         $("#main-content").load("view/home.php");
-
 
         // load pages when dropdown-item (PROFILE SUB-MENU) is clicked
         // - Il mio profilo
@@ -271,6 +274,7 @@
             $("#main-content").load(url, function () {
                 anchor.parent().addClass("active"); // active new anchor
                 old_active.removeClass("active"); // de-active old anchor
+                $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
 
             });
         });
@@ -291,32 +295,38 @@
 
             clearLoginModalMessage();
 
-          if($("#login-form")[0].checkValidity()) {
-                // form validato
-                var username = $("#username-lgn").val();
-                var password = $("#password-lgn").val();
-                var request = $.ajax({
-                    type: "POST",
-                    url: "model/login.php",
-                    data: {username: username, password: password},
-                    dataType: "html"
-                });
-                request.done( function (response) {
-                    // alert(response);
-                    // visualizzo risultato
-                    //rimosso perche non devo visualizzare nulla
-                    $("#main-content").prepend(response);
-                    // chiudo il pannello di login
-                    $("#btn-close-login").click();
+            if($("#login-form")[0].checkValidity()) {
+                    // form validato
+                    var username = $("#username-lgn").val();
+                    var password = $("#password-lgn").val();
+                    var request = $.ajax({
+                        type: "POST",
+                        url: "model/login.php",
+                        data: {username: username, password: password},
+                        dataType: "html"
+                    });
+                    request.done( function (response) {
+                        // alert(response);
+                        // visualizzo risultato
+                        //rimosso perche non devo visualizzare nulla
+                        $("#main-content").prepend(response);
+                        // chiudo il pannello di login
+                        $("#btn-close-login").click();
 
-                });
-            }else{
+                        $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                        // setto timer che fa chiudere il messaggio
+                        setTimeout(function () {
+                            $(".my-alert-btn").click();
+                        },5000);
+
+                    });
+                }else{
                 // form non valido
                 $(".form-msg").text("compila i campi contrassegnati in rosso");
                 if(!$("#username-lgn")[0].checkValidity()){
                     $("#username-lgn").addClass("border border-danger");
                 }
-
                 if(!$("#password-lgn")[0].checkValidity()){
                     $("#password-lgn").addClass("border border-danger");
                 }
@@ -376,6 +386,14 @@
                     // chiudo il pannello di registrazione
                     $("#btn-close-signup").click();
 
+
+                    $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                    // setto timer che fa chiudere il messaggio
+                    setTimeout(function () {
+                        $(".my-alert-btn").click();
+                    },5000);
+
                 });
 
             }else{
@@ -416,7 +434,7 @@
             clearRegistrationModalMessage();
         });
 
-
+        // carica la classifica ogni volta che viene selezionata una nuova categoria
         $(document).on('change','select', function() {
             var category = $("select option:selected").text();
             // non riesco a capire per quale motivo il testo dell'option selezionato
@@ -437,29 +455,7 @@
 
             });
         });
-        // .trigger( "change" );
 
-
-
- // non dovrebbe essere piu necessario
-
-        // !!! important !!!
-        // allaccio trigger in questo modo poiche l'elemento di cui devo
-        // intercettare il click non esiste nel DOM al momento della sua creazione
-        // ma viene caricato successivamente tramite registration.php facendo una chiamata AJAX
-        // $(document).on('click', '.alert > a', function(){
-        //     var ref = $(this).attr("href");
-        //     alert(ref);
-        //     switch (ref) {
-        //         case "#sign-in":
-        //             $("#sign-in").click();  //apro pannello di login
-        //             break;
-        //
-        //         case "#sign-up":
-        //             $("#sign-up").click();  //apro pannello di registrazione
-        //             break;
-        //     }
-        // });
     });
 
 </script>

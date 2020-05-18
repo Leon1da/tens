@@ -10,13 +10,19 @@ $check->bindParam(':category', $category, PDO::PARAM_STR);
 $check->execute();
 $categories = $check->fetchAll(PDO::FETCH_ASSOC);
 
-$result = '';
-if (count($categories) > 0) {
-    // categoria ESISTE nel db
-    // carico Ranking per la categoria selezionata
-    $query = "
+
+if (count($categories) > 0) $result = getBestPlayersEver($pdo,$category);
+else $result = getBestPlayersEver($pdo);
+
+
+function getBestPlayersEver($pdo, $category = null){
+
+    if($category!=null){
+        // categoria ESISTE nel database
+        // carico Rankin Globale per categoria
+        $query = "
         SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
-            sum(g.errate) as tot_errate, sum(g.mancate) as tot_mancate
+            sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie
         FROM games g JOIN users u on g.user = u.id
             JOIN category c on g.categoria = c.id
         WHERE c.nome = :categoria
@@ -24,35 +30,41 @@ if (count($categories) > 0) {
         ORDER BY tot_score DESC
     ";
 
-    $check = $pdo->prepare($query);
-    $check->bindParam(':categoria', $category, PDO::PARAM_STR);
-    $check->execute();
-    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+        $check = $pdo->prepare($query);
+        $check->bindParam(':categoria', $category, PDO::PARAM_STR);
+        $check->execute();
+        $result = $check->fetchAll(PDO::FETCH_ASSOC);
 
-
-} else {
-    // categoria NON ESISTE nel database
-    // carico Rankin Globale (per tutte le categorie)
-    $query = "
+    }
+    else{
+        // categoria NON ESISTE nel database
+        // carico Rankin Globale (per tutte le categorie)
+        $query = "
         SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
-            sum(g.errate) as tot_errate, sum(g.mancate) as tot_mancate
+            sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie
         FROM games g JOIN users u on g.user = u.id
             JOIN category c on g.categoria = c.id
         GROUP BY g.user
         ORDER BY tot_score DESC
     ";
 
+        $check = $pdo->prepare($query);
+        $check->execute();
+        $result = $check->fetchAll(PDO::FETCH_ASSOC);
 
-    $check = $pdo->prepare($query);
-    $check->execute();
-    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    return $result;
 }
+
+
 if(count($result)>0){
     echo printRankingTable($result);
 }else{
     echo "<h6>Nessuno si e` ancora classificato in <b>".$category."</b> <br> Che cosa aspetti? Diventa il primo!</h6>";
 }
+
+
 // stampa la risposta del db in formato tabellare
 function printRankingTable($vector){
     $table='
@@ -64,7 +76,7 @@ function printRankingTable($vector){
             <th scope="col">Score</th>
             <th scope="col">Esatte</th>
             <th scope="col">Errate</th>
-            <th scope="col">Mancate</th>
+            <th scope="col">Vittorie</th>
         </tr>
         </thead>
         
@@ -78,7 +90,7 @@ function printRankingTable($vector){
         $table .= '<td>' . $row['tot_score'] . '</td>';
         $table .= '<td>' . $row['tot_esatte'] . '</td>';
         $table .= '<td>' . $row['tot_errate'] . '</td>';
-        $table .= '<td>' . $row['tot_mancate'] . '</td>';
+        $table .= '<td>' . $row['tot_vittorie'] . '</td>';
         $table .= '</tr>';
         $i++;
     }
@@ -86,5 +98,4 @@ function printRankingTable($vector){
     return $table;
 }
 
-//}
 ?>

@@ -40,7 +40,6 @@
 
         $("#home-play-btn").click(function () {
             var old_active = $(".nav-item.active"); // old page
-            alert(old_active.text());
             $("#main-content").load("view/game.php", function () {
                 old_active.removeClass("active"); // de-active old anchor
                 $(".nav-link[href='#game']").parent(this).addClass("active"); // active new anchor

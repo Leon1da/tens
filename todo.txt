@@ -3,15 +3,17 @@ Tens
 Generale
 - [ ] Commentare codice?
 - [ ] Traduzioni
-- [ ] Nome navbar
-- [ V ] Collegamento home logo
-- [ v ] Rimuovere multiplayer
-- [ ] Messaggi login dentro il modal
-- [ ] Chiusura automatica messaggi top
-- [ ] Chiusura automatica navbar
-- [ ? ] Cambio font non piace a safari (non la facciamo piu
 - [ ] Organizzazione codice e pulizia
+- [ ] Messaggi login dentro il modal (piu complicato del previsto)
+
+- [ ? ] Cambio font non piace a safari (non la facciamo piu
+- [ ? ] Nome navbar
+
+- [ V ] Chiusura automatica messaggi top
+- [ V ] Chiusura automatica navbar
 - [ V ] Controllo input form
+- [ V ] Collegamento home logo
+- [ V ] Rimuovere multiplayer
 
 Home
 - [ ] Pulsante registrati (Riempio con qualcosaltro)
@@ -24,7 +26,7 @@ About us
 Statistiche
 - [ ] Traduzione all categories
 - [ ] Titolo “classifiche”
-- [ ] Distanziamento tabella resto
+- [ V ] Distanziamento tabella resto
 - [ ] Miglior score
 
 Game

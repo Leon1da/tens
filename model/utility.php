@@ -11,9 +11,9 @@ function printErrorMessage($status, $msg){
     switch ($status) {
         case Status::Success :
             ?>
-            <div class="alert alert-success" role="alert" >
+            <div class="alert alert-success" role="alert">
                 <?php echo $msg; ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -21,9 +21,9 @@ function printErrorMessage($status, $msg){
             break;
         case Status::Warning :
             ?>
-            <div class="alert alert-warning" role="alert" >
+            <div class="alert alert-warning my-alert" role="alert" >
                 <?php echo $msg; ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -31,9 +31,9 @@ function printErrorMessage($status, $msg){
             break;
         case Status::Error :
             ?>
-            <div class="alert alert-danger" role="alert" >
+            <div class="alert alert-danger my-alert" role="alert" >
                 <?php echo $msg; ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
