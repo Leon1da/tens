@@ -14,9 +14,28 @@
     --darker-blur-color: rgba(5, 88, 100, .25);
 }
 
+  #bg {
+
+      position: fixed;
+      top: 25%;
+      left: 25%;
+
+      /* Preserve aspet ratio */
+      width: 50%;
+      height: 50%;
+
+      opacity: 50%;
+  }
+
 body{
     font-family: 'Maven Pro', sans-serif;
-    background-color: var(--bg-color);
+    /*background-color: var(--bg-color);*/
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+    /*background-image: url("../resources/logov3.svg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-position-x: 0vw;*/
+    /*background-position-y: 0vh;*/
 
 }
 
@@ -117,6 +136,8 @@ body{
 
 }
 .jumbotron{
+    border-radius: 0rem;
+    opacity: 80%;
     height: 50vh;
     width: 100vw;
 }
@@ -260,11 +281,17 @@ profile modal
 
 
 
+
 /*// Extra small devices (portrait phones, less than 576px)*/
 /*// No media query since this is the default in Bootstrap*/
 
 /*// Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+
+    .jumbotron{
+        height: 50vh;
+    }
+
     #d-0{
         font-size: 1.8rem;
     }
