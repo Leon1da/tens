@@ -1,5 +1,4 @@
 /*
-* Song obj:
 * name = nome canzone
 * artist = nome artista
 * player = oggetto audio per la riproduzione

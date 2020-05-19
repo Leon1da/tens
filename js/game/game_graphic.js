@@ -1,5 +1,8 @@
 const FADE_TIME = 100;
 
+/*
+*
+*/
 function g_initCategories() {
     $(function () {
         let html = '';
@@ -8,7 +11,12 @@ function g_initCategories() {
                 html += '<option>'+category.nome+'</option>';
         });
 
-        $("#selettore_categoria").html(html);
+        let category_selector = $("#selettore_categoria");
+        let lastSelected = localStorage.getItem("lastSelected");
+
+        category_selector.html(html);
+        if(lastSelected != null && getCategory(lastSelected) != null)
+            category_selector.val(lastSelected);
     });
 }
 
@@ -23,6 +31,7 @@ function g_initSelectors() {
         selectCategory(getCategory(category_selector.val()));
     });
     category_selector.on("change",() => {
+        localStorage.setItem("lastSelected",category_selector.val());
         selectCategory(getCategory(category_selector.val()));
     });
 

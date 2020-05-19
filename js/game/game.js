@@ -2,16 +2,20 @@ const api = new Spotify_api(); //API
 
 var songs_objs; //Array contenente oggetti song
 var wrong_songs_objs; //oggetti wrongSong
-var categories = [];
-var playlists;
+var categories = []; //Array di categorie
+var playlists; //array di playlist
 
 var onPlay; //canzone in riproduzione
 var correct; //indice della risposta corretta
-var autoTimer;
+var autoTimer; //timer per l'autoplay
 
 const PLAY_DURATION = 10; //durata della riproduzione in secondi
 const AUTOPLAY_DURATION = 3; //in secondi
 
+
+/*
+* Inizia il primo caricamento del gioco, viene chiamata solo all'apertura della pagina gioca
+*/
 function firstLoad() {
     g_notReady();
     g_initSelectors();
@@ -20,6 +24,9 @@ function firstLoad() {
 
 }
 
+/*
+*  Richiede un access token al webserver per poter fare le richieste ai CDN di Spotify e avvia il caricamento automatico
+*/
 function getAccessToken() {
     $.get("./model/token.php",function (token,status) {
         if(status !== "success"){
@@ -32,6 +39,9 @@ function getAccessToken() {
     });
 }
 
+/*
+*  Richiede al webserver i generi musicali e chiama l'update grafico
+*/
 function getCategories() {
     $.get("model/getCategories.php",function (data,status) {
         if(status !== "success"){
@@ -44,13 +54,9 @@ function getCategories() {
     },"json");
 }
 
-function selectCategory(category) {
-    g_notReady();
-    s_init(category);
-    $.get("model/getPlaylists.php",{genre:category.nome},getPlaylistsCallback,"json");
-}
-
-
+/*
+* Carica appena possibile la modalità di default
+*/
 function autoload(i = 30) {
     let category = getCategory("Normale");
     if(i === 0){
@@ -66,9 +72,69 @@ function autoload(i = 30) {
     selectCategory(category);
 }
 
+
+/*
+* Imposta grafica e statistiche per la categoria di gioco selezionata, richiede al webserver le playlist della categoria selezionata
+* Parametri: category = categoria selezionata dal giocatore
+*/
+function selectCategory(category) {
+    g_notReady();
+    s_init(category);
+    $.get("model/getPlaylists.php",{genre:category.nome},getPlaylistsCallback,"json");
+}
+
+
+/*
+* Salva le playlists ricevute dal webserver e chiama il caricamento
+*/
+function getPlaylistsCallback(playlists_result,status) {
+    if(status !== "success"){
+        console.log("Errore Caricamento Playlists");
+        g_notification("Errore caricamento. Ricarica la pagina");
+        return;
+    }
+    playlists = playlists_result;
+    loadRandomPlaylist();
+}
+
+
+/*
+* Carica una playlist random, può essere ricorsiva
+*/
+function loadRandomPlaylist() {
+    function loadPlaylistCallback(res,status){
+        if(status !== "success"){
+            console.warn("Errore caricamento Playlist da Spotify\n Risultato: " + res);
+            loadRandomPlaylist();
+            return;
+        }
+        if(res.items.length < 40){
+            console.warn("Playlist troppo corta: " + res.items.length);
+            loadRandomPlaylist();
+            return;
+        }
+        loadTracks(res.items);
+    }
+
+    let playlist = getRandomPlaylist();
+    if(playlist == null){
+        console.error("Nessuna playlist utilizzabile");
+        g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
+        return;
+    }
+    api.getPlaylistTracks(playlist,loadPlaylistCallback);
+}
+
+
+
+/*
+* Carica le canzoni negli array globali
+* Parametri: items = json contentente un vettore di tracks
+*/
 function loadTracks(items) {
     songs_objs = [];
     wrong_songs_objs = [];
+
     while((songs_objs.length < 10 || wrong_songs_objs.length < 30 ) && items.length !== 0){
         let track = items.splice(Math.floor(Math.random()*items.length),1).pop(); //Rimuove una canzone casuale dall'array di canzoni
         if(track.track != null) //alcuni risultati vengono restituiti dentro items altri dentro items.track
@@ -97,11 +163,17 @@ function loadTracks(items) {
     g_ready();
 }
 
+/*
+* Avviata al click su gioca, inizia la partita
+*/
 function startGame() {
     play();
     g_start();
 }
 
+/*
+* Avviata al click su esci o riavvia, pulisce l'autoplay e la grafica
+*/
 function stopGame() {
     if(isPlaying()){
         onPlay.player.pause();
@@ -112,10 +184,9 @@ function stopGame() {
     g_stop();
 }
 
-
 /*
-* Imposta i pulsanti e inizia la riproduzione
- */
+* Inizia la riproduzione, autoplay e grafica
+*/
 function play() {
     if(isPlaying() || isEnded())
         return;
@@ -128,17 +199,22 @@ function play() {
     g_startRoundProgressBar();
     g_setButtons();
 
-    onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION;
+    onPlay.player.currentTime = onPlay.player.duration - PLAY_DURATION < 0 ? 0 : onPlay.player.duration - PLAY_DURATION; //Permette di impostare la durata su PLAY_DURATION
     onPlay.player.play();
 }
 
-
+/*
+* Prepara l'autoplay
+*/
 function setAutoplay() {
-    if(onPlay == null)
+     if(onPlay == null)
         return;
     onPlay.player.addEventListener("pause",startTimerCallback);
 }
 
+/*
+* Imposta l'autoplay quando finisce la riproduzione
+*/
 function startTimerCallback() {
     if(isEnded())
         ended();
@@ -146,7 +222,9 @@ function startTimerCallback() {
     autoTimer = setTimeout(play,AUTOPLAY_DURATION*1000);
 }
 
-
+/*
+* Viene attivata dal click su di una canzone: interrompe la riproduzione, controlla se è finito
+*/
 function stopPlay(id) {
     if(!isPlaying())
         return;
@@ -157,7 +235,9 @@ function stopPlay(id) {
     ended();
 }
 
-
+/*
+* Viene chiamata alla fine della partita: invia il punteggio e aggiorna la grafica
+*/
 function ended() {
     if(!isEnded())
         return;
@@ -167,46 +247,10 @@ function ended() {
 
 }
 
-function getPlaylistsCallback(playlists_result,status) {
-    if(status !== "success"){
-        console.log("Errore Caricamento Playlists");
-        g_notification("Errore caricamento. Ricarica la pagina");
-        return;
-    }
-    playlists = playlists_result;
-    loadRandomPlaylist();
-}
-
-
-
-function loadRandomPlaylist() {
-    function loadPlaylistCallback(res,status){
-        if(status !== "success"){
-            console.warn("Errore caricamento Playlist da Spotify\n Risultato: " + res);
-            loadRandomPlaylist();
-            return;
-        }
-        if(res.items.length < 40){
-            console.warn("Playlist troppo corta: " + res.items.length);
-            loadRandomPlaylist();
-            return;
-        }
-        loadTracks(res.items);
-    }
-
-    let playlist = getRandomPlaylist();
-    if(playlist == null){
-        console.error("Nessuna playlist utilizzabile");
-        g_notification("Caricamento playlist non riuscito, riprova o cambia modalità");
-        return;
-    }
-    api.getPlaylistTracks(playlist,loadPlaylistCallback);
-}
 
 
 /*
 * UTILS
-*
 */
 
 function isPlaying() {
