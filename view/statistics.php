@@ -1,11 +1,23 @@
 <div class="row m-0">
-    <div class="col-12">
-        <div class="m-5" style="height: 25vh;">
+
+
+<!--        <div class="row m-0">-->
+            <div class="jumbotron m-0 m-md-5" style="height: 30vh; opacity: 80%;">
                 <div class="row justify-content-center" id="d-0"> Scala le classifiche per diventare il Campione ! </div>
                 <div class="row justify-content-center secondary-text-statistics"  id="d-1"> Gioca con le playlist piu in voga</div>
                 <div class="row justify-content-center secondary-text-statistics"  id="d-2"> Scegli il genere che preferisci </div>
                 <div class="row justify-content-center secondary-text-statistics"  id="d-3"> Mostra di che pasta sei fatto! </div>
-        </div>
+            </div>
+<!--        </div>-->
+<!--        <div class="m-5" style="height: 25vh;">-->
+<!--                <div class="row justify-content-center" id="d-0"> Scala le classifiche per diventare il Campione ! </div>-->
+<!--                <div class="row justify-content-center secondary-text-statistics"  id="d-1"> Gioca con le playlist piu in voga</div>-->
+<!--                <div class="row justify-content-center secondary-text-statistics"  id="d-2"> Scegli il genere che preferisci </div>-->
+<!--                <div class="row justify-content-center secondary-text-statistics"  id="d-3"> Mostra di che pasta sei fatto! </div>-->
+<!--        </div>-->
+
+
+    <div class="col-12">
 
         <div class="m-5" style="">
             <div class="row justify-content-center">
@@ -27,7 +39,9 @@
                 <div class="col-12 col-sm-12 col-md-6" id="rank"></div>
             </div>
         </div>
-   </div>
+
+    </div>
+
 </div>
 
 <script src="js/statistics.js"></script>
