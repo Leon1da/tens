@@ -134,12 +134,14 @@ function play() {
 
 
 function setAutoplay() {
-    if(onPlay == null || songs_objs.length < 1)
+    if(onPlay == null)
         return;
     onPlay.player.addEventListener("pause",startTimerCallback);
 }
 
 function startTimerCallback() {
+    if(isEnded())
+        ended();
     g_startAutoplayProgressBar();
     autoTimer = setTimeout(play,AUTOPLAY_DURATION*1000);
 }
