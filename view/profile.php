@@ -73,9 +73,9 @@ if(isset($_SESSION['session_id'])){
         // all score
 
         $all_score_query = "
-        SELECT sum(score) as total, sum(vittoria) as vittorie, sum(numero_domande) as domande, sum(esatte) as esatte, sum(errate) as errate
-        FROM games
-        WHERE user = :user_id
+        SELECT sum(score) as total, sum(vittoria) as vittorie, sum(esatte) as esatte, sum(errate) as errate
+        FROM games g
+        WHERE g.user = :user_id
         ";
 
         $check = $pdo->prepare($all_score_query);
@@ -88,7 +88,7 @@ if(isset($_SESSION['session_id'])){
         $best_score_query = "
         SELECT MAX(score) as score ,esatte as esatte, errate as errate, c.nome as categoria
         FROM games g JOIN category c ON g.categoria = c.id 
-        WHERE user = :user_id
+        WHERE g.user = :user_id
         ";
 
         $check = $pdo->prepare($best_score_query);
@@ -97,8 +97,7 @@ if(isset($_SESSION['session_id'])){
         $best_score_result = $check->fetchAll(PDO::FETCH_ASSOC);
 
 
-        if(count($all_score_result)>0){
-
+        if(strlen($all_score_result[0]['total'])>0){
         ?>
         Totale di sempre
         <div class="row">
@@ -120,8 +119,8 @@ if(isset($_SESSION['session_id'])){
         </div>
         <?php
         }
-        if(count($best_score_result)>0) {
-        ?>
+        if(strlen($best_score_result[0]['score'])>0) {
+            ?>
         Partita migliore
         <div class="row">
             <button type="button" class="btn" style="background-color: transparent;">
@@ -137,15 +136,14 @@ if(isset($_SESSION['session_id'])){
             </button>
 
             <button type="button" class="btn" style="background-color: transparent;">
-                Gategoria: <span class="badge badge-light"><?php echo $best_score_result[0]['categoria']; ?></span>
+                Categoria: <span class="badge badge-light"><?php echo $best_score_result[0]['categoria']; ?></span>
             </button>
         </div>
 
         <?php
+        }else{
+            echo "Non hai ancora effettuato nessuna partita. <br> Cosa aspetti?";
         }
-        if(count($best_score_result)==0 && count($all_score_result)==0){
-                echo "Non hai ancora effettuato nessuna partita. <br> Cosa aspetti?";
-            }
     }
 }
 

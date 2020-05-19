@@ -265,7 +265,8 @@ profile modal
 
 /*// Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-    #d-0{font-size: 1.5rem;
+    #d-0{
+        font-size: 1.8rem;
     }
     .secondary-text-statistics{
         font-size: 1.2rem;
@@ -357,4 +358,15 @@ profile modal
     /*body{*/
     /*    color: green;*/
     /*}*/
+}
+
+
+#rank-pos-1{
+    background-color: #ffd700 ;
+}
+#rank-pos-2{
+    background-color: #c0c0c0;
+}
+#rank-pos-3{
+    background-color: #cd7f32;
 }

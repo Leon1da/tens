@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v87">
+    <link rel="stylesheet" href="css/style.css?v90">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -274,7 +274,13 @@
             $("#main-content").load(url, function () {
                 anchor.parent().addClass("active"); // active new anchor
                 old_active.removeClass("active"); // de-active old anchor
-                $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                if (//window.matchMedia("(max-width: 576px)").matches ||
+                    // window.matchMedia("(max-width: 768px)").matches ||
+                    window.matchMedia("(max-width: 992px)").matches) {
+                    $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                }
 
             });
         });
@@ -313,7 +319,12 @@
                         // chiudo il pannello di login
                         $("#btn-close-login").click();
 
-                        $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+                        if (//window.matchMedia("(max-width: 576px)").matches ||
+                            // window.matchMedia("(max-width: 768px)").matches ||
+                            window.matchMedia("(max-width: 992px)").matches) {
+                            $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                        }
 
                         // setto timer che fa chiudere il messaggio
                         setTimeout(function () {
@@ -387,7 +398,12 @@
                     $("#btn-close-signup").click();
 
 
-                    $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+                    if (//window.matchMedia("(max-width: 576px)").matches ||
+                        // window.matchMedia("(max-width: 768px)").matches ||
+                        window.matchMedia("(max-width: 992px)").matches) {
+                        $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                    }
 
                     // setto timer che fa chiudere il messaggio
                     setTimeout(function () {
@@ -436,16 +452,16 @@
 
         // carica la classifica ogni volta che viene selezionata una nuova categoria
         $(document).on('change','select', function() {
-            var category = $("select option:selected").text();
+            var category = $("#category option:selected").text(); //selected category
+            var query_option = $("#category-query-option option:selected").val(); //selected option
             // non riesco a capire per quale motivo il testo dell'option selezionato
             // e` <nome_catogoria>Scegli, quindi faccio un substring per rimuovere
             // la parte inutile
-            category = category.substring(0, category.length - 6);
             // alert(category);
             var request = $.ajax({
                 type: "POST",
                 url: "view/elements/GetRankingTable.php",
-                data: {category: category},
+                data: {category: category, option: query_option},
                 dataType: "html"
             });
             request.done( function (response) {
