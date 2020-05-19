@@ -33,6 +33,7 @@ Game
 - [x] Raggae correzione
 - [ ] Pulsante esci in small screen
 - [ ] Cache
+- [ ] bug se non si risponde alla domanda finale e finisce il tempo
 
 Profilo
 - [ ] Totale partite
