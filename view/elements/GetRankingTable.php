@@ -23,7 +23,7 @@ else echo "<h6>Nessuno si e` ancora classificato in <b>".$category."</b> <br> Ch
 // stampa la risposta del db in formato tabellare
 function printRankingTable($vector, $option){
     $table='
-    <table class="table table-hover table-sm table-md table-xl">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -42,10 +42,23 @@ function printRankingTable($vector, $option){
         <tbody id="table_body_content">';
 
     // stampo riga per riga la classifica
-    $i = 1;
+    $pos = 1;
     foreach ($vector as $row) {
-        $table .= '<tr id="rank-pos-'.$i.'">';
-        $table .= '<th scope="row">' . $i . '</th>';
+        $table .= '<tr>';
+        switch ($pos){
+            case 1:
+                $table .= '<th scope="row"><img src="resources/1st.svg" alt="" width="32" height="32"></th>';
+                break;
+            case 2:
+                $table .= '<th scope="row"><img src="resources/2nd.svg" alt="" width="32" height="32"></th>';
+                break;
+            case 3:
+                $table .= '<th scope="row"><img src="resources/3nd.svg" alt="" width="32" height="32"></th>';
+                break;
+            default:
+                $table .= '<th scope="row">&nbsp;&nbsp;'.$pos.'</th>';
+                break;
+        }
         $table .= '<td>' . $row['username'] . '</td>';
         $table .= '<td>' . $row['tot_score'] . '</td>';
         $table .= '<td>' . $row['tot_esatte'] . '</td>';
@@ -54,7 +67,7 @@ function printRankingTable($vector, $option){
             $table .= '<td>' . $row['tot_vittorie'] . '</td>';
         }
         $table .= '</tr>';
-        $i++;
+        $pos++;
     }
     $table.='</tbody> </table>';
     return $table;

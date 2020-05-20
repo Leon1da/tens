@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v93">
+    <link rel="stylesheet" href="css/style.css?v94">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -23,14 +23,14 @@
 </head>
 <body>
 
-<img src="resources/logov3.svg" id="bg" alt="">
+<img src="resources/logo_background_black.svg" id="bg" alt="">
 
  <!-- Header -->
 
  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
 
      <a class="navbar-brand" id="logo" href="#home">
-         <img src="resources/B.svg" width="31" height="23" class="d-inline-block align-top" alt="">
+         <img src="resources/logo_navbar.svg" width="31" height="23" class="d-inline-block align-top" alt="">
 <!--         Ten's-->
      </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -232,7 +232,7 @@
     $(document).ready(function () {
         setTimeout(function () {
             $("#bg").fadeIn(1000);
-        },3000);
+        },3500);
     });
 </script>
 

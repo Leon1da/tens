@@ -18,6 +18,8 @@ $(document).ready(function() {
                 dataType: "html"
             });
             request.done(function (response) {
+                // se necessario, effettuo il salvataggio dei dati della partita effettuata come guest
+                s_localstore_check();
                 // alert(response);
                 // visualizzo risultato
                 //rimosso perche non devo visualizzare nulla
