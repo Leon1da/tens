@@ -2,19 +2,20 @@
 require('../../model/database.php');
 
 $category = $_POST["category"] ?? '';
+
 // 0 tutte le partite
 // 1 il migliore
 $option = $_POST["option"] ?? '';
 
 // verifico se la categoria richiesta esiste
-$query = "SELECT nome FROM category WHERE nome = :category";
+$query = "SELECT id,nome FROM category WHERE nome = :category";
 $check = $pdo->prepare($query);
 $check->bindParam(':category', $category, PDO::PARAM_STR);
 $check->execute();
 $categories = $check->fetchAll(PDO::FETCH_ASSOC);
 
 
-if (count($categories) > 0) $result = getPlayersRank($pdo,$category,$option);
+if (count($categories) > 0) $result = getPlayersRank($pdo,$categories[0]['id'],$option);
 else $result = getPlayersRank($pdo,null,$option);
 
 if(count($result)>0) echo printRankingTable($result,$option);
@@ -73,71 +74,45 @@ function printRankingTable($vector, $option){
     return $table;
 }
 
-function getPlayersRank($pdo, $category, $option){
-    if($category!=null){
-        // categoria ESISTE nel database
-        // carico Rankin Globale per categoria
-        if($option == 1){
-            // migliore partita (miglior punteggio)
-            $query = "
-                SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte,
-                    g.errate as tot_errate
-                FROM games g JOIN users u on g.user = u.id
-                    JOIN category c on g.categoria = c.id
-                WHERE c.nome = :categoria
-                GROUP BY g.user
-                ORDER BY tot_score DESC
-                ";
-            }else{
-            //tutte le partite (somma punteggi)
-            $query = "
-                SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
-                    sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie
-                FROM games g JOIN users u on g.user = u.id
-                    JOIN category c on g.categoria = c.id
-                WHERE c.nome = :categoria
-                GROUP BY g.user
-                ORDER BY tot_score DESC
-                ";
-        }
+function getPlayersRank($pdo, $category_id, $option){
 
-        $check = $pdo->prepare($query);
-        $check->bindParam(':categoria', $category, PDO::PARAM_STR);
-        $check->execute();
-        $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    $query = "";
+    if($option == 1){
+        // migliore partita di sempre (max(score))
+        $query .= "SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte, g.errate as tot_errate ";
 
+    }else{
+        // somma tutte le partite (sum(score) per giocatore))
+        $query .= "SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
+                    sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie ";
     }
-    else{
-        // categoria NON ESISTE nel database
-        // carico Rankin Globale (per tutte le categorie)
-        if($option == 1){
-            $query = "
-                SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte,
-                    g.errate as tot_errate
-                FROM games g JOIN users u on g.user = u.id
-                    JOIN category c on g.categoria = c.id
-                GROUP BY g.user
-                ORDER BY tot_score DESC
-            ";
-        }else{
-            $query = "
-                SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
-                    sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie
-                FROM games g JOIN users u on g.user = u.id
-                    JOIN category c on g.categoria = c.id
-                GROUP BY g.user
-                ORDER BY tot_score DESC
-            ";
-        }
 
+    $query .= "FROM games g JOIN users u on g.user = u.id JOIN category c on g.categoria = c.id ";
 
-        $check = $pdo->prepare($query);
-        $check->execute();
-        $result = $check->fetchAll(PDO::FETCH_ASSOC);
-
+    if($category_id!=null){
+        // filtro per categoria
+        $query .= "WHERE g.categoria = :categoria_id ";
+        $query .= "GROUP BY u.username, g.categoria ";
+    }else{
+        $query .= "GROUP BY u.username ";
     }
-    return $result;
+
+
+    $query .= "ORDER BY tot_score DESC ";
+
+    $check = $pdo->prepare($query);
+    if($category_id!=null){
+        $check->bindParam(':categoria_id', $category_id, PDO::PARAM_STR);
+    }
+    $check->execute();
+    return $check->fetchAll(PDO::FETCH_ASSOC);
 }
+
+//SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte, g.errate as tot_errate
+//FROM games g JOIN users u on g.user = u.id JOIN category c on g.categoria = c.id
+//WHERE c.nome = :categoria
+//GROUB BY u.username
+//ORDER BY tot_score DESC
 
 
 ?>

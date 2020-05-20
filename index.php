@@ -91,7 +91,7 @@
 
 
  <!-- Profile Modal -->
- <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content hide-my-profile-modal" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+ <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content hide-my-profile-modal" style="z-index: 200;" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
      <div class="modal-header">
          <h5 class="modal-title" id="exampleModalCenterTitle">Profilo</h5>
          <button type="button" class="close"  id="close-profile-modal" data-dismiss="modal" aria-label="Close">

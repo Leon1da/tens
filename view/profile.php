@@ -76,6 +76,7 @@ if(isset($_SESSION['session_id'])){
         SELECT sum(score) as total, sum(vittoria) as vittorie, sum(esatte) as esatte, sum(errate) as errate
         FROM games g
         WHERE g.user = :user_id
+        GROUP BY g.user
         ";
 
         $check = $pdo->prepare($all_score_query);
@@ -89,6 +90,7 @@ if(isset($_SESSION['session_id'])){
         SELECT MAX(score) as score ,esatte as esatte, errate as errate, c.nome as categoria
         FROM games g JOIN category c ON g.categoria = c.id 
         WHERE g.user = :user_id
+        GROUP BY g.user 
         ";
 
         $check = $pdo->prepare($best_score_query);
