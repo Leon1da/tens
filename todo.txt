@@ -2,7 +2,7 @@
 Tens
 Generale
 - [ ] Commentare codice?
-- [ ] Traduzioni
+- [ V ] Traduzioni
 - [ ] Organizzazione codice e pulizia
 - [ ] Messaggi login dentro il modal (piu complicato del previsto)
 
@@ -32,10 +32,10 @@ Statistiche
 - [ ] Miglior score
 
 Game
-- [x] Raggae correzione
-- [ ] Pulsante esci in small screen
-- [ ] Cache
-- [ ] bug se non si risponde alla domanda finale e finisce il tempo
+- [ V ] Raggae correzione
+- [ V ] Pulsante esci in small screen
+- [ V ] Cache
+- [ V ] bug se non si risponde alla domanda finale e finisce il tempo
 
 Profilo
 - [ ] Totale partite

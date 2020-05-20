@@ -20,6 +20,8 @@
 
     <title>Ten's</title>
 
+    <link rel="shortcut icon" href="resources/favicon.ico">
+
 </head>
 <body>
 
