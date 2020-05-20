@@ -1,13 +1,14 @@
-var statsData;
-var toSave = false;
+var statsData; //Punteggi della partita in corso
 
 let bonus; //risposte corrette di seguito
 
 const timeMultiplier = 100; //Moltiplicatore del punteggio del tempo
 
+/*
+* Inizializza i dati
+*/
 function s_init(category,total = 10) {
     bonus = 1;
-    toSave = false;
     statsData = {
         category: category.nome,
         multiplier: category.moltiplicatore,
@@ -19,9 +20,13 @@ function s_init(category,total = 10) {
         total: total,
         start: Date.now()/1000,
         stop: 0,
+        isOld: false,
     }
 }
 
+/*
+* Aggiorna i dati e calcola i punteggi
+*/
 function s_update(correct,remainingTime) {
     if(!correct){
         bonus = 1;
@@ -39,8 +44,10 @@ function s_update(correct,remainingTime) {
     return {score: score,timeBonus:timeBonus};
 }
 
+/*
+* Invia al webserver i dati o li salva se non è stato effettuato il login
+*/
 function s_send() {
-    toSave = true;
     statsData.missed = statsData.total - statsData.correct - statsData.wrong;
     statsData.victory = statsData.correct > 5 ? 1 : 0;
     statsData.stop = Date.now()/1000;
@@ -49,10 +56,42 @@ function s_send() {
         type: 'POST',
         data: statsData,
         dataType : "text",
-        success: data => {
-            if(data === "done")
-                toSave = false;
-            g_saveStats(data);
+        success: response => {
+            if(response === "login"){
+                if(!statsData.isOld)
+                    g_saveStats(response);
+                statsData.isOld = true;
+                s_localstore_add();
+                return;
+            }
+            if(response === "done"){
+                g_saveStats(statsData.isOld ? "old" : "done");
+                s_localstore_remove();
+            }
             },
     });
+}
+
+/*
+* Aggiunge al localstorage il punteggio
+*/
+function s_localstore_add() {
+    localStorage.setItem("oldStats",JSON.stringify(statsData));
+}
+
+/*
+* Rimuove dal localstorage eventuali punteggi pregressi
+*/
+function s_localstore_remove() {
+    localStorage.removeItem("oldStats");
+}
+
+/*
+* Controlla se ci sono punteggi da salvare ed eventualmente li salva
+*/
+function s_localstore_check() {
+    let data = localStorage.getItem("oldStats");
+    if(data === null) return;
+    statsData = JSON.parse(data);
+    s_send();
 }

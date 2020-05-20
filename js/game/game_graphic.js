@@ -1,7 +1,8 @@
-const FADE_TIME = 100;
+const FADE_TIME = 100; //Tempo in ms per l'effetto "cambio punteggio mostrato"
 
 /*
-*
+* Inserisce i titoli delle categorie nel selettore.
+* Se impostato un localstorage lo apre in automatico sull'ultima categoria selezionata
 */
 function g_initCategories() {
     $(function () {
@@ -20,6 +21,9 @@ function g_initCategories() {
     });
 }
 
+/*
+* Aggiunge le funzioni callback ai vari pulsanti
+*/
 function g_initSelectors() {
     $("#normale_btn").on("click", () => {
         $("#selettore_categoria_collapse").collapse("hide");
@@ -42,6 +46,9 @@ function g_initSelectors() {
 
 }
 
+/*
+* Imposta il pulsante gioca su "gioca" e lo rende cliccabile
+*/
 function g_ready() {
     $(function () {
         $("#gioca_btn")
@@ -53,6 +60,9 @@ function g_ready() {
     });
 }
 
+/*
+* imposta il pulsante gioca su "caricamento"
+*/
 function g_notReady() {
     $(function () {
         $("#gioca_btn")
@@ -61,6 +71,9 @@ function g_notReady() {
     });
 }
 
+/*
+* Chiamata all'avvio del gioco imposta il pulsante gioca su "esci"
+*/
 function g_start() {
     $(function () {
         $('#partita-tab').tab('show');
@@ -73,6 +86,9 @@ function g_start() {
     });
 }
 
+/*
+* Reset della grafica a causa del click su "esci" o su "rigioca"
+*/
 function g_stop() {
     $(function () {
         g_setGameProgressBar(0);
@@ -82,6 +98,9 @@ function g_stop() {
     })
 }
 
+/*
+* Imposta i pulsanti di scelta
+*/
 function g_setButtons() {
     $(function () {
         for(let i = 0;i<4;i++){
@@ -99,6 +118,12 @@ function g_setButtons() {
     });
 }
 
+/*
+* Gestisce le animazioni e i dati visualizzati nella zona punteggio
+* Parametri:
+*   score = punteggio intermedio
+*   timeScore = bonus tempo
+*/
 function g_updateScore(score,timeScore) {
     $(function () {
         let text_obj = $("#punteggio_testo");
@@ -130,7 +155,9 @@ function g_updateScore(score,timeScore) {
     });
 }
 
-
+/*
+* Mostra il riquadro finale con il punteggio finale
+*/
 function g_endGame(){
     $(function () {
         let title;
@@ -155,6 +182,11 @@ function g_endGame(){
     })
 }
 
+/*
+* Mostra un messaggio contenente un feedback sul salvataggio della partita
+* Parametri:
+*   response = è la risposta dal web server, può essere null se è una chiamata interna e la risposta non è ancora arrivata
+*/
 function g_saveStats(response = null) {
     $(function () {
         $("#notifiche_titolo").text("Salvataggio");
@@ -170,6 +202,9 @@ function g_saveStats(response = null) {
             case "login":
                 notifiche.html('Effettua il login per salvare i risultati');
                 break;
+            case "old":
+                notifiche.html('Salvataggio partita precedente riuscito');
+                break;
             default:
                 notifiche.html('Errore salvataggio');
         }
@@ -177,6 +212,9 @@ function g_saveStats(response = null) {
     })
 }
 
+/*
+* Mostra un messaggio che notifica all utente eventuali errori
+*/
 function g_notification(msg) {
     $(function () {
         let toast = $(".my-toast");
@@ -188,7 +226,11 @@ function g_notification(msg) {
 }
 
 
-
+/*
+* Imposta la progress bar della partita sul valore progress
+* Parametri:
+*   Progress = progresso da 1 a 10
+*/
 function g_setGameProgressBar(progress) {
     let percent = (progress * 10) + "%";
     $(function () {
@@ -196,6 +238,9 @@ function g_setGameProgressBar(progress) {
     })
 }
 
+/*
+* Imposta la progress bar del round all 100% e la riduce progressivamente
+*/
 function g_startRoundProgressBar() {
     $(function () {
         $("#progresso_round")
@@ -205,6 +250,9 @@ function g_startRoundProgressBar() {
     })
 }
 
+/*
+* Imposta la progress bar del round durante l'attesa dell'autoplay
+*/
 function g_startAutoplayProgressBar() {
     $(function () {
         $("#progresso_round")

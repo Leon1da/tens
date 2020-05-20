@@ -224,6 +224,7 @@
  <script src="js/model_view.js"></script>
  <script src="js/menus.js"></script>
  <script src="js/modals.js"></script>
+<script src="js/game/game_stats.js" type="text/javascript"></script>
 
 <script>
     $("#bg").hide();

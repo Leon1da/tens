@@ -17,6 +17,7 @@ const AUTOPLAY_DURATION = 3; //in secondi
 * Inizia il primo caricamento del gioco, viene chiamata solo all'apertura della pagina gioca
 */
 function firstLoad() {
+    s_localstore_check();
     g_notReady();
     g_initSelectors();
     getAccessToken();
@@ -232,7 +233,6 @@ function stopPlay(id) {
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
     let result = s_update(id===correct,timeLeft);
     g_updateScore(result.score,result.timeBonus);
-    ended();
 }
 
 /*

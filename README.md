@@ -1,8 +1,6 @@
-# LTW
+# Ten's - Linguaggi e tecnologie per il web 
 
-https://ltw.plexoo.duckdns.org
+https://tens.plexoo.duckdns.org
 
 SQL:
-https://ltw.plexoo.duckdns.org/phpmyadmin
-User: admin
-Pass: Y8CzvisLTNjk
+https://tens.plexoo.duckdns.org/phpmyadmin
