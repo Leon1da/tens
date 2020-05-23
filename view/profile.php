@@ -27,7 +27,7 @@ if(isset($_SESSION['session_id'])){
         <br>
 
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Nome</div>
@@ -35,7 +35,7 @@ if(isset($_SESSION['session_id'])){
                     <input type="text" class="form-control" placeholder="<?php echo $user['nome']; ?>" readonly>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Cognome</div>

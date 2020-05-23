@@ -28,7 +28,7 @@
 <img src="resources/logo_background_black.svg" id="bg" alt="">
 
  <!-- Header -->
-
+<!-- fixed-top -->
  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
 
      <a class="navbar-brand" id="logo" href="#home">
@@ -91,7 +91,7 @@
 
 
  <!-- Profile Modal -->
- <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-6 modal-content hide-my-profile-modal" style="z-index: 200;" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+ <div class="col-12 offset-md-4 col-md-4 offset-sm-2 col-sm-8 modal-content hide-my-profile-modal mt-5" style="z-index: 200;" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
      <div class="modal-header">
          <h5 class="modal-title" id="exampleModalCenterTitle">Profilo</h5>
          <button type="button" class="close"  id="close-profile-modal" data-dismiss="modal" aria-label="Close">
@@ -103,7 +103,7 @@
      </div>
  </div>
 
- <div id="main-content">
+ <div class="" id="main-content">
 
  </div>
 
@@ -226,7 +226,7 @@
 
  <script src="js/main.js"></script>
  <script src="js/model_view.js"></script>
- <script src="js/menus.js"></script>
+ <script src="js/menus.js?v2"></script>
  <script src="js/modals.js"></script>
  <script src="js/game/game_stats.js" type="text/javascript"></script>
 

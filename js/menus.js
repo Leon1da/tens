@@ -11,15 +11,22 @@ $(document).ready(function() {
                 $("#profile-modal").removeClass("hide-my-profile-modal");
                 var url = "view/profile.php";
                 $("#profile-modal-body").load(url);
+                if (window.matchMedia("(max-width: 992px)").matches) {
+                    $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
+
+                }
+
                 break;
             case "#logout":
                 var url = "model/logout.php";
                 $.get(url, function (response) {
                     $("#main-content").prepend(response);
                 });
-
                 $("#profile-modal").addClass("hide-my-profile-modal");
+                if (window.matchMedia("(max-width: 992px)").matches) {
+                    $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
 
+                }
                 break;
         }
     });
