@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v99">
+    <link rel="stylesheet" href="css/style.css?v100">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -216,7 +216,6 @@
 
 </div>
 
- <!-- Optional JavaScript -->
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -229,7 +228,8 @@
  <script src="js/model_view.js"></script>
  <script src="js/menus.js"></script>
  <script src="js/modals.js"></script>
-<script src="js/game/game_stats.js" type="text/javascript"></script>
+ <script src="js/game/game_stats.js" type="text/javascript"></script>
+
 
 <script>
     $("#bg").hide();

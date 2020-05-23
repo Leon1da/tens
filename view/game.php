@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Gioca | Ten's</title>
-    <script src="js/game/spotify_api.js" type="text/javascript"></script>
-    <script src="js/game/game.js" type="text/javascript"></script>
-    <script src="js/game/game_objects.js" type="text/javascript"></script>
-    <script src="js/game/game_graphic.js" type="text/javascript"></script>
+    <script src="js/game/spotify_api.js?v2" type="text/javascript"></script>
+    <script src="js/game/game.js?v2" type="text/javascript"></script>
+    <script src="js/game/game_objects.js?v2" type="text/javascript"></script>
+    <script src="js/game/game_graphic.js?v2" type="text/javascript"></script>
 </head>
 <body>
 
