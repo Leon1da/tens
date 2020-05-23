@@ -11,6 +11,7 @@ function Song(url,name,artist,image) {
     this.player = document.createElement("audio");
     this.player.src = url;
     this.player.setAttribute("preload","true");
+    this.player.autoplay = true;
 
 }
 
