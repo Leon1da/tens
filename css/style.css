@@ -12,6 +12,11 @@
     --medium-blur-color: rgba(85, 130, 139, .25);
     --dark-blur-color: rgba(2, 108, 124, .25);
     --darker-blur-color: rgba(5, 88, 100, .25);
+
+    --correct-color: rgba(105,181,120,1);
+    --wrong-color: rgba(140, 28, 19, 1);
+    --correct-blur-color: rgba(105,181,120, .25);
+    --wrong-blur-color: rgba(140, 28, 19, .25);
 }
 
   #bg {
@@ -251,16 +256,32 @@ Game page
     width: 0;
 }
 
-.media {
+.media-custom {
     background-color: var(--light-blur-color);
 }
 
-.media:hover, .media:active {
+.media-custom:hover, .media-custom:active {
     background-color: var(--medium-color);
 }
 
-.media:hover h5, .media:hover p {
+.media-custom:hover h5, .media-custom:hover p {
     color: white !important;
+}
+
+.media-custom-correct {
+    background-color: var(--correct-blur-color);
+}
+
+.media-custom-correct:hover, .media-custom-correct:active {
+    background-color: var(--correct-color);
+}
+
+.media-custom-wrong {
+    background-color: var(--wrong-blur-color);
+}
+
+.media-custom-wrong:hover, .media-custom-wrong:active {
+    background-color: var(--wrong-color);
 }
 
 /* End game page */

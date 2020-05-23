@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="ricomincia_finale_btn">Rigioca</button>
+                <button type="button" class="btn btn-primary rounded-pill" id="ricomincia_finale_btn">Rigioca</button>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                                         <li>Genere: Gioca con il tuo genere preferito e fai capire agli altri che sei il migliore.</li>
                                     </ul>
                                     <p>
-                                        Seleziona gioca per iniziare subito o cambia la modalità di gioco. <br>
+                                        Seleziona "gioca" per iniziare subito o cambia la modalità di gioco. <br>
                                         Buona fortuna!
                                     </p>
 
@@ -171,7 +171,7 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-sm-6 my-1 mb-sm-3">
-                                            <div class="media rounded shadow p-2">
+                                            <div class="media rounded shadow p-2 media-custom" id="media0">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover0" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo0"></h5>
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 my-1 mb-sm-3">
-                                            <div class="media rounded shadow p-2">
+                                            <div class="media rounded shadow p-2 media-custom" id="media1">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover1" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo1"></h5>
@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 my-1">
-                                            <div class="media rounded shadow p-2">
+                                            <div class="media rounded shadow p-2 media-custom" id="media2">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover2" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo2"></h5>
@@ -203,7 +203,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 my-1">
-                                            <div class="media rounded shadow p-2">
+                                            <div class="media rounded shadow p-2 media-custom" id="media3">
                                                 <img class="align-self-center mr-3 h-25 w-25 rounded" id="cover3" src="./resources/Transparent.png" alt="Cover">
                                                 <div class="media-body align-self-center">
                                                     <h5 class="text-dark" id="titolo3"></h5>

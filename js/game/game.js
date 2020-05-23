@@ -233,6 +233,7 @@ function stopPlay(id) {
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
     let result = s_update(id===correct,timeLeft);
     g_updateScore(result.score,result.timeBonus);
+    g_updateButtons(correct);
 }
 
 /*
