@@ -77,6 +77,7 @@ function g_notReady() {
 function g_start() {
     $(function () {
         $('#partita-tab').tab('show');
+        $('#punteggio_valore').text(0);
         $("#gioca_btn")
             .text("Esci")
             .one("click",stopGame)
