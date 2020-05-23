@@ -71,16 +71,27 @@ $(document).ready(function() {
 // load registration modal when sign-up btn is clicked
     $("#register-btn").click(function () {
         clearRegistrationModalMessage();
+
         // html form validation
         // $("#register-form").reportValidity();
         if ($("#register-form")[0].checkValidity()) {
+
             var nome = $("#name-reg").val();
             var cognome = $("#surname-reg").val();
             var email = $("#email-reg").val();
             var sesso = $("#sesso-reg").val();
-
             var username = $("#username-reg").val();
+
             var password = $("#password-reg").val();
+            var password_check = $("#password-reg-check").val();
+
+            if(password != password_check) {
+                // la password non corrisponde
+                $(".form-msg").append("Le password devono corrispondere.<br>");
+                $("#password-reg-check").addClass("border border-danger");
+                $("#password-reg").addClass("border border-danger");
+                return;
+            }
 
             // alert(nome + " " + cognome + " " + email  + " " + sesso + " " + username + " " + password);
 
@@ -119,6 +130,7 @@ $(document).ready(function() {
 
             });
 
+
         } else {
             if (!$("#name-reg")[0].checkValidity()) {
                 $("#name-reg").addClass("border border-danger");
@@ -137,18 +149,19 @@ $(document).ready(function() {
 
             if (!$("#username-reg")[0].checkValidity()) {
                 $("#username-reg").addClass("border border-danger");
-                $(".form-msg").append("username: almeno 8, massimo 30 caratteri<br>");
+                $(".form-msg").append("username: almeno 3, massimo 30 caratteri<br>");
             }
-
             if (!$("#password-reg")[0].checkValidity()) {
                 $("#password-reg").addClass("border border-danger");
                 $(".form-msg").append("password: almeno 8, massimo 30 caratteri<br>");
 
             }
+            if (!$("#password-reg-check")[0].checkValidity()) {
+                $("#password-reg-check").addClass("border border-danger");
+                $(".form-msg").append("conferma password: almeno 8, massimo 30 caratteri<br>");
 
+            }
         }
-
-
     });
 
 // on register modal close
@@ -164,6 +177,7 @@ $(document).ready(function() {
         $("#email-reg").removeClass("border border-danger");
         $("#username-reg").removeClass("border border-danger");
         $("#password-reg").removeClass("border border-danger");
+        $("#password-reg-check").removeClass("border border-danger");
 
     }
 

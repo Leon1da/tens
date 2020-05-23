@@ -163,7 +163,7 @@
                      </div>
                      <div class="form-group" style="margin-bottom: 0;">
                          <div class="row">
-                             <div class="col-md-7">
+                             <div class="col-md-7 mb-3">
                                  <input type="email" placeholder="Email*" id="email-reg" class="form-control"
                                         pattern="[\w-]+@([\w-]+\.)+[\w-]+" required>
                              </div>
@@ -188,10 +188,13 @@
                         <!-- Credenziali -->
 
                      <div class="form-group">
-                         <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username"  minlength="8" max="50" required>
+                         <input type="text" class="form-control" id="username-reg" placeholder="Username*" name="username"  minlength="3" maxlength="50" required>
                      </div>
                      <div class="form-group">
                          <input type="password" class="form-control" id="password-reg" placeholder="Password*" name="password"  minlength="8" maxlength="50" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="password" class="form-control" id="password-reg-check" placeholder="Conferma Password*" name="password-check"  minlength="8" maxlength="50" required>
                      </div>
                      <small class="form-text text-muted">
                          Utilizzeremo le informazioni che ci fornisci al solo scopo di mogliorare la tua esperienza di gioco.
