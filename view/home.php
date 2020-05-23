@@ -2,7 +2,7 @@
     <div class="col-12 ">
 
         <div class="row mb-5 h-75">
-            <div class="jumbotron col m-0 m-md-5" style=" max-height: 40vh; min-height: 20vh;z-index: 100; opacity: 80%">
+            <div class="jumbotron col m-0 m-md-5 shadow p-3 mb-5 rounded" style=" max-height: 40vh; min-height: 20vh;z-index: 100; opacity: 80%">
                 <!--        <img src="../resources/logo.svg" class="img-fluid" alt="Responsive image">-->
                 <div class="row" id="zero">Benvenuto su Ten's</div>
 

@@ -1,5 +1,5 @@
     <div class="w-100 h-30">
-        <div class="jumbotron h-30 m-md-5" style="height: 30vh; opacity: 80%;">
+        <div class="jumbotron h-30 m-md-5 shadow p-3 mb-5 rounded" style="height: 30vh; opacity: 80%;">
             <div class="row justify-content-center" id="d-0"> Scala le classifiche per diventare il Campione ! </div>
             <div class="row justify-content-center secondary-text-statistics"  id="d-1"> Gioca con le playlist piu in voga</div>
             <div class="row justify-content-center secondary-text-statistics"  id="d-2"> Scegli il genere che preferisci </div>
