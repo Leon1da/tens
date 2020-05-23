@@ -1,6 +1,6 @@
 
     <div class="row justify-content-center m-1">
-        <div class="card col-12 col-md-4 m-sm-5 " style="background-color: transparent;">
+        <div class="card col-12 col-md-3 m-sm-5 " style="background-color: transparent;">
             <img src="resources/hacker-vector-cartoon.png" class="card-img-top img-fluid" style="" alt="...">
             <div class="card-body" style="background-color: white;">
                 <h5 class="card-title">Francesco Tassone</h5>
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="card col-12 col-md-4 m-sm-5" style="background-color: transparent;">
+        <div class="card col-12 col-md-3 m-sm-5 mt-1" style="background-color: transparent;">
             <img src="resources/hacker-vector-cartoon.png" class="card-img-top img-fluid" style="" alt="...">
             <div class="card-body" style="background-color: white;">
                 <h5 class="card-title">Leonardo Ospizio</h5>
@@ -25,8 +25,8 @@
         </div>
     </div>
     <div class="row justify-content-center m-1">
-        <div class="w-auto mx-md-5">
-            <p> Vuoi segnalarci un bug, proporci una collaborazione o offrirci una birra?
+        <div class="w-auto m-2 mx-md-5">
+            <p> Vuoi segnalarci un bug, proporci una collaborazione o offrirci una birra?<br>
                 Contattaci, ti risponderemo il prima possibile.</p>
         </div>
 

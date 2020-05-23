@@ -136,16 +136,6 @@ body{
 /*
  Homepage
  */
-#home-play-btn{
- width: 20vw;
-
-}
-.jumbotron{
-    border-radius: 0rem;
-    opacity: 80%;
-    height: 50vh;
-    width: 100vw;
-}
 
 #first{
     margin-left: -100vw;
@@ -308,10 +298,6 @@ profile modal
 
 /*// Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-
-    .jumbotron{
-        height: 50vh;
-    }
 
     #d-0{
         font-size: 1.8rem;
