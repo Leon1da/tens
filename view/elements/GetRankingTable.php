@@ -80,7 +80,7 @@ function getPlayersRank($pdo, $category_id, $option){
     if($option == 1){
         // migliore partita di sempre (max(score))
         $query .= "SELECT u.username,
-                          g.score as tot_score, 
+                          MAX(g.score) as tot_score, 
                           g.esatte as tot_esatte, 
                           g.errate as tot_errate ";
 
@@ -101,9 +101,9 @@ function getPlayersRank($pdo, $category_id, $option){
         $query .= "WHERE g.categoria = :categoria_id ";
     }
 
-    if($option == 0){
+//    if($option == 0){
         $query .= "GROUP BY u.username ";
-    }
+//    }
 
     $query .= "ORDER BY tot_score DESC ";
 
