@@ -9,18 +9,23 @@ $password = $_POST['password'] ?? '';
 $email = $_POST['email'] ?? '';
 $sesso = $_POST['sesso'] ?? '';
 
+$name_size = strlen($nome);
+$cognome_size = strlen($cognome);
+$username_size = strlen($username);
+$password_size = strlen($password);
 
-$pwdLenght = mb_strlen($password);
 
 
-if (empty($username) || empty($password)) {
-//    $msg = 'Compila tutti i campi';
-//    printErrorMessage(Status::Warning, $msg);
-
-} elseif ($pwdLenght < 8 || $pwdLenght > 50) {
-//    $msg = 'Lunghezza minima password 8 caratteri.
-//            Lunghezza massima 20 caratteri.';
-//    printErrorMessage(Status::Warning, $msg);
+if (empty($nome) || empty($cognome) || empty($email) || empty($username) || empty($password)) {
+    printErrorMessage(Status::Warning, "Devi compilare tutti i campi obbligatori tutti i campi");
+}else if ($name_size < 8 || $name_size > 50) {
+    printErrorMessage(Status::Warning, "Il nome deve contenere almeno 3 caratteri e al massimo 50");
+}else if ($cognome_size < 8 || $cognome_size > 50) {
+    printErrorMessage(Status::Warning, "Il congnome deve contenere almeno 3 caratteri e al massimo 50");
+}else if ($username_size < 8 || $username_size > 50) {
+    printErrorMessage(Status::Warning, "l'username deve contenere almeno 3 caratteri e al massimo 50");
+}else if ($password_size < 8 || $password_size > 50) {
+    printErrorMessage(Status::Warning, "La password deve contenere almeno 8 caratteri e al massimo 50");
 } else {
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -38,8 +43,7 @@ if (empty($username) || empty($password)) {
     $user = $check->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($user) > 0) {
-        $msg = 'Username o email già in uso';
-        printErrorMessage(Status::Warning, $msg);
+        printErrorMessage(Status::Warning, "L'username scelto e` gia` in uso");
     } else {
         $query = "
             INSERT INTO users
@@ -56,11 +60,9 @@ if (empty($username) || empty($password)) {
         $check->execute();
 
         if ($check->rowCount() > 0) {
-            $msg = 'Registrazione eseguita con successo';
-            printErrorMessage(Status::Success,$msg);
+            printErrorMessage(Status::Success,"Registrazione eseguita con successo");
         } else {
-            $msg = 'La registrazione non e` andata a buon fine.';
-            printErrorMessage(Status::Error, $msg);
+            printErrorMessage(Status::Error, "La registrazione non e` andata a buon fine.");
         }
     }
 }

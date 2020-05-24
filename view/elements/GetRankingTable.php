@@ -75,30 +75,39 @@ function printRankingTable($vector, $option){
 }
 
 function getPlayersRank($pdo, $category_id, $option){
-
+//   SELECT u.username, c.nome, g.score, g.esatte FROM games g JOIN users u ON g.user = u.id JOIN category c ON c.id = g.categoria GROUP BY u.username, g.categoria ORDER BY g.score DESC
     $query = "";
     if($option == 1){
         // migliore partita di sempre (max(score))
-        $query .= "SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte, g.errate as tot_errate ";
+        $query .= "SELECT u.username,
+                          g.score as tot_score, 
+                          g.esatte as tot_esatte, 
+                          g.errate as tot_errate ";
 
     }else{
         // somma tutte le partite (sum(score) per giocatore))
-        $query .= "SELECT u.username, sum(g.score) as tot_score, sum(g.esatte) as tot_esatte,
-                    sum(g.errate) as tot_errate, sum(g.vittoria) as tot_vittorie ";
+        $query .= "SELECT u.username,
+                          sum(g.score) as tot_score, 
+                          sum(g.esatte) as tot_esatte,
+                          sum(g.errate) as tot_errate, 
+                          sum(g.vittoria) as tot_vittorie ";
     }
 
-    $query .= "FROM games g JOIN users u on g.user = u.id JOIN category c on g.categoria = c.id ";
+    $query .= "FROM games g JOIN users u on g.user = u.id ";
 
     if($category_id!=null){
         // filtro per categoria
+        $query .= "JOIN category c on g.categoria = c.id ";
         $query .= "WHERE g.categoria = :categoria_id ";
-        $query .= "GROUP BY u.username, g.categoria ";
-    }else{
+    }
+
+    if($option == 0){
         $query .= "GROUP BY u.username ";
     }
 
-
     $query .= "ORDER BY tot_score DESC ";
+
+//    echo $query;
 
     $check = $pdo->prepare($query);
     if($category_id!=null){
