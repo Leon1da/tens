@@ -1,13 +1,13 @@
 
 Tens
 Generale
-- [ ] Commentare codice?
+- [ V ] Commentare codice?
 - [ V ] Traduzioni
 - [ ] Organizzazione codice e pulizia
 - [ ] Messaggi login dentro il modal (piu complicato del previsto)
 
-- [ ? ] Cambio font non piace a safari (non la facciamo piu
-- [ ? ] Nome navbar
+- [ V ] Cambio font non piace a safari (non la facciamo piu
+- [ V ] Nome navbar
 
 - [ V ] Chiusura automatica messaggi top
 - [ V ] Chiusura automatica navbar
@@ -15,7 +15,7 @@ Generale
 - [ V ] Collegamento home logo
 - [ V ] Rimuovere multiplayer
 
-- [ ] Salvataggio punteggi al login (chiamare funzione s_localstore_check())
+- [ V ] Salvataggio punteggi al login (chiamare funzione s_localstore_check())
 
 Home
 - [ ] Pulsante registrati (Riempio con qualcosaltro)
@@ -23,7 +23,7 @@ Home
 - [ V ] Cambio stile pulsanti
 
 About us
-- [ ] Tutta da fare
+- [ V ] Tutta da fare
 
 Statistiche
 - [ ] Traduzione all categories

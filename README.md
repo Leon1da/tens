@@ -2,5 +2,6 @@
 
 https://tens.plexoo.duckdns.org
 
-SQL:
-https://tens.plexoo.duckdns.org/phpmyadmin
+Un progetto di 
+    Francesco Tassone
+    Leonardo Ospizio
