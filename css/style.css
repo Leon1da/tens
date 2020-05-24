@@ -306,12 +306,19 @@ profile modal
 
 
 
+@media (max-width: 575px) {
+    .jumbotron.home{
+        height: 20vh;
+        max-height: 20vh;
+    }
+}
 /*// Extra small devices (portrait phones, less than 576px)*/
 /*// No media query since this is the default in Bootstrap*/
 
 /*// Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
 
+    
     #d-0{
         font-size: 1.8rem;
     }
@@ -346,7 +353,7 @@ profile modal
 
 /*// Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
-
+    .jumbotron{min-height: 40vh;}
     .nav-link.menu{
         border-bottom-style: solid;
         border-bottom-width: 5px;
@@ -416,4 +423,10 @@ profile modal
 }
 #rank-pos-3{
     background-color: #cd7f32;
+}
+
+.jumbotron{
+    background-color:white;
+    opacity: 80%;
+    box-shadow: 0 .5rem 1rem rgba(2, 108, 124, .25) !important;
 }
