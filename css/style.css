@@ -274,6 +274,19 @@ Game page
     background-color: var(--wrong-color);
 }
 
+.media-custom-correct-sel {
+    background-color: var(--correct-color);
+
+}
+
+.media-custom-wrong-sel {
+    background-color: var(--wrong-color);
+}
+
+.media-custom-correct-sel h5, .media-custom-correct-sel p, .media-custom-wrong-sel h5, .media-custom-wrong-sel p {
+    color: white !important;
+}
+
 /* End game page */
 
 
