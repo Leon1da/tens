@@ -122,17 +122,17 @@ function g_setButtons() {
 
 /*
 * Imposta i colori dei pulsanti alla scelta del giocatore
-* Parametri = id: id del pulsante corretto
+* Parametri =
+* id: id del pulsante corretto
 */
 function g_updateButtons(id) {
     $(function () {
         for(let i = 0;i<4;i++){
             let media_obj = $("#media"+i);
-            if(i == id)
+            if(i === id)
                 media_obj.addClass("media-custom-correct");
             else
                 media_obj.addClass("media-custom-wrong");
-
         }
     });
 }
