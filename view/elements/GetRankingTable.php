@@ -18,7 +18,7 @@ $categories = $check->fetchAll(PDO::FETCH_ASSOC);
 if (count($categories) > 0) $result = getPlayersRank($pdo,$categories[0]['id'],$option);
 else $result = getPlayersRank($pdo,null,$option);
 
-if(count($result)>0) echo printRankingTable($result,$option);
+if(count($result) > 0) echo printRankingTable($result,$option);
 else echo "<h6>Nessuno si e` ancora classificato in <b>".$category."</b> <br> Che cosa aspetti? Diventa il primo!</h6>";
 
 // stampa la risposta del db in formato tabellare
@@ -75,53 +75,70 @@ function printRankingTable($vector, $option){
 }
 
 function getPlayersRank($pdo, $category_id, $option){
-//   SELECT u.username, c.nome, g.score, g.esatte FROM games g JOIN users u ON g.user = u.id JOIN category c ON c.id = g.categoria GROUP BY u.username, g.categoria ORDER BY g.score DESC
+
     $query = "";
     if($option == 1){
-        // migliore partita di sempre (max(score))
-        $query .= "SELECT u.username,
-                          MAX(g.score) as tot_score, 
-                          g.esatte as tot_esatte, 
-                          g.errate as tot_errate ";
+        // best game
+        $query.= "
+            SELECT users.username, games.score as tot_score, games.esatte as tot_esatte, games.errate as tot_errate
+            FROM users,games,";
+
+        if($category_id != null){
+            $query.= "(SELECT user,MAX(score) as maxscore FROM games WHERE categoria = :categoria_id GROUP BY games.user) AS t";
+        }else{
+            $query.= "(SELECT user,MAX(score) as maxscore FROM games GROUP BY games.user) AS t";
+        }
+
+        $query.=" WHERE users.id = t.user AND games.score = t.maxscore ORDER BY tot_score DESC";
+
 
     }else{
-        // somma tutte le partite (sum(score) per giocatore))
-        $query .= "SELECT u.username,
-                          sum(g.score) as tot_score, 
-                          sum(g.esatte) as tot_esatte,
-                          sum(g.errate) as tot_errate, 
-                          sum(g.vittoria) as tot_vittorie ";
+        // all game
+        $query.= "
+            SELECT u.username, SUM(g.score) AS tot_score, SUM(g.esatte) AS tot_esatte, SUM(g.errate) as tot_errate, SUM(g.vittoria) AS tot_vittorie
+            FROM users u, games g";
+        if($category_id != null){
+            $query.= ", category c WHERE c.id = g.categoria AND g.categoria = :categoria_id AND g.user = u.id";
+        }else{
+            $query.= " WHERE g.user = u.id";
+        }
+        $query.="
+            GROUP BY u.username
+            ORDER BY tot_score DESC";
+
     }
 
-    $query .= "FROM games g JOIN users u on g.user = u.id ";
-
-    if($category_id!=null){
-        // filtro per categoria
-        $query .= "JOIN category c on g.categoria = c.id ";
-        $query .= "WHERE g.categoria = :categoria_id ";
-    }
-
-//    if($option == 0){
-        $query .= "GROUP BY u.username ";
-//    }
-
-    $query .= "ORDER BY tot_score DESC ";
-
-//    echo $query;
+    echo $query;
 
     $check = $pdo->prepare($query);
     if($category_id!=null){
         $check->bindParam(':categoria_id', $category_id, PDO::PARAM_STR);
     }
     $check->execute();
-    return $check->fetchAll(PDO::FETCH_ASSOC);
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 
-//SELECT u.username, max(g.score) as tot_score, g.esatte as tot_esatte, g.errate as tot_errate
-//FROM games g JOIN users u on g.user = u.id JOIN category c on g.categoria = c.id
-//WHERE c.nome = :categoria
-//GROUB BY u.username
-//ORDER BY tot_score DESC
 
+
+// migliore partita
+// SELECT users.username, games.score as tot_score, games.esatte as tot_esatte, games.errate as tot_errate
+// FROM users,games,
+//  (SELECT user,MAX(score) as maxscore FROM games GROUP BY games.user) AS t
+// WHERE users.id = t.user AND games.score = t.maxscore ORDER BY tot_score DESC
+
+// migliore partita per categoria
+// SELECT users.username, games.score, games.esatte, games.errate
+// FROM users,games,
+//(SELECT user,MAX(score) as maxscore FROM games WHERE categoria = 3 GROUP BY games.user) AS t
+// WHERE users.id = t.user AND games.score = t.maxscore ORDER BY games.score DESC
+
+// tutte le partite
+// SELECT u.username, SUM(g.score) AS tot_score, SUM(g.esatte), SUM(g.errate), SUM(g.vittoria)
+// FROM users u JOIN games g ON g.user = u.id
+// GROUP BY u.username
+// ORDER BY tot_score DESC
 
 ?>
+
+
