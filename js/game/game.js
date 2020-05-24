@@ -224,7 +224,7 @@ function startTimerCallback() {
 }
 
 /*
-* Viene attivata dal click su di una canzone: interrompe la riproduzione, controlla se è finito
+* Viene attivata dal click su di una canzone: interrompe la riproduzione
 */
 function stopPlay(id) {
     if(!isPlaying())
@@ -233,7 +233,7 @@ function stopPlay(id) {
     let timeLeft = onPlay.player.duration - onPlay.player.currentTime;
     let result = s_update(id===correct,timeLeft);
     g_updateScore(result.score,result.timeBonus);
-    g_updateButtons(correct);
+    g_updateButtons(correct,id);
 }
 
 /*

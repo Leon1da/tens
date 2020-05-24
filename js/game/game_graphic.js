@@ -111,7 +111,11 @@ function g_setButtons() {
             else
                 song = wrong_songs_objs.pop();
             if(song != null) {
-                $("#media"+i).removeClass("media-custom-wrong").removeClass("media-custom-correct");//.addClass("media-custom");
+                $("#media"+i)
+                    .removeClass("media-custom-wrong")
+                    .removeClass("media-custom-correct")
+                    .removeClass("media-custom-correct-sel")
+                    .removeClass("media-custom-wrong-sel");
                 $("#titolo"+i).text(song.name);
                 $("#artista"+i).text(song.artist);
                 $("#cover"+i).attr("src",song.image);
@@ -125,7 +129,7 @@ function g_setButtons() {
 * Parametri =
 * id: id del pulsante corretto
 */
-function g_updateButtons(id) {
+function g_updateButtons(id,selected) {
     $(function () {
         for(let i = 0;i<4;i++){
             let media_obj = $("#media"+i);
@@ -133,6 +137,13 @@ function g_updateButtons(id) {
                 media_obj.addClass("media-custom-correct");
             else
                 media_obj.addClass("media-custom-wrong");
+
+            if(i === selected){
+                if(i === id)
+                    media_obj.addClass("media-custom-correct-sel")
+                else
+                    media_obj.addClass("media-custom-wrong-sel")
+            }
         }
     });
 }
@@ -277,7 +288,7 @@ function g_startAutoplayProgressBar() {
         $("#progresso_round")
             .stop(true,false)
             .delay(AUTOPLAY_DURATION*400)
-            .animate({width: "0%"},AUTOPLAY_DURATION*400) //Scende da dove rimasta fino alla fine in 1/4 del tempo di autoplay
+            .animate({width: "0%"},AUTOPLAY_DURATION*400) //Scende da dove rimasta fino alla fine
             .animate({width: "100%"},AUTOPLAY_DURATION*200); //Sale fino al 100% nel tempo rimanente
     })
 }
