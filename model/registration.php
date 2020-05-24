@@ -18,13 +18,13 @@ $password_size = strlen($password);
 
 if (empty($nome) || empty($cognome) || empty($email) || empty($username) || empty($password)) {
     printErrorMessage(Status::Warning, "Devi compilare tutti i campi obbligatori tutti i campi");
-}else if ($name_size < 8 || $name_size > 50) {
+}else if ($name_size < 3 || $name_size > 50) {
     printErrorMessage(Status::Warning, "Il nome deve contenere almeno 3 caratteri e al massimo 50");
-}else if ($cognome_size < 8 || $cognome_size > 50) {
+}else if ($cognome_size < 3 || $cognome_size > 50) {
     printErrorMessage(Status::Warning, "Il congnome deve contenere almeno 3 caratteri e al massimo 50");
-}else if ($username_size < 8 || $username_size > 50) {
+}else if ($username_size < 3 || $username_size > 50) {
     printErrorMessage(Status::Warning, "l'username deve contenere almeno 3 caratteri e al massimo 50");
-}else if ($password_size < 8 || $password_size > 50) {
+}else if ($password_size < 3 || $password_size > 50) {
     printErrorMessage(Status::Warning, "La password deve contenere almeno 8 caratteri e al massimo 50");
 } else {
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
