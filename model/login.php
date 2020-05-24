@@ -7,8 +7,7 @@ $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if (empty($username) || empty($password)) {
-    $msg = 'Inserisci username e password';
-    printErrorMessage(Status::Warning,$msg);
+    printErrorMessage(Status::Warning,"Inserisci username e password");
 } else {
     $query = "
         SELECT username, password
@@ -23,8 +22,7 @@ if (empty($username) || empty($password)) {
     $user = $check->fetch(PDO::FETCH_ASSOC);
 
     if (!$user || password_verify($password, $user['password']) === false) {
-        $msg = 'Credenziali utente errate';
-        printErrorMessage(Status::Warning,$msg);
+        printErrorMessage(Status::Warning,"Credenziali utente errate");
     } else {
         session_start();
         session_regenerate_id();
@@ -32,6 +30,7 @@ if (empty($username) || empty($password)) {
         $_SESSION['session_user'] = $user['username'];
         // nuova sessione
         // #area riservata
+        printErrorMessage(Status::Success,"Login effettuato con successo");
         include('controller.php');
         exit;
     }

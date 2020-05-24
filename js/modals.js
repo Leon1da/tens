@@ -34,10 +34,7 @@ $(document).ready(function() {
 
                 }
 
-                // setto timer che fa chiudere il messaggio
-                setTimeout(function () {
-                    $(".my-alert-btn").click();
-                }, 5000);
+                closeAlertMessage();
 
             });
         } else {
@@ -87,7 +84,7 @@ $(document).ready(function() {
 
             if(password != password_check) {
                 // la password non corrisponde
-                $(".form-msg").append("Le password devono corrispondere.<br>");
+                $(".form-msg").append("Le password devono coincidere.<br>");
                 $("#password-reg-check").addClass("border border-danger");
                 $("#password-reg").addClass("border border-danger");
                 return;
@@ -120,13 +117,10 @@ $(document).ready(function() {
                     // window.matchMedia("(max-width: 768px)").matches ||
                     window.matchMedia("(max-width: 992px)").matches) {
                     $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
-
                 }
 
-                // setto timer che fa chiudere il messaggio
-                setTimeout(function () {
-                    $(".my-alert-btn").click();
-                }, 5000);
+                closeAlertMessage();
+
 
             });
 
@@ -179,6 +173,14 @@ $(document).ready(function() {
         $("#password-reg").removeClass("border border-danger");
         $("#password-reg-check").removeClass("border border-danger");
 
+    }
+
+    // imposta un timer che fa chiudere i messagi di bootstrap
+    // (avvenuto login/registrazione)
+    function closeAlertMessage() {
+        setTimeout(function () {
+            $(".my-alert-btn").click(); // click sull [x]
+        }, 2000);
     }
 
 });

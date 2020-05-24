@@ -1,8 +1,8 @@
 <div class="row mx-0 justify-content-center" style="min-height: 85vh; max-width: 100vw">
     <div class="col-12 ">
-
         <div class="row mb-5 h-75">
-            <div class="jumbotron col m-0 m-md-5 shadow p-3 mb-5 rounded" style=" max-height: 40vh; min-height: 20vh;z-index: 100; opacity: 80%">
+            <div class="jumbotron col m-0 m-md-5 p-3 rounded" style="max-height: 40vh; min-height: 20vh;z-index: 100; opacity: 80%;
+    box-shadow: 0 .5rem 1rem rgba(2, 108, 124, .25) !important;">
                 <!--        <img src="../resources/logo.svg" class="img-fluid" alt="Responsive image">-->
                 <div class="row" id="zero">Benvenuto su Ten's</div>
 

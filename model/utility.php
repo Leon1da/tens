@@ -12,36 +12,28 @@ function printErrorMessage($status, $msg){
         case Status::Success :
             ?>
             <div class="alert alert-success" role="alert">
-                <?php echo $msg; ?>
-                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <?php
             break;
         case Status::Warning :
             ?>
             <div class="alert alert-warning my-alert" role="alert" >
-                <?php echo $msg; ?>
-                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <?php
             break;
         case Status::Error :
             ?>
             <div class="alert alert-danger my-alert" role="alert" >
-                <?php echo $msg; ?>
-                <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <?php
             break;
     }
 
+    echo $msg;
+    ?>
+        <button type="button" class="close my-alert-btn" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+<?php
 }
 
 ?>
