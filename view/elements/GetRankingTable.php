@@ -108,7 +108,7 @@ function getPlayersRank($pdo, $category_id, $option){
 
     }
 
-    echo $query;
+//    echo $query;
 
     $check = $pdo->prepare($query);
     if($category_id!=null){
