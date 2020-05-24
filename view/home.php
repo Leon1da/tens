@@ -1,6 +1,6 @@
 <div class="row mx-0 justify-content-center" style="min-height: 85vh; max-width: 100vw">
     <div class="col-12 ">
-        <div class="row mb-5 h-75">
+        <div class="row mb-5 h-60">
             <div class="jumbotron col m-0 m-md-5 p-3 rounded" style="max-height: 40vh; min-height: 20vh;z-index: 100; opacity: 80%;
     box-shadow: 0 .5rem 1rem rgba(2, 108, 124, .25) !important;">
                 <!--        <img src="../resources/logo.svg" class="img-fluid" alt="Responsive image">-->
@@ -15,9 +15,16 @@
 
         </div>
 
+        <div class="row justify-content-center m-0 h-10">
+            <div class="my-5">
+                <?php  include("elements/getAccessInfo.php");?>
+            </div>
+
+        </div>
+
         <!-- Pulsante gioca -->
-        <div class="row justify-content-center m-0 h-25">
-            <div class="col-10 col-sm-6 col-md-4 col-lg-3 pt-1 align-self-end">
+        <div class="row justify-content-center m-0 h-20">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 pt-1 align-self-end my-5">
                 <button class="btn btn-primary btn-lg btn-block rounded-pill" type="button" id="home-play-btn">
                     Gioca
                 </button>
