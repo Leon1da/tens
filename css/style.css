@@ -428,5 +428,5 @@ profile modal
 .jumbotron{
     background-color:white;
     opacity: 80%;
-    box-shadow: 0 .5rem 1rem rgba(2, 108, 124, .25) !important;
+    box-shadow: 0 .5rem 5rem rgba(2, 108, 124, .25) !important;
 }
