@@ -1,6 +1,6 @@
 # Ten's - Linguaggi e tecnologie per il web 
 
-https://tens.plexoo.duckdns.org
+https://ltw.plexoo.duckdns.org
 
 Un progetto di 
     Francesco Tassone
