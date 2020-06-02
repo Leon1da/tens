@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     /* MODAL LOGIN */
 
-// load login modal when sign-in btn is clicked
+// effettua il login e la validazione al click sul pulsante di login
     $("#login-btn").click(function () {
 
         clearLoginModalMessage();
@@ -20,16 +20,13 @@ $(document).ready(function() {
             request.done(function (response) {
                 // se necessario, effettuo il salvataggio dei dati della partita effettuata come guest
                 s_localstore_check();
-                // alert(response);
-                // visualizzo risultato
-                //rimosso perche non devo visualizzare nulla
+
+                // append del risultato
                 $("#main-content").prepend(response);
                 // chiudo il pannello di login
                 $("#btn-close-login").click();
 
-                if (//window.matchMedia("(max-width: 576px)").matches ||
-                    // window.matchMedia("(max-width: 768px)").matches ||
-                    window.matchMedia("(max-width: 992px)").matches) {
+                if ( window.matchMedia("(max-width: 992px)").matches) {
                     $(".navbar-toggler").click(); //chiude il menu su dispositivi mobili
 
                 }
@@ -56,7 +53,7 @@ $(document).ready(function() {
         clearLoginModalMessage();
     });
 
-// delete login validation message
+// cancella i messaggi di validazione sul form
     function clearLoginModalMessage() {
         $(".form-msg").text("");
         $("#username-lgn").removeClass("border border-danger");
@@ -65,12 +62,11 @@ $(document).ready(function() {
 
     /* MODAL REGISTRAZIONE */
 
-// load registration modal when sign-up btn is clicked
+    // effettua la validazione del form e la registrazione al click sul bottone
     $("#register-btn").click(function () {
         clearRegistrationModalMessage();
 
-        // html form validation
-        // $("#register-form").reportValidity();
+        // validazione form
         if ($("#register-form")[0].checkValidity()) {
 
             var nome = $("#name-reg").val();
@@ -106,7 +102,6 @@ $(document).ready(function() {
                 dataType: "html"
             });
             request.done(function (response) {
-                // alert(response);
                 //visualizzo risultato
                 $("#main-content").prepend(response);
                 // chiudo il pannello di registrazione
@@ -125,7 +120,7 @@ $(document).ready(function() {
             });
 
 
-        } else {
+        } else {    // valiazione del form campo per campo
             if (!$("#name-reg")[0].checkValidity()) {
                 $("#name-reg").addClass("border border-danger");
                 $(".form-msg").append("nome: almeno 3, massimo 50 caratteri<br>");

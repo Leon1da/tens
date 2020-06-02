@@ -76,6 +76,7 @@ function printRankingTable($vector, $option){
 
 function getPlayersRank($pdo, $category_id, $option){
 
+    // creazione dinamica della query
     $query = "";
     if($option == 1){
         // best game

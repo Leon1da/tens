@@ -1,4 +1,6 @@
 <?php
+// acquisisce da spotify il token per fare richieste agli endpoint
+
 $result = getToken();
 $json = json_decode($result, true);
 $access_token = $json["access_token"];

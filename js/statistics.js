@@ -6,6 +6,7 @@ $(document).ready(function () {
     $("#categories").load("view/elements/getCategoriesOptionPane.php");
     $("#rank").load("view/elements/GetRankingTable.php");
 
+    // animazione scritte nella pagina classifiche
     $("#d-0").animate({'margin-left': '+=150vw'}, 500);
     setTimeout(function () {
         $("#d-1").animate({'margin-left': '+=150vw'}, 1000);

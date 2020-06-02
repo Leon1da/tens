@@ -24,8 +24,8 @@ if (empty($username) || empty($password)) {
     if (!$user || password_verify($password, $user['password']) === false) {
         printErrorMessage(Status::Warning,"Credenziali utente errate");
     } else {
-        session_start();
-        session_regenerate_id();
+        session_start(); // avvio la sessione
+        session_regenerate_id(); // genero il l'id sella sessione
         $_SESSION['session_id'] = session_id();
         $_SESSION['session_user'] = $user['username'];
         // nuova sessione

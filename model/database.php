@@ -1,24 +1,26 @@
 <?php
 $config = [
-    'db_engine' => 'mysql',
-    'db_host' => '127.0.0.1',
-    'db_name' => 'tens_schema',
-    'db_user' => 'root',
-    'db_password' => '',
+    'engine' => 'mysql',
+    'host' => '127.0.0.1',
+    'database' => 'tens_schema',
+    'username' => 'root',
+    'password' => '',
 ];
 
-$db_config = $config['db_engine'] . ":host=".$config['db_host'] . ";dbname=" . $config['db_name'];
+$db_config = $config['engine'] . ":host=".$config['host'] . ";dbname=" . $config['database'];
 
 try {
-    $pdo = new PDO($db_config, $config['db_user'], $config['db_password'], [
+    // creo oggetto PDO includo in tutti i file per cui e` necessario l'accesso al database
+    $pdo = new PDO($db_config, $config['username'], $config['password'], [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
     ]);
 
+    // configuarzione
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 } catch (PDOException $exception) {
-    exit("Connessione al db non riuscita " . $exception->getMessage());
+    exit("Connessione al database non riuscita " . $exception->getMessage());
 }
 
 ?>

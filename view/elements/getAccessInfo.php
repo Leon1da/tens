@@ -51,8 +51,6 @@ $mese = date("Y-m");
 $start_mese = $mese."-01 00:00:00";
 $end_mese = $mese."-31 23:59:59";
 
-//echo $start_mese." ".$end_mese;
-
 $query = "SELECT u.username FROM users u JOIN games g ON u.id = g.user WHERE start >= :start_mese AND start <= :end_mese AND g.score = (SELECT MAX(score) FROM games)";
 $check = $pdo->prepare($query);
 $check->bindParam(':start_mese', $start_mese, PDO::PARAM_STR);
@@ -63,7 +61,6 @@ $best_player = $check->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($best_player) > 0) {
     ?>
-    <!--    <button class="btn btn-primary btn-block rounded-pill" type="button">-->
     Miglior giocatore del mese: &nbsp;
     <span class="badge badge-warning">
     <?php echo $best_player[0]['username']; ?>
@@ -71,7 +68,6 @@ if (count($best_player) > 0) {
 
 
     <br>
-    <!--    </button>-->
     <?php
 }
 

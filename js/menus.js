@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    // load pages when dropdown-item (PROFILE SUB-MENU) is clicked
+    // carica il modal profilo o effetuua il logout qunado il link relativo viene clickato
     // - Il mio profilo
     // - logout
     $(".dropdown-item").click(function () {
@@ -31,21 +31,21 @@ $(document).ready(function() {
         }
     });
 
-    // load pages when a nav-anchor (MAIN MENU) is clicked
+    // carica le pagine al click sui link sul menu
     // - home
     // - about us
     // - statistics
     // - game
     // - multiplayers (coming soon)
     $(".nav-link.menu").click(function () {
-        var old_active = $(".nav-item.active"); // old page
-        var anchor = $(this);   // clicked anchor
-        var page = anchor.attr("href"); // page to visit
+        var old_active = $(".nav-item.active"); // vecchia pagina
+        var anchor = $(this);
+        var page = anchor.attr("href"); // pagina da visitare
         page = page.substring(1, page.length);
-        var url = "view/" + page + ".php"; // url to load
+        var url = "view/" + page + ".php"; // url da caricare
         $("#main-content").load(url, function () {
-            anchor.parent().addClass("active"); // active new anchor
-            old_active.removeClass("active"); // de-active old anchor
+            anchor.parent().addClass("active"); // imposta il nuovo link come attivo
+            old_active.removeClass("active");   // rimuovo la
 
             if (//window.matchMedia("(max-width: 576px)").matches ||
                 // window.matchMedia("(max-width: 768px)").matches ||

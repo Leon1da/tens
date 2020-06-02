@@ -1,4 +1,5 @@
 <?php
+/* mostra l'input di selezione per la categoria */
 require('../../model/database.php');
 
 $query = "SELECT * FROM category";
