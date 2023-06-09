@@ -13,8 +13,9 @@ echo $access_token;
 */
 function getToken(){
     /* Spotify API client id e secret */
-    $client_id     = 'a351932160f74239bb1a1459e88819f7';
-    $client_secret = 'cc456cf809e64324a526cc27fad02063';
+    // this should be secret...!!!     
+    $client_id     = '';
+    $client_secret = '';
 
     /* Richiesta curl*/
     $ch = curl_init();
